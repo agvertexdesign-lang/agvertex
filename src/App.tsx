@@ -17,12 +17,14 @@ import { ProcessView } from './components/views/ProcessView';
 import { CareersView } from './components/views/CareersView';
 import { ContactView } from './components/views/ContactView';
 import { FAQView } from './components/views/FAQView';
-import { X, Send, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
+import { X, Send, CheckCircle2, ShieldCheck, Zap, Loader2 } from 'lucide-react';
+import { submitToWeb3Forms } from './lib/web3forms';
 
 export default function App() {
   const navigate = useNavigate();
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState<boolean>(false);
   const [quoteSubmitted, setQuoteSubmitted] = useState<boolean>(false);
+  const [quoteSubmitting, setQuoteSubmitting] = useState<boolean>(false);
   const [quoteForm, setQuoteForm] = useState({
     name: '',
     email: '',
@@ -41,9 +43,22 @@ export default function App() {
     navigate(cleanPath);
   };
 
-  const handleQuoteSubmit = (e: React.FormEvent) => {
+  const handleQuoteSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setQuoteSubmitting(true);
+
+    await submitToWeb3Forms({
+      name: quoteForm.name,
+      email: quoteForm.email,
+      phone: quoteForm.phone || 'Not provided',
+      service_required: quoteForm.service,
+      timeline: quoteForm.timeline,
+      project_description: quoteForm.description || 'Not provided',
+    }, `AG VERTEX Instant Quote Request - ${quoteForm.name}`);
+
+    setQuoteSubmitting(false);
     setQuoteSubmitted(true);
+    
     setTimeout(() => {
       setQuoteSubmitted(false);
       setIsQuoteModalOpen(false);
@@ -278,9 +293,19 @@ export default function App() {
 
                     <button
                       type="submit"
-                      className="btn-primary px-7 py-3 text-xs font-semibold flex items-center gap-2 shadow-lg shadow-blue-500/25"
+                      disabled={quoteSubmitting}
+                      className="btn-primary px-7 py-3 text-xs font-semibold flex items-center gap-2 shadow-lg shadow-blue-500/25 disabled:opacity-50 cursor-pointer"
                     >
-                      Submit Specifications <Send className="w-3.5 h-3.5" />
+                      {quoteSubmitting ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          Submit Specifications <Send className="w-3.5 h-3.5" />
+                        </>
+                      )}
                     </button>
                   </div>
                 </form>

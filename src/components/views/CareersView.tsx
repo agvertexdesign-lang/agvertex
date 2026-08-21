@@ -22,6 +22,7 @@ import { DEFAULT_CAD_STACK } from '../../lib/api/settings';
 export const CareersView: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [profileSubmitted, setProfileSubmitted] = useState(false);
+  const [profileSubmitting, setProfileSubmitting] = useState(false);
   const { careers: dbCareers } = useCareersData();
   const { settings } = useSettingsData();
   const { pageContent } = usePageContent();
@@ -38,8 +39,22 @@ export const CareersView: React.FC = () => {
     notes: '',
   });
 
-  const handleProfileSubmit = (e: React.FormEvent) => {
+  const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setProfileSubmitting(true);
+
+    await submitToWeb3Forms({
+      name: profileForm.name,
+      email: profileForm.email,
+      phone: profileForm.phone || 'Not provided',
+      primary_discipline: profileForm.primaryDiscipline,
+      cad_software: profileForm.cadSoftware,
+      experience_years: profileForm.experienceYears,
+      portfolio_link: profileForm.portfolioLink || 'Not provided',
+      additional_notes: profileForm.notes || 'Not provided',
+    }, `AG VERTEX Career Profile Submission - ${profileForm.name}`);
+
+    setProfileSubmitting(false);
     setProfileSubmitted(true);
     setTimeout(() => {
       setProfileSubmitted(false);

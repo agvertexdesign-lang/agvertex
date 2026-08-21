@@ -15,6 +15,9 @@ import {
 } from 'lucide-react';
 import { useSettingsData } from '../../hooks/useCmsData';
 
+import { submitToWeb3Forms } from '../../lib/web3forms';
+import { Loader2 } from 'lucide-react';
+
 export const ContactView: React.FC = () => {
   const { settings } = useSettingsData();
   const [formData, setFormData] = useState({
@@ -27,22 +30,23 @@ export const ContactView: React.FC = () => {
     agreed: true,
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    
+    await submitToWeb3Forms({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || 'Not provided',
+      service_required: formData.service,
+      project_overview: formData.overview,
+      preferred_timeline: formData.timeline || 'Not specified',
+    }, `AG VERTEX Project Review Request - ${formData.name}`);
+
+    setSubmitting(false);
     setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        overview: '',
-        timeline: '',
-        agreed: true,
-      });
-    }, 3500);
   };
 
   const GLOBAL_HUBS = [
@@ -232,9 +236,19 @@ export const ContactView: React.FC = () => {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full btn-primary py-4 text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-blue-500/25 mt-2"
+                  disabled={submitting}
+                  className="w-full btn-primary py-4 text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer disabled:opacity-50"
                 >
-                  Send Project Request <Send className="w-4 h-4" />
+                  {submitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Sending Request...
+                    </>
+                  ) : (
+                    <>
+                      Send Project Request <Send className="w-4 h-4" />
+                    </>
+                  )}
                 </button>
 
               </form>
