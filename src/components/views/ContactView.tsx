@@ -15,8 +15,7 @@ import {
 } from 'lucide-react';
 import { useSettingsData } from '../../hooks/useCmsData';
 
-import { submitToWeb3Forms } from '../../lib/web3forms';
-import { Loader2 } from 'lucide-react';
+import { sendToWhatsApp } from '../../lib/whatsapp';
 
 export const ContactView: React.FC = () => {
   const { settings } = useSettingsData();
@@ -30,22 +29,20 @@ export const ContactView: React.FC = () => {
     agreed: true,
   });
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitting(true);
-    
-    await submitToWeb3Forms({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone || 'Not provided',
-      service_required: formData.service,
-      project_overview: formData.overview,
-      preferred_timeline: formData.timeline || 'Not specified',
-    }, `AG VERTEX Project Review Request - ${formData.name}`);
 
-    setSubmitting(false);
+    const message = `🚨 *AG VERTEX — New Project Review Request*
+
+*Name:* ${formData.name}
+*Work Email:* ${formData.email}
+*Phone:* ${formData.phone || 'Not provided'}
+*Service Required:* ${formData.service || 'General Inquiry'}
+*Project Overview:* ${formData.overview}
+*Preferred Timeline:* ${formData.timeline || 'Not specified'}`;
+
+    sendToWhatsApp(message);
     setSubmitted(true);
   };
 
@@ -236,19 +233,9 @@ export const ContactView: React.FC = () => {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={submitting}
-                  className="w-full btn-primary py-4 text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer disabled:opacity-50"
+                  className="w-full btn-primary py-4 text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer"
                 >
-                  {submitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      Sending Request...
-                    </>
-                  ) : (
-                    <>
-                      Send Project Request <Send className="w-4 h-4" />
-                    </>
-                  )}
+                  Send Request via WhatsApp <Send className="w-4 h-4" />
                 </button>
 
               </form>

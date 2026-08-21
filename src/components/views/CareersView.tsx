@@ -18,12 +18,11 @@ import {
 } from 'lucide-react';
 import { useCareersData, usePageContent, useSettingsData } from '../../hooks/useCmsData';
 import { DEFAULT_CAD_STACK } from '../../lib/api/settings';
-import { submitToWeb3Forms } from '../../lib/web3forms';
+import { sendToWhatsApp } from '../../lib/whatsapp';
 
 export const CareersView: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [profileSubmitted, setProfileSubmitted] = useState(false);
-  const [profileSubmitting, setProfileSubmitting] = useState(false);
   const { careers: dbCareers } = useCareersData();
   const { settings } = useSettingsData();
   const { pageContent } = usePageContent();
@@ -40,22 +39,21 @@ export const CareersView: React.FC = () => {
     notes: '',
   });
 
-  const handleProfileSubmit = async (e: React.FormEvent) => {
+  const handleProfileSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setProfileSubmitting(true);
 
-    await submitToWeb3Forms({
-      name: profileForm.name,
-      email: profileForm.email,
-      phone: profileForm.phone || 'Not provided',
-      primary_discipline: profileForm.primaryDiscipline,
-      cad_software: profileForm.cadSoftware,
-      experience_years: profileForm.experienceYears,
-      portfolio_link: profileForm.portfolioLink || 'Not provided',
-      additional_notes: profileForm.notes || 'Not provided',
-    }, `AG VERTEX Career Profile Submission - ${profileForm.name}`);
+    const message = `💼 *AG VERTEX — Specialist Profile Submission*
 
-    setProfileSubmitting(false);
+*Name:* ${profileForm.name}
+*Email:* ${profileForm.email}
+*Phone:* ${profileForm.phone || 'Not provided'}
+*Discipline:* ${profileForm.primaryDiscipline}
+*CAD Software:* ${profileForm.cadSoftware}
+*Experience:* ${profileForm.experienceYears}
+*Portfolio Link:* ${profileForm.portfolioLink || 'Not provided'}
+*Additional Notes:* ${profileForm.notes || 'Not provided'}`;
+
+    sendToWhatsApp(message);
     setProfileSubmitted(true);
     setTimeout(() => {
       setProfileSubmitted(false);
@@ -506,9 +504,9 @@ export const CareersView: React.FC = () => {
 
                   <button
                     type="submit"
-                    className="w-full btn-primary py-3 text-xs font-semibold flex items-center justify-center gap-2"
+                    className="w-full btn-primary py-3 text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    Submit Profile <Send className="w-3.5 h-3.5" />
+                    Submit Profile via WhatsApp <Send className="w-3.5 h-3.5" />
                   </button>
                 </form>
               </>
