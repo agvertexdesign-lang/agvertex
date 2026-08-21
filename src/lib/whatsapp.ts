@@ -1,9 +1,9 @@
 export const WHATSAPP_NUMBER = "12896831234";
 
-export function sendToWhatsApp(messageText: string) {
-  const encodedText = encodeURIComponent(messageText);
+export function sendToWhatsApp(message: string | string[]) {
+  const text = Array.isArray(message) ? message.join("\n") : message;
+  const encodedText = encodeURIComponent(text);
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
   
-  // Open WhatsApp chat in new window / tab
   window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 }

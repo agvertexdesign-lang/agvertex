@@ -42,18 +42,22 @@ export const CareersView: React.FC = () => {
   const handleProfileSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const message = `💼 *AG VERTEX — Specialist Profile Submission*
+    const lines = [
+      "💼 AG VERTEX — Specialist Profile Submission",
+      "----------------------------------------",
+      `👤 Name: ${profileForm.name}`,
+      `✉️ Email: ${profileForm.email}`,
+      `📞 Phone: ${profileForm.phone || 'Not provided'}`,
+      `🛠️ Primary Discipline: ${profileForm.primaryDiscipline}`,
+      `💻 CAD Software: ${profileForm.cadSoftware}`,
+      `⏳ Experience: ${profileForm.experienceYears}`,
+      `🔗 Portfolio Link: ${profileForm.portfolioLink || 'Not provided'}`,
+      "",
+      "📝 Additional Summary / Notes:",
+      profileForm.notes || 'Not provided',
+    ];
 
-*Name:* ${profileForm.name}
-*Email:* ${profileForm.email}
-*Phone:* ${profileForm.phone || 'Not provided'}
-*Discipline:* ${profileForm.primaryDiscipline}
-*CAD Software:* ${profileForm.cadSoftware}
-*Experience:* ${profileForm.experienceYears}
-*Portfolio Link:* ${profileForm.portfolioLink || 'Not provided'}
-*Additional Notes:* ${profileForm.notes || 'Not provided'}`;
-
-    sendToWhatsApp(message);
+    sendToWhatsApp(lines);
     setProfileSubmitted(true);
     setTimeout(() => {
       setProfileSubmitted(false);

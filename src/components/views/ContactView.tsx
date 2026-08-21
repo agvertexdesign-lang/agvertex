@@ -33,16 +33,20 @@ export const ContactView: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const message = `🚨 *AG VERTEX — New Project Review Request*
+    const lines = [
+      "📌 AG VERTEX — New Project Review Request",
+      "----------------------------------------",
+      `👤 Name: ${formData.name}`,
+      `✉️ Work Email: ${formData.email}`,
+      `📞 Phone: ${formData.phone || 'Not provided'}`,
+      `🛠️ Service Required: ${formData.service || 'General Inquiry'}`,
+      `📅 Preferred Timeline: ${formData.timeline || 'Not specified'}`,
+      "",
+      "📝 Project Overview:",
+      formData.overview,
+    ];
 
-*Name:* ${formData.name}
-*Work Email:* ${formData.email}
-*Phone:* ${formData.phone || 'Not provided'}
-*Service Required:* ${formData.service || 'General Inquiry'}
-*Project Overview:* ${formData.overview}
-*Preferred Timeline:* ${formData.timeline || 'Not specified'}`;
-
-    sendToWhatsApp(message);
+    sendToWhatsApp(lines);
     setSubmitted(true);
   };
 

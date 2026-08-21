@@ -45,16 +45,20 @@ export default function App() {
   const handleQuoteSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const message = `⚡ *AG VERTEX — Instant Quote & DFM Specs*
+    const lines = [
+      "⚡ AG VERTEX — Instant Quote & DFM Specs",
+      "----------------------------------------",
+      `👤 Name: ${quoteForm.name}`,
+      `✉️ Work Email: ${quoteForm.email}`,
+      `📞 Phone: ${quoteForm.phone || 'Not provided'}`,
+      `🛠️ Engineering Service: ${quoteForm.service}`,
+      `📅 Preferred Timeline: ${quoteForm.timeline}`,
+      "",
+      "📝 Project Specifications:",
+      quoteForm.description || 'Not provided',
+    ];
 
-*Name:* ${quoteForm.name}
-*Work Email:* ${quoteForm.email}
-*Phone:* ${quoteForm.phone || 'Not provided'}
-*Service Required:* ${quoteForm.service}
-*Preferred Timeline:* ${quoteForm.timeline}
-*Project Specifications:* ${quoteForm.description || 'Not provided'}`;
-
-    sendToWhatsApp(message);
+    sendToWhatsApp(lines);
     setQuoteSubmitted(true);
     
     setTimeout(() => {
