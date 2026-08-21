@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { useCareersData, usePageContent, useSettingsData } from '../../hooks/useCmsData';
 import { DEFAULT_CAD_STACK } from '../../lib/api/settings';
+import { submitToWeb3Forms } from '../../lib/web3forms';
 
 export const CareersView: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
