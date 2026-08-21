@@ -11,23 +11,29 @@ export async function submitToWeb3Forms(
   subject: string = "New Inquiry from AG VERTEX Website"
 ): Promise<Web3FormsResponse> {
   try {
-    const formData = new FormData();
-    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
-    formData.append("subject", subject);
-    formData.append("from_name", "AG VERTEX Engineering Website");
-
-    Object.entries(fields).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        formData.append(key, typeof value === 'boolean' ? (value ? 'Yes' : 'No') : String(value));
-      }
-    });
+    const payload = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: subject,
+      from_name: "AG VERTEX Engineering Website",
+      ...fields
+    };
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(payload),
     });
 
     const data = await response.json();
+    console.log("Web3Forms API Response:", data);
+
+    if (!data.success) {
+      console.warn("Web3Forms returned unsuccessful response:", data.message);
+    }
+
     return data;
   } catch (error: any) {
     console.error("Web3Forms submission error:", error);
