@@ -6,13 +6,13 @@ interface PreloaderProps {
 
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState('INITIALIZING CAD ENGINE...');
+  const [statusText, setStatusText] = useState('INITIALIZING MECHANICAL DESIGN SUITE...');
   const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
-    // Total duration = 2.5 seconds max for snappy loading
-    const totalTime = 2500;
-    const intervalTime = 30;
+    // Snappy 1.2s loading screen
+    const totalTime = 1200;
+    const intervalTime = 20;
     const totalSteps = totalTime / intervalTime;
     const stepIncrement = 100 / totalSteps;
 
@@ -24,16 +24,14 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           setTimeout(() => {
             setIsDone(true);
             if (onComplete) onComplete();
-          }, 300);
+          }, 200);
           return 100;
         }
 
-        if (next < 30) {
-          setStatusText('INITIALIZING CAD ENGINE...');
-        } else if (next < 65) {
-          setStatusText('CALIBRATING METROLOGY & SIMULATION MESH...');
-        } else if (next < 90) {
-          setStatusText('OPTIMIZING GRAPHICS & TOPOGRAPHY FIELD...');
+        if (next < 35) {
+          setStatusText('INITIALIZING MECHANICAL DESIGN SUITE...');
+        } else if (next < 75) {
+          setStatusText('LOADING CAD DATA & DRAWING ENGINE...');
         } else {
           setStatusText('SYSTEM READY. WELCOME TO AG VERTEX.');
         }
@@ -42,12 +40,11 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       });
     }, intervalTime);
 
-    // Fail-safe safety timeout: force unmount preloader after 3.2 seconds max
     const safetyTimeout = setTimeout(() => {
       setProgress(100);
       setIsDone(true);
       if (onComplete) onComplete();
-    }, 3200);
+    }, 1500);
 
     return () => {
       clearInterval(interval);
@@ -55,40 +52,37 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     };
   }, [onComplete]);
 
-  // Completely unmount from DOM when done so it NEVER blocks interactions or visibility
   if (isDone) return null;
 
   return (
-    <div className={`fixed inset-0 z-[100] bg-[#F8FAFC] flex flex-col items-center justify-center p-6 transition-opacity duration-500 ease-out ${
+    <div className={`fixed inset-0 z-[100] bg-[#F8FAFC] flex flex-col items-center justify-center p-6 transition-opacity duration-300 ease-out ${
       progress >= 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'
     }`}>
       
-      {/* Background Blueprint Grid Pattern */}
-      <div className="absolute inset-0 bg-blueprint opacity-60 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#0057FF]/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+      {/* Background Subtle Ambient Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#0057FF]/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
 
-      <div className="relative z-10 flex flex-col items-center max-w-sm w-full space-y-8 text-center">
+      <div className="relative z-10 flex flex-col items-center max-w-xs sm:max-w-sm w-full space-y-6 text-center">
         
-        {/* Brand Logo with Glow Ring */}
-        <div className="relative group">
-          <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#0057FF] to-[#2D8CFF] opacity-20 blur-xl animate-pulse" />
-          <div className="relative p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl">
+        {/* Brand Logo */}
+        <div className="relative">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl">
             <img
               src="/ag_vertex_logo.png"
               alt="AG VERTEX Logo"
-              className="h-10 md:h-12 w-auto object-contain"
+              className="h-9 sm:h-11 w-auto object-contain"
             />
           </div>
         </div>
 
-        {/* Status Metrology Terminal Text */}
+        {/* Status Text & Progress percentage */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#0057FF] text-[10px] font-mono font-bold tracking-widest uppercase">
-            <span className="w-2 h-2 rounded-full bg-[#0057FF] animate-ping" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0057FF] animate-ping" />
             {statusText}
           </div>
           
-          <div className="text-4xl font-heading font-bold text-[#0F172A] font-mono tracking-tight">
+          <div className="text-3xl sm:text-4xl font-heading font-bold text-[#0F172A] font-mono tracking-tight">
             {progress}%
           </div>
         </div>
@@ -101,10 +95,10 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           />
         </div>
 
-        {/* Metrology Spec Footprint */}
-        <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-400 border-t border-slate-200/80 pt-4">
-          <span>PRECISION: 0.001 MM</span>
-          <span>AG VERTEX v2.6</span>
+        {/* Footprint */}
+        <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-500 border-t border-slate-200/80 pt-3">
+          <span>WINDSOR, ONTARIO</span>
+          <span>AG VERTEX</span>
         </div>
 
       </div>

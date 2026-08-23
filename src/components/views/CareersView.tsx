@@ -130,7 +130,7 @@ export const CareersView: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-16 lg:space-y-24 pt-36 sm:pt-40 lg:pt-44 pb-20 overflow-x-hidden">
+    <div className="space-y-16 lg:space-y-24 pt-24 sm:pt-32 lg:pt-40 pb-20 overflow-x-hidden">
       
       {/* 1. HERO SECTION */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
