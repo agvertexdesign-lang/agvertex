@@ -24,15 +24,64 @@ export function useShowcaseVisibility() {
   return { enabled, loading };
 }
 
+export const DEFAULT_SERVICES: Service[] = [
+  {
+    id: 'svc-1',
+    title: 'Product Design & 3D CAD',
+    short_desc: '3D CAD modeling, parametric part architecture, component design and detailed mechanical assemblies.',
+    full_desc: 'Mechanical components and assemblies developed with performance, manufacturability, and production requirements in mind using PTC Creo Parametric, Siemens NX, and SolidWorks.',
+    image_url: '/services/product_design.png',
+    display_order: 1,
+    status: 'published',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'svc-2',
+    title: 'Mold & Die Tooling Support',
+    short_desc: 'Injection mold layouts, core & cavity development, pressure die-casting dies, parting strategies and tooling prints.',
+    full_desc: 'Practical tooling support for plastic injection molds, hot-runner components, inserts, lifters, sliders, and aluminum/magnesium pressure die-casting dies.',
+    image_url: '/services/injection_mold.png',
+    display_order: 2,
+    status: 'published',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'svc-3',
+    title: 'Drawings, GD&T & BOMs',
+    short_desc: 'ASME Y14.5 manufacturing prints, Geometric Dimensioning & Tolerancing, datum reference frames and structured BOMs.',
+    full_desc: 'Clear 2D manufacturing prints with precise Geometric Dimensioning and Tolerancing (GD&T) application, datum reference frames, tolerance stack-up definition, and structured Bills of Materials.',
+    image_url: '/services/drawings_gdt.png',
+    display_order: 3,
+    status: 'published',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+  {
+    id: 'svc-4',
+    title: 'DFM/DFA & Supplier Coordination',
+    short_desc: 'Manufacturability reviews, assembly simplification, automotive drawing review and supplier technical coordination.',
+    full_desc: 'Design for Manufacturability and Assembly (DFM/DFA) design reviews, automotive tier-supplier drawing reviews against OEM specifications, and prototype supplier coordination.',
+    image_url: '/services/dfm_dfa.png',
+    display_order: 4,
+    status: 'published',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  },
+];
+
 export function useServicesData() {
-  const [services, setServices] = useState<Service[]>([]);
+  const [services, setServices] = useState<Service[]>(DEFAULT_SERVICES);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     let mounted = true;
     servicesApi.getPublished().then(data => {
       if (mounted) {
-        setServices(data);
+        if (data && data.length > 0) {
+          setServices(data);
+        }
         setLoading(false);
       }
     }).catch(() => {

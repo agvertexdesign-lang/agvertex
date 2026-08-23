@@ -212,10 +212,10 @@ export default function App() {
               <>
                 <div className="space-y-1">
                   <span className="text-[11px] font-mono font-bold text-[#0057FF] uppercase tracking-widest flex items-center gap-1.5">
-                    <Zap className="w-3.5 h-3.5" /> INSTANT QUOTE & DFM ESTIMATOR
+                    <Zap className="w-3.5 h-3.5" /> PROJECT REVIEW & TECHNICAL ESTIMATE
                   </span>
-                  <h3 className="text-2xl font-heading font-bold text-[#0F172A]">Start Your Engineering Project</h3>
-                  <p className="text-xs text-slate-500">Fill out your specs for an instant technical review and NDA-backed proposal.</p>
+                  <h3 className="text-2xl font-heading font-bold text-[#0F172A]">Request a Project Review</h3>
+                  <p className="text-xs text-slate-500">Fill out your specifications for a technical review and practical design proposal.</p>
                 </div>
 
                 <form onSubmit={handleQuoteSubmit} className="space-y-4 text-xs">

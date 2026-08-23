@@ -22,16 +22,13 @@ export const Navbar: React.FC<NavbarProps> = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const rawNavLinks = [
+  const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About' },
     { path: '/services', label: 'Services' },
-    { path: '/portfolio', label: 'Showcase', key: 'showcase' },
     { path: '/careers', label: 'Careers' },
     { path: '/contact', label: 'Contact' },
   ];
-
-  const navLinks = rawNavLinks.filter(l => l.key !== 'showcase' || showcaseEnabled);
 
   const isLinkActive = (path: string) => {
     if (path === '/') {

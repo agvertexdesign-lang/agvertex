@@ -187,7 +187,7 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
                   onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMG; }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent flex items-end p-4">
-                  <span className="text-xs font-mono font-bold text-white uppercase">AG VERTEX MANUFACTURING-FOCUSED ENGINEERING</span>
+                  <span className="text-xs font-mono font-bold text-white uppercase">AG VERTEX MANUFACTURING-FOCUSED MECHANICAL DESIGN</span>
                 </div>
               </div>
             )}

@@ -17,34 +17,27 @@ export const Footer: React.FC<FooterProps> = () => {
   };
 
   const servicesList = [
-    { label: 'Product Design & Development', path: '/services' },
-    { label: 'Injection Mold Design', path: '/services' },
-    { label: 'Pressure Die-Casting Die Design', path: '/services' },
-    { label: '3D CAD Modelling', path: '/services' },
+    { label: 'Product Design & 3D CAD', path: '/services' },
+    { label: 'Mold & Die Tooling Support', path: '/services' },
     { label: 'Drawings, GD&T & BOMs', path: '/services' },
-    { label: 'Automotive Drawing Validation', path: '/services' },
+    { label: 'DFM/DFA & Supplier Coordination', path: '/services' },
+    { label: 'Automotive Drawing Review', path: '/services' },
   ];
 
-  const rawCompanyList = [
+  const companyList = [
     { label: 'About', path: '/about' },
-    { label: 'Capability Showcase', path: '/portfolio', key: 'showcase' },
-    { label: 'Engineering Approach', path: '/services' },
+    { label: 'Services', path: '/services' },
     { label: 'Careers', path: '/careers' },
     { label: 'Contact', path: '/contact' },
   ];
 
-  const companyList = rawCompanyList.filter(c => c.key !== 'showcase' || showcaseEnabled);
-
-  const rawBottomNavLinks = [
+  const bottomNavLinks = [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about' },
     { label: 'Services', path: '/services' },
-    { label: 'Showcase', path: '/portfolio', key: 'showcase' },
     { label: 'Careers', path: '/careers' },
     { label: 'Contact', path: '/contact' },
   ];
-
-  const bottomNavLinks = rawBottomNavLinks.filter(l => l.key !== 'showcase' || showcaseEnabled);
 
   const socialLinks = settings?.social || { linkedin: '', instagram: '', facebook: '', youtube: '' };
   const contactEmail = settings?.contact?.email || 'info@agvertex.com';

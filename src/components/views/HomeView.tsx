@@ -58,7 +58,7 @@ export const HomeView: React.FC<HomeViewProps> = () => {
           {/* Left Hero Content */}
           <div className="lg:col-span-6 space-y-7">
             <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-heading font-extrabold text-[#0F172A] tracking-tight leading-[1.12]">
-              {home.hero_title || 'ENGINEERING DESIGN BUILT FOR MANUFACTURING'}
+              {home.hero_title || 'Engineering Design Built for Manufacturing.'}
             </h1>
 
             {/* Resized larger, clear and prominent subtitle */}
@@ -75,7 +75,7 @@ export const HomeView: React.FC<HomeViewProps> = () => {
 
               <div className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-mono font-semibold text-slate-700 bg-white/95 border border-slate-200/90 px-4 py-2 rounded-full shadow-xs">
                 <Clock className="w-4 h-4 text-[#0057FF] shrink-0" />
-                {home.badge_2 || '15+ Years of Engineering Experience'}
+                {home.badge_2 || '15+ Years of Mechanical Design Experience'}
               </div>
             </div>
 

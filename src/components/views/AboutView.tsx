@@ -61,13 +61,13 @@ export const AboutView: React.FC<AboutViewProps> = () => {
       image: about.exp_2_img || '/services/injection_mold.png',
     },
     {
-      title: about.exp_3_title || 'AUTOMOTIVE ENGINEERING',
+      title: about.exp_3_title || 'AUTOMOTIVE DRAWING REVIEW',
       desc: about.exp_3_desc || 'Experience with suspension, steering, wheel-end components, engineering drawings, GD&T, and supplier coordination.',
       image: about.exp_3_img || '/services/drawing_validation.png',
     },
     {
       title: about.exp_4_title || 'CAD & DOCUMENTATION',
-      desc: about.exp_4_desc || '3D models, drawings, BOMs, and controlled documentation using established CAD and PLM workflows.',
+      desc: about.exp_4_desc || '3D models, drawings, BOMs, and controlled documentation using established CAD workflows.',
       image: about.exp_4_img || '/images/cad_workstation_single.jpeg',
     },
   ];
@@ -76,7 +76,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
     {
       icon: Calendar,
       value: '15+ YEARS',
-      label: 'Professional Engineering Experience',
+      label: 'Mechanical Design Experience',
     },
     {
       icon: Box,
@@ -110,20 +110,20 @@ export const AboutView: React.FC<AboutViewProps> = () => {
 
             {/* Distinct headline tailored for About Page */}
             <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-heading font-extrabold text-[#0F172A] tracking-tight leading-[1.12]">
-              {about.hero_title || 'PRECISION MECHANICAL DESIGN & ENGINEERING PARTNER'}
+              {about.hero_title || 'Practical Mechanical Design Experience.'}
             </h1>
 
             {/* Resized larger and highly readable paragraph */}
             <p className="text-base sm:text-lg lg:text-xl text-slate-700 font-medium leading-relaxed max-w-xl">
-              {about.hero_desc || 'AG Vertex is a Windsor, Ontario-based mechanical design consultancy specializing in product design, mold and die design, 3D CAD modelling, and automotive drawing validation. We help transform engineering concepts into practical, manufacturable designs supported by accurate documentation and supplier coordination.'}
+              {about.hero_desc || 'AG Vertex is a Windsor-based mechanical design consultancy supporting product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA and supplier coordination.'}
             </p>
 
             <div className="pt-2">
               <button
-                onClick={() => navigate('/portfolio')}
+                onClick={() => navigate('/contact')}
                 className="btn-primary px-8 py-4 text-sm sm:text-base font-bold flex items-center gap-2.5 cursor-pointer shadow-xl shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300"
               >
-                Explore Our Capabilities
+                Request a Project Review
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

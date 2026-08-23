@@ -114,16 +114,6 @@ export const BackgroundParticlesCanvas: React.FC = () => {
 
         ctx.stroke();
 
-        // 3. Render Elevation Metrology Labels on Major Contours
-        if (isMajorContour && i > 2 && i < contourCount - 2) {
-          const labelX = (width * 0.15 + i * 110 + time * 20) % (width * 0.8);
-          const labelWave = Math.sin(labelX * 0.003 + time + i * 0.35) * 35 + Math.cos(labelX * 0.0015 - time * 0.8 + i * 0.2) * 45;
-          const labelY = baseY + labelWave;
-
-          ctx.font = '9px monospace';
-          ctx.fillStyle = 'rgba(0, 87, 255, 0.35)';
-          ctx.fillText(`ISO +${i * 50}M`, labelX, labelY - 4);
-        }
       }
 
       animationFrameId = requestAnimationFrame(render);

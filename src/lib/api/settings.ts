@@ -67,34 +67,34 @@ export const DEFAULT_CAD_STACK: CadStackItem[] = [
   {
     id: 'cad-1',
     name: 'PTC Creo Parametric',
-    category: 'Parametric 3D CAD & Surfacing',
-    desc: 'Advanced surface modeling, mechanism design, large assemblies, and associative 2D drawing generation.',
-    badge: 'CREO',
+    category: 'Primary CAD System',
+    desc: 'Advanced surface modeling, mechanism design, complex assemblies, and associative 2D drawing generation.',
+    badge: 'PRIMARY CAD SYSTEM',
     logo_url: '/images/logos/creo.png',
   },
   {
     id: 'cad-2',
     name: 'Siemens NX',
-    category: 'PLM & High-End Tooling',
-    desc: 'Complex injection mold design, progressive dies, parting line splits, and multi-axis machining CAD data.',
-    badge: 'SIEMENS NX',
+    category: 'Additional CAD Tool',
+    desc: 'Complex injection mold design, parting line splits, and multi-axis CAD data generation.',
+    badge: 'ADDITIONAL TOOL',
     logo_url: '/images/logos/siemens_nx.png',
   },
   {
     id: 'cad-3',
-    name: 'Autodesk AutoCAD',
-    category: '2D Drafting & Plant Layouts',
-    desc: 'Precision engineering prints, geometric tolerance layout, plant schematics, and legacy DWG translation.',
-    badge: 'AUTOCAD',
-    logo_url: '/images/logos/autocad.png',
+    name: 'Dassault SolidWorks',
+    category: 'Additional CAD Tool',
+    desc: 'Mechanical design, sheet metal enclosures, weldments, ASME Y14.5 GD&T drafting, and integrated BOM control.',
+    badge: 'ADDITIONAL TOOL',
+    logo_url: '/images/logos/solidworks.png',
   },
   {
     id: 'cad-4',
-    name: 'Dassault SolidWorks',
-    category: 'Mechanical Design & DFM',
-    desc: 'Machine design, sheet metal enclosures, weldments, ASME Y14.5 GD&T drafting, and integrated BOM control.',
-    badge: 'SOLIDWORKS',
-    logo_url: '/images/logos/solidworks.png',
+    name: 'Autodesk AutoCAD',
+    category: 'Additional CAD Tool',
+    desc: 'Precision 2D engineering drafting, geometric tolerance layout, and legacy DWG translation.',
+    badge: 'ADDITIONAL TOOL',
+    logo_url: '/images/logos/autocad.png',
   },
 ];
 
@@ -125,7 +125,6 @@ export interface AboutPageContent {
   exp_4_title: string;
   exp_4_desc: string;
   exp_4_img: string;
-  facility_img: string;
 
   cad_stack_title: string;
   cad_stack_desc: string;
@@ -155,16 +154,16 @@ export interface WebsitePageContent {
 
 export const DEFAULT_PAGE_CONTENT: WebsitePageContent = {
   home: {
-    hero_title: 'ENGINEERING DESIGN BUILT FOR MANUFACTURING',
+    hero_title: 'Engineering Design Built for Manufacturing.',
     hero_subtitle: 'Practical mechanical design support for products, tooling, CAD documentation, and supplier coordination.',
     badge_1: 'Windsor, Ontario, Canada',
-    badge_2: '15+ Years of Engineering Experience',
+    badge_2: '15+ Years of Mechanical Design Experience',
     hero_cta_primary: 'Request a Project Review',
     hero_cta_secondary: 'Explore Services',
     cap_1_title: 'PRODUCT & MECHANICAL DESIGN',
     cap_1_desc: '3D CAD Modelling • Drawings, GD&T & BOMs',
     cap_1_img: '/services/product_design.png',
-    cap_2_title: 'MOLD & DIE TOOLING DESIGN',
+    cap_2_title: 'MOLD & DIE TOOLING SUPPORT',
     cap_2_desc: '3D CAD Modelling • Drawings, GD&T & BOMs',
     cap_2_img: '/services/injection_mold.png',
     cap_3_title: 'CAD DOCUMENTATION & MANUFACTURING SUPPORT',
@@ -173,18 +172,18 @@ export const DEFAULT_PAGE_CONTENT: WebsitePageContent = {
   },
   about: {
     hero_tag: 'ABOUT AG VERTEX',
-    hero_title: 'PRECISION MECHANICAL DESIGN & ENGINEERING PARTNER',
-    hero_desc: 'AG Vertex is a Windsor, Ontario-based mechanical design consultancy specializing in product design, mold and die design, 3D CAD modelling, and automotive drawing validation. We help transform engineering concepts into practical, manufacturable designs supported by accurate documentation and supplier coordination.',
+    hero_title: 'Practical Mechanical Design Experience.',
+    hero_desc: 'AG Vertex is a Windsor-based mechanical design consultancy supporting product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA and supplier coordination.',
     hero_img: '/images/cad_workstation_single.jpeg',
 
     pillar_1_title: 'OUR MISSION',
     pillar_1_desc: 'To deliver practical and precise mechanical design solutions that support manufacturability, quality, and efficient product development.',
     pillar_2_title: 'OUR VISION',
-    pillar_2_desc: 'To become a trusted engineering design partner for manufacturers, tooling companies, and automotive suppliers across Canada and beyond.',
+    pillar_2_desc: 'To become a trusted mechanical design consultancy for manufacturers, tooling companies, and automotive suppliers across Canada and beyond.',
     pillar_3_title: 'CORE VALUES',
     pillar_3_desc: 'Technical Integrity · Quality · Collaboration · Confidentiality · Continuous Improvement',
     pillar_4_title: 'OUR PROMISE',
-    pillar_4_desc: "Clear communication, carefully developed deliverables, and engineering support focused on each client's technical and manufacturing requirements.",
+    pillar_4_desc: "Clear communication, carefully developed deliverables, and mechanical design support focused on each client's technical and manufacturing requirements.",
 
     exp_1_title: 'PRODUCT DEVELOPMENT',
     exp_1_desc: 'Mechanical components and assemblies developed with performance, manufacturability, and production requirements in mind.',
@@ -192,31 +191,30 @@ export const DEFAULT_PAGE_CONTENT: WebsitePageContent = {
     exp_2_title: 'TOOLING EXPERIENCE',
     exp_2_desc: 'Practical experience supporting injection molds, hot-runner systems, mold components, and pressure die-casting applications.',
     exp_2_img: '/services/injection_mold.png',
-    exp_3_title: 'AUTOMOTIVE ENGINEERING',
+    exp_3_title: 'AUTOMOTIVE DRAWING REVIEW',
     exp_3_desc: 'Experience with suspension, steering, wheel-end components, engineering drawings, GD&T, and supplier coordination.',
     exp_3_img: '/services/drawing_validation.png',
     exp_4_title: 'CAD & DOCUMENTATION',
-    exp_4_desc: '3D models, drawings, BOMs, and controlled documentation using established CAD and PLM workflows.',
+    exp_4_desc: '3D models, drawings, BOMs, and controlled documentation using established CAD workflows.',
     exp_4_img: '/images/cad_workstation_single.jpeg',
-    facility_img: '/services/drawing_validation.png',
 
-    cad_stack_title: 'SOFTWARE & CAD PROFICIENCY',
-    cad_stack_desc: 'We collaborate using industry-standard engineering suites and enterprise PLM workflows.',
+    cad_stack_title: 'SOFTWARE & CAD PROFICIENCY STACK',
+    cad_stack_desc: 'Creo Parametric serves as our primary CAD system, backed by proficiency across Siemens NX, SolidWorks, and AutoCAD.',
     cad_items: DEFAULT_CAD_STACK,
   },
   careers: {
-    hero_tag: 'CAREERS & COLLABORATION',
-    hero_title: 'BRING PRACTICAL ENGINEERING IDEAS TO LIFE',
-    hero_desc: 'AG Vertex welcomes experienced mechanical designers, tooling specialists, and CAD professionals interested in future project-based collaboration.',
+    hero_tag: 'CAREERS AT AG VERTEX',
+    hero_title: 'JOIN OUR MECHANICAL DESIGN TEAM',
+    hero_desc: 'We are always looking for talented CAD specialists, tooling designers, and mechanical design consultants.',
     hero_img: '/images/cad_team_collaboration.jpeg',
-    val_1_title: 'PRACTICAL ENGINEERING',
-    val_1_desc: 'We solve real design problems with practical, manufacturable solutions.',
-    val_2_title: 'FLEXIBLE COLLABORATION',
-    val_2_desc: 'Work with us on a project basis or as an independent specialist.',
-    val_3_title: 'TECHNICAL INTEGRITY',
-    val_3_desc: 'We stand for accuracy, reliability, and clear communication in every deliverable.',
-    val_4_title: 'CONTINUOUS LEARNING',
-    val_4_desc: 'We encourage knowledge sharing and ongoing growth in engineering.',
+    val_1_title: 'TECHNICAL EXCELLENCE',
+    val_1_desc: 'We strive for precision and clarity in every drawing, 3D model, and BOM.',
+    val_2_title: 'PRACTICAL INNOVATION',
+    val_2_desc: 'Applying practical mechanical design experience to solve real manufacturing challenges.',
+    val_3_title: 'CONTINUOUS LEARNING',
+    val_3_desc: 'Expanding software proficiency and keeping pace with industry standards.',
+    val_4_title: 'CLIENT CONFIDENTIALITY',
+    val_4_desc: 'Protecting intellectual property and proprietary client designs at all times.',
   },
 };
 
@@ -231,15 +229,15 @@ const defaultSettings: AllSettings = {
   social: { linkedin: '', instagram: '', facebook: '', youtube: '' },
   business: {
     company_name: 'AG Vertex',
-    tagline: 'Precision Mechanical Design & Engineering Partner',
-    short_description: 'Mechanical design consultancy in Windsor, Ontario.',
+    tagline: 'Windsor-Based Mechanical Design Consultancy',
+    short_description: 'Windsor-based mechanical design consultancy supporting product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA and supplier coordination.',
     business_hours: 'Monday – Friday, 9 AM – 5 PM EST',
   },
   images: {
     about_hero_image: '/images/cad_workstation_single.jpeg',
     about_facility_image: '/services/drawing_validation.png',
     careers_team_image: '/images/cad_team_collaboration.jpeg',
-    home_hero_image: '',
+    home_hero_image: '/images/cad_workstation_single.jpeg',
   },
 };
 
