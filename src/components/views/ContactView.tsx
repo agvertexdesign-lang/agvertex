@@ -22,22 +22,31 @@ export const ContactView: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    company: '',
     phone: '',
     service: '',
     overview: '',
     timeline: '',
-    agreed: true,
+    agreed: false,
   });
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
+
+    if (!formData.agreed) {
+      setErrorMessage('Please check the consent box to allow us to respond to your inquiry.');
+      return;
+    }
 
     const lines = [
       "📌 AG VERTEX — New Project Review Request",
       "----------------------------------------",
       `👤 Name: ${formData.name}`,
       `✉️ Work Email: ${formData.email}`,
+      `🏢 Company: ${formData.company || 'Not provided'}`,
       `📞 Phone: ${formData.phone || 'Not provided'}`,
       `🛠️ Service Required: ${formData.service || 'General Inquiry'}`,
       `📅 Preferred Timeline: ${formData.timeline || 'Not specified'}`,
@@ -54,7 +63,7 @@ export const ContactView: React.FC = () => {
     {
       country: 'CANADA',
       flag: '🇨🇦',
-      city: 'Windsor & Toronto, Ontario',
+      city: 'Windsor, Ontario',
       role: 'Headquarters & Client Engineering Coordination',
       details: 'North American engineering management, tooling review, OEM standards alignment, and client account delivery.',
       timezone: 'EST (UTC-5)',
@@ -86,7 +95,7 @@ export const ContactView: React.FC = () => {
           GET IN TOUCH
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-[#0F172A] tracking-tight">
-          Let's discuss your project
+          Request a Project Review
         </h1>
         <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-medium max-w-2xl mx-auto">
           Tell us what you are developing, the engineering support you need, and your preferred timeline.
@@ -101,7 +110,7 @@ export const ContactView: React.FC = () => {
           <div className="lg:col-span-7 glass-card bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/90 shadow-xl space-y-6">
             <div className="space-y-1.5">
               <h2 className="text-2xl font-heading font-bold text-[#0F172A] tracking-tight">
-                Request a Project Review
+                Project Inquiry Details
               </h2>
               <p className="text-sm text-slate-600 font-medium">
                 Fill in the details below and an engineer will review your inquiry and respond promptly.
@@ -113,12 +122,18 @@ export const ContactView: React.FC = () => {
                 <CheckCircle2 className="w-12 h-12 mx-auto text-emerald-600" />
                 <h3 className="font-heading font-bold text-xl">Project Request Sent!</h3>
                 <p className="text-sm text-emerald-800 max-w-md mx-auto font-medium">
-                  Thank you for contacting AG Vertex. Our engineering team will review your requirements and respond promptly.
+                  Thank you for contacting AG Vertex. Our team will review your requirements and respond promptly.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 
+                {errorMessage && (
+                  <div className="p-4 rounded-xl bg-red-50 text-red-700 text-xs font-semibold border border-red-200">
+                    {errorMessage}
+                  </div>
+                )}
+
                 {/* Name & Work Email */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
@@ -150,17 +165,17 @@ export const ContactView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Phone Number & Service Required */}
+                {/* Company & Phone Number */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
                     <label className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
-                      Phone Number (Optional)
+                      Company
                     </label>
                     <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="e.g. (519) 555-0123"
+                      type="text"
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      placeholder="e.g. Acme Tooling Solutions"
                       className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-300 text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all"
                     />
                   </div>
@@ -176,14 +191,11 @@ export const ContactView: React.FC = () => {
                       className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-300 text-sm font-medium text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all cursor-pointer"
                     >
                       <option value="">Select a service</option>
-                      <option value="Product Design & Development">Product Design & Development</option>
-                      <option value="Injection Mold Design">Injection Mold Design</option>
-                      <option value="Pressure Die-Casting Die Design">Pressure Die-Casting Die Design</option>
-                      <option value="3D CAD Modelling">3D CAD Modelling</option>
+                      <option value="Product Design & 3D CAD">Product Design & 3D CAD</option>
+                      <option value="Mold & Die Tooling Support">Mold & Die Tooling Support</option>
                       <option value="Drawings, GD&T & BOMs">Drawings, GD&T & BOMs</option>
+                      <option value="DFM/DFA & Supplier Coordination">DFM/DFA & Supplier Coordination</option>
                       <option value="Automotive Drawing Review">Automotive Drawing Review</option>
-                      <option value="DFM / DFA Support">DFM / DFA Support</option>
-                      <option value="Supplier & Prototype Coordination">Supplier & Prototype Coordination</option>
                     </select>
                   </div>
                 </div>
@@ -206,7 +218,7 @@ export const ContactView: React.FC = () => {
                 {/* Preferred Timeline */}
                 <div className="space-y-2">
                   <label className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
-                    Preferred Timeline (Optional)
+                    Preferred Timeline
                   </label>
                   <select
                     value={formData.timeline}
@@ -220,18 +232,24 @@ export const ContactView: React.FC = () => {
                   </select>
                 </div>
 
-                {/* Checkbox */}
-                <div className="flex items-center gap-3 pt-2">
-                  <input
-                    type="checkbox"
-                    id="consent"
-                    checked={formData.agreed}
-                    onChange={(e) => setFormData({ ...formData, agreed: e.target.checked })}
-                    className="w-4 h-4 rounded border-slate-400 text-[#0057FF] focus:ring-blue-500 cursor-pointer"
-                  />
-                  <label htmlFor="consent" className="text-xs sm:text-sm text-slate-700 font-medium cursor-pointer">
-                    I agree that AG Vertex may contact me about this inquiry.
-                  </label>
+                {/* Checkbox (Unchecked by default) */}
+                <div className="space-y-2 pt-1">
+                  <div className="flex items-start gap-3">
+                    <input
+                      type="checkbox"
+                      id="consent"
+                      required
+                      checked={formData.agreed}
+                      onChange={(e) => setFormData({ ...formData, agreed: e.target.checked })}
+                      className="w-4 h-4 rounded border-slate-400 text-[#0057FF] focus:ring-blue-500 cursor-pointer mt-0.5"
+                    />
+                    <label htmlFor="consent" className="text-xs sm:text-sm text-slate-700 font-medium cursor-pointer">
+                      I agree that AG Vertex may contact me regarding this inquiry.
+                    </label>
+                  </div>
+                  <p className="text-xs text-slate-500 pl-7">
+                    Your information is used only to respond to this inquiry.
+                  </p>
                 </div>
 
                 {/* Submit Button */}
@@ -274,23 +292,12 @@ export const ContactView: React.FC = () => {
                   </a>
                 </div>
 
-                {settings?.contact?.phone && (
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-bold">
-                      <Phone className="w-5 h-5" />
-                    </div>
-                    <a href={`tel:${settings.contact.phone}`} className="font-semibold text-slate-900 hover:text-[#0057FF]">
-                      {settings.contact.phone}
-                    </a>
-                  </div>
-                )}
-
                 <div className="flex items-center gap-3.5">
                   <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-bold">
                     <Calendar className="w-5 h-5" />
                   </div>
                   <span className="font-semibold text-slate-900">
-                    {settings?.business?.business_hours || 'Project inquiries by appointment'}
+                    Monday–Friday, 9 AM–5 PM ET
                   </span>
                 </div>
               </div>

@@ -134,7 +134,9 @@ export const AboutView: React.FC<AboutViewProps> = () => {
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-900 group">
               <img
                 src={settings?.images?.about_hero_image || "/images/cad_workstation_single.jpeg"}
-                alt="CAD Workstation - AG Vertex"
+                alt="CAD Workstation Visual - AG Vertex Mechanical Design Consultancy"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[380px] sm:h-[450px] object-cover transition-transform duration-700 group-hover:scale-103"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent flex items-end p-6 sm:p-8">

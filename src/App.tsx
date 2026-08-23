@@ -17,11 +17,11 @@ import { ProcessView } from './components/views/ProcessView';
 import { CareersView } from './components/views/CareersView';
 import { ContactView } from './components/views/ContactView';
 import { FAQView } from './components/views/FAQView';
-import { X, Send, CheckCircle2, ShieldCheck, Zap, Loader2 } from 'lucide-react';
-import { sendToWhatsApp } from './lib/whatsapp';
+import { useSEO } from './hooks/useSEO';
 
 export default function App() {
   const navigate = useNavigate();
+  useSEO();
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState<boolean>(false);
   const [quoteSubmitted, setQuoteSubmitted] = useState<boolean>(false);
   const [quoteForm, setQuoteForm] = useState({
@@ -92,9 +92,6 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] relative overflow-x-hidden selection:bg-[#0057FF] selection:text-white">
       
-      {/* 0. INITIAL PRELOADER SCREEN */}
-      <Preloader />
-
       {/* 1. SCROLL RESET ON ROUTE CHANGE */}
       <ScrollToTop />
 

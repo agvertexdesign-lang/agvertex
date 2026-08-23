@@ -133,7 +133,9 @@ export const HomeView: React.FC<HomeViewProps> = () => {
                   <div className="h-52 overflow-hidden relative">
                     <img 
                       src={card.image} 
-                      alt={card.title}
+                      alt={`AG Vertex Representative Capability Visual - ${card.title}`}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
