@@ -1,4 +1,4 @@
-export const WEB3FORMS_ACCESS_KEY = "6479dd2c-745a-4923-8035-1e8ebe924c37";
+export const WEB3FORMS_ACCESS_KEY = "05c842a4-bdd5-4cd3-b9a8-b2d1a2b646bd";
 
 export interface Web3FormsResponse {
   success: boolean;

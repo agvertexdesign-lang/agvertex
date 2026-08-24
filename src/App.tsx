@@ -18,6 +18,8 @@ import { CareersView } from './components/views/CareersView';
 import { ContactView } from './components/views/ContactView';
 import { FAQView } from './components/views/FAQView';
 import { useSEO } from './hooks/useSEO';
+import { sendToWhatsApp } from './lib/whatsapp';
+import { submitToWeb3Forms } from './lib/web3forms';
 
 export default function App() {
   const navigate = useNavigate();
@@ -33,16 +35,14 @@ export default function App() {
     description: '',
   });
 
-  const handleNavigate = (tabOrPath: string) => {
-    const cleanPath = tabOrPath.startsWith('/')
-      ? tabOrPath
-      : tabOrPath === 'home'
+  const handleCustomNavigate = (tabOrPath: string) => {
+    const cleanPath = tabOrPath === 'home'
       ? '/'
       : `/${tabOrPath}`;
     navigate(cleanPath);
   };
 
-  const handleQuoteSubmit = (e: React.FormEvent) => {
+  const handleQuoteSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const lines = [
@@ -59,6 +59,22 @@ export default function App() {
     ];
 
     sendToWhatsApp(lines);
+
+    try {
+      await submitToWeb3Forms({
+        name: quoteForm.name,
+        email: quoteForm.email,
+        replyto: quoteForm.email,
+        phone: quoteForm.phone || 'Not provided',
+        engineering_service: quoteForm.service,
+        timeline: quoteForm.timeline,
+        project_specifications: quoteForm.description || 'Not provided',
+        to_email: 'agvertexdesign@gmail.com',
+      }, `AG VERTEX — New Quote Request (${quoteForm.name})`);
+    } catch (err) {
+      console.warn("Quote Web3Forms submit log:", err);
+    }
+
     setQuoteSubmitted(true);
     
     setTimeout(() => {

@@ -16,6 +16,7 @@ import {
 import { useSettingsData } from '../../hooks/useCmsData';
 
 import { sendToWhatsApp } from '../../lib/whatsapp';
+import { submitToWeb3Forms } from '../../lib/web3forms';
 
 export const ContactView: React.FC = () => {
   const { settings } = useSettingsData();
@@ -32,7 +33,7 @@ export const ContactView: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
 
@@ -56,6 +57,23 @@ export const ContactView: React.FC = () => {
     ];
 
     sendToWhatsApp(lines);
+
+    try {
+      await submitToWeb3Forms({
+        name: formData.name,
+        email: formData.email,
+        replyto: formData.email,
+        company: formData.company || 'Not provided',
+        phone: formData.phone || 'Not provided',
+        service_required: formData.service || 'General Inquiry',
+        timeline: formData.timeline || 'Not specified',
+        project_overview: formData.overview,
+        to_email: 'agvertexdesign@gmail.com',
+      }, `AG VERTEX — New Project Inquiry (${formData.name})`);
+    } catch (err) {
+      console.warn("Contact Web3Forms submit log:", err);
+    }
+
     setSubmitted(true);
   };
 

@@ -159,7 +159,7 @@ export const CareersView: React.FC = () => {
     // 3. Direct email transmission to agvertexdesign@gmail.com
     try {
       const formData = new FormData();
-      formData.append("access_key", "6479dd2c-745a-4923-8035-1e8ebe924c37");
+      formData.append("access_key", "05c842a4-bdd5-4cd3-b9a8-b2d1a2b646bd");
       formData.append("subject", `AG VERTEX — New CV & Profile Submission (${profileForm.name})`);
       formData.append("from_name", "AG VERTEX Careers");
       formData.append("to_email", "agvertexdesign@gmail.com");
