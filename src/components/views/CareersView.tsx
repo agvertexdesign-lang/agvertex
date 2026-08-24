@@ -19,6 +19,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useCareersData, usePageContent, useSettingsData } from '../../hooks/useCmsData';
 import { DEFAULT_CAD_STACK } from '../../lib/api/settings';
+import { supabase } from '../../lib/supabase';
 import { submitToWeb3Forms } from '../../lib/web3forms';
 import { sendToWhatsApp } from '../../lib/whatsapp';
 
@@ -78,6 +79,31 @@ export const CareersView: React.FC = () => {
     setErrorMessage('');
   };
 
+  const uploadResume = async (file: File): Promise<string | null> => {
+    try {
+      const ext = file.name.split('.').pop() || 'pdf';
+      const cleanName = file.name.replace(/[^a-zA-Z0-9_.-]/g, '_');
+      const storagePath = `resumes/${Date.now()}_${cleanName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('cms-images')
+        .upload(storagePath, file, { cacheControl: '3600', upsert: true });
+
+      if (uploadError) {
+        console.warn('Storage upload error:', uploadError);
+        return null;
+      }
+
+      const { data } = supabase.storage
+        .from('cms-images')
+        .getPublicUrl(storagePath);
+
+      return data.publicUrl;
+    } catch {
+      return null;
+    }
+  };
+
   const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
@@ -89,6 +115,11 @@ export const CareersView: React.FC = () => {
 
     setIsSubmitting(true);
 
+    let cvPublicUrl: string | null = null;
+    if (selectedFile) {
+      cvPublicUrl = await uploadResume(selectedFile);
+    }
+
     const lines = [
       "💼 AG VERTEX — Specialist Profile Submission",
       "----------------------------------------",
@@ -97,16 +128,35 @@ export const CareersView: React.FC = () => {
       `🛠️ Discipline: ${profileForm.primaryDiscipline}`,
       `💻 CAD Tools: ${profileForm.cadTools.join(', ') || 'Not specified'}`,
       `🔗 LinkedIn: ${profileForm.linkedin || 'Not provided'}`,
-      `📄 Résumé / CV File: ${profileForm.resumeName ? `${profileForm.resumeName} (Sent to info@agvertex.com)` : 'Not attached'}`,
+      cvPublicUrl 
+        ? `📄 Download CV Document: ${cvPublicUrl}`
+        : `📄 Résumé / CV File: ${profileForm.resumeName || 'Not attached'}`,
       "",
       "📝 Experience Summary / Notes:",
       profileForm.notes || 'Not provided',
     ];
 
-    // Open WhatsApp with pre-formatted application text
-    sendToWhatsApp(lines);
+    // 1. Try native Web Share API with physical file object attachment (attaches PDF to WhatsApp)
+    let sharedViaNativeApp = false;
+    if (selectedFile && navigator.share && navigator.canShare && navigator.canShare({ files: [selectedFile] })) {
+      try {
+        await navigator.share({
+          title: `AG VERTEX Specialist Profile - ${profileForm.name}`,
+          text: lines.join('\n'),
+          files: [selectedFile],
+        });
+        sharedViaNativeApp = true;
+      } catch (err) {
+        console.log("Native share cancelled or failed, using wa.me fallback", err);
+      }
+    }
 
-    // Send full application with CV attachment via FormData to info@agvertex.com
+    // 2. Fallback to WhatsApp Web link with direct downloadable file link
+    if (!sharedViaNativeApp) {
+      sendToWhatsApp(lines);
+    }
+
+    // 3. Backup transmission to info@agvertex.com
     try {
       const formData = new FormData();
       formData.append("access_key", "6479dd2c-745a-4923-8035-1e8ebe924c37");
