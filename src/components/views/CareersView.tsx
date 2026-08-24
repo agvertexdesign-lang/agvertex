@@ -85,23 +85,43 @@ export const CareersView: React.FC = () => {
       const cleanName = file.name.replace(/[^a-zA-Z0-9_.-]/g, '_');
       const storagePath = `resumes/${Date.now()}_${cleanName}`;
 
+      // Primary upload: Supabase Storage bucket
       const { error: uploadError } = await supabase.storage
         .from('cms-images')
         .upload(storagePath, file, { cacheControl: '3600', upsert: true });
 
-      if (uploadError) {
-        console.warn('Storage upload error:', uploadError);
-        return null;
+      if (!uploadError) {
+        const { data } = supabase.storage
+          .from('cms-images')
+          .getPublicUrl(storagePath);
+
+        if (data?.publicUrl) {
+          return data.publicUrl;
+        }
+      } else {
+        console.warn('Supabase storage upload error:', uploadError);
       }
-
-      const { data } = supabase.storage
-        .from('cms-images')
-        .getPublicUrl(storagePath);
-
-      return data.publicUrl;
-    } catch {
-      return null;
+    } catch (e) {
+      console.warn('Supabase upload exception:', e);
     }
+
+    // Secondary fallback upload: tmpfiles.org
+    try {
+      const form = new FormData();
+      form.append('file', file);
+      const res = await fetch('https://tmpfiles.org/api/v1/upload', {
+        method: 'POST',
+        body: form
+      });
+      const json = await res.json();
+      if (json?.data?.url) {
+        return json.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');
+      }
+    } catch (e) {
+      console.warn('Fallback file upload error:', e);
+    }
+
+    return null;
   };
 
   const handleProfileSubmit = async (e: React.FormEvent) => {
@@ -122,17 +142,17 @@ export const CareersView: React.FC = () => {
       }
 
       const response = await submitToWeb3Forms({
-        name: profileForm.name,
-        email: profileForm.email,
-        replyto: profileForm.email,
-        discipline: profileForm.primaryDiscipline,
-        cad_tools: profileForm.cadTools.join(', '),
-        linkedin_url: profileForm.linkedin || 'Not provided',
-        resume_filename: profileForm.resumeName || 'Not attached',
-        cv_download_url: cvPublicUrl || 'Not attached',
-        experience_summary: profileForm.notes || 'Not provided',
-        to_email: 'agvertexdesign@gmail.com',
-      }, `AG VERTEX — New CV & Specialist Profile Submission (${profileForm.name})`);
+        "Full Name": profileForm.name,
+        "Email Address": profileForm.email,
+        "replyto": profileForm.email,
+        "Discipline": profileForm.primaryDiscipline,
+        "CAD Tools": profileForm.cadTools.join(', '),
+        "LinkedIn Profile": profileForm.linkedin || 'Not provided',
+        "Résumé File Name": profileForm.resumeName || 'Not attached',
+        "CV Document Link (Click to Download)": cvPublicUrl || 'Upload failed / Not attached',
+        "Experience Summary": profileForm.notes || 'Not provided',
+        "to_email": 'agvertexdesign@gmail.com',
+      }, `AG VERTEX — New CV Submission (${profileForm.name})`);
 
       if (response.success) {
         setProfileSubmitted(true);
