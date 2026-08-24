@@ -44,6 +44,8 @@ export const CareersView: React.FC = () => {
     agreed: false,
   });
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
   const CAD_TOOL_OPTIONS = [
     'PTC Creo Parametric',
     'Siemens NX',
@@ -71,6 +73,7 @@ export const CareersView: React.FC = () => {
       return;
     }
 
+    setSelectedFile(file);
     setProfileForm(prev => ({ ...prev, resumeName: file.name }));
     setErrorMessage('');
   };
@@ -94,7 +97,7 @@ export const CareersView: React.FC = () => {
       `🛠️ Discipline: ${profileForm.primaryDiscipline}`,
       `💻 CAD Tools: ${profileForm.cadTools.join(', ') || 'Not specified'}`,
       `🔗 LinkedIn: ${profileForm.linkedin || 'Not provided'}`,
-      `📄 Résumé / CV: ${profileForm.resumeName || 'Not attached'}`,
+      `📄 Résumé / CV File: ${profileForm.resumeName ? `${profileForm.resumeName} (Sent to info@agvertex.com)` : 'Not attached'}`,
       "",
       "📝 Experience Summary / Notes:",
       profileForm.notes || 'Not provided',
@@ -103,19 +106,29 @@ export const CareersView: React.FC = () => {
     // Open WhatsApp with pre-formatted application text
     sendToWhatsApp(lines);
 
+    // Send full application with CV attachment via FormData to info@agvertex.com
     try {
-      await submitToWeb3Forms({
-        name: profileForm.name,
-        email: profileForm.email,
-        discipline: profileForm.primaryDiscipline,
-        cad_tools: profileForm.cadTools.join(', '),
-        linkedin_url: profileForm.linkedin || 'Not provided',
-        resume_filename: profileForm.resumeName || 'Not attached',
-        experience_summary: profileForm.notes || 'Not provided',
-        consent_accepted: 'Yes',
-      }, "AG VERTEX — New Specialist Profile Submission");
+      const formData = new FormData();
+      formData.append("access_key", "6479dd2c-745a-4923-8035-1e8ebe924c37");
+      formData.append("subject", `AG VERTEX — New CV & Profile Submission (${profileForm.name})`);
+      formData.append("from_name", "AG VERTEX Careers");
+      formData.append("name", profileForm.name);
+      formData.append("email", profileForm.email);
+      formData.append("discipline", profileForm.primaryDiscipline);
+      formData.append("cad_tools", profileForm.cadTools.join(', '));
+      formData.append("linkedin_url", profileForm.linkedin || 'Not provided');
+      formData.append("experience_summary", profileForm.notes || 'Not provided');
+
+      if (selectedFile) {
+        formData.append("attachment", selectedFile);
+      }
+
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
     } catch (err) {
-      console.warn("Background Web3Forms backup log:", err);
+      console.warn("Background Web3Forms submission log:", err);
     } finally {
       setIsSubmitting(false);
       setProfileSubmitted(true);
@@ -472,7 +485,7 @@ export const CareersView: React.FC = () => {
                         className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-[#0057FF] hover:file:bg-blue-100 cursor-pointer"
                       />
                       {profileForm.resumeName && (
-                        <p className="text-[10px] text-emerald-600 font-medium truncate">Selected: {profileForm.resumeName}</p>
+                        <p className="text-[10px] text-emerald-600 font-medium truncate">✓ {profileForm.resumeName} (File sent to info@agvertex.com)</p>
                       )}
                     </div>
 
