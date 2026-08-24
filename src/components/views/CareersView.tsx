@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 import { useCareersData, usePageContent, useSettingsData } from '../../hooks/useCmsData';
 import { DEFAULT_CAD_STACK } from '../../lib/api/settings';
 import { submitToWeb3Forms } from '../../lib/web3forms';
+import { sendToWhatsApp } from '../../lib/whatsapp';
 
 export const CareersView: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -85,11 +86,27 @@ export const CareersView: React.FC = () => {
 
     setIsSubmitting(true);
 
+    const lines = [
+      "💼 AG VERTEX — Specialist Profile Submission",
+      "----------------------------------------",
+      `👤 Full Name: ${profileForm.name}`,
+      `✉️ Email: ${profileForm.email}`,
+      `🛠️ Discipline: ${profileForm.primaryDiscipline}`,
+      `💻 CAD Tools: ${profileForm.cadTools.join(', ') || 'Not specified'}`,
+      `🔗 LinkedIn: ${profileForm.linkedin || 'Not provided'}`,
+      `📄 Résumé / CV: ${profileForm.resumeName || 'Not attached'}`,
+      "",
+      "📝 Experience Summary / Notes:",
+      profileForm.notes || 'Not provided',
+    ];
+
+    // Open WhatsApp with pre-formatted application text
+    sendToWhatsApp(lines);
+
     try {
-      const response = await submitToWeb3Forms({
+      await submitToWeb3Forms({
         name: profileForm.name,
         email: profileForm.email,
-        phone: profileForm.phone || 'Not provided',
         discipline: profileForm.primaryDiscipline,
         cad_tools: profileForm.cadTools.join(', '),
         linkedin_url: profileForm.linkedin || 'Not provided',
@@ -97,16 +114,11 @@ export const CareersView: React.FC = () => {
         experience_summary: profileForm.notes || 'Not provided',
         consent_accepted: 'Yes',
       }, "AG VERTEX — New Specialist Profile Submission");
-
-      if (response.success) {
-        setProfileSubmitted(true);
-      } else {
-        setErrorMessage(response.message || 'Submission error. Please try again.');
-      }
-    } catch {
-      setErrorMessage('Failed to submit profile. Please try again.');
+    } catch (err) {
+      console.warn("Background Web3Forms backup log:", err);
     } finally {
       setIsSubmitting(false);
+      setProfileSubmitted(true);
     }
   };
 
@@ -508,14 +520,14 @@ export const CareersView: React.FC = () => {
                     </p>
                   </div>
 
-                  {/* Callout 14: Submit Profile Securely */}
+                  {/* Submit Profile via WhatsApp */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full btn-primary py-3.5 text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-blue-500/20 disabled:opacity-50"
                   >
-                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                    {isSubmitting ? 'Submitting Profile...' : 'Submit Profile Securely'}
+                    <Send className="w-4 h-4 text-emerald-400" />
+                    {isSubmitting ? 'Opening WhatsApp...' : 'Submit Profile via WhatsApp'}
                   </button>
                 </form>
               </>
