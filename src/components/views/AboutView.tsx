@@ -312,11 +312,6 @@ export const AboutView: React.FC<AboutViewProps> = () => {
                   {tool.desc}
                 </p>
               </div>
-
-              <div className="pt-4 border-t border-slate-100 flex items-center gap-2 text-[11px] font-semibold text-emerald-600">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                <span>Production Ready</span>
-              </div>
             </div>
           ))}
         </div>
