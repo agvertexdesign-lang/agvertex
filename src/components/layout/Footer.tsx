@@ -40,7 +40,7 @@ export const Footer: React.FC<FooterProps> = () => {
   ];
 
   const socialLinks = settings?.social || { linkedin: '', instagram: '', facebook: '', youtube: '' };
-  const contactEmail = settings?.contact?.email || 'info@agvertex.com';
+  const contactEmail = settings?.contact?.email || 'agvertexdesign@gmail.com';
 
   return (
     <footer className="bg-white text-slate-700 pt-16 pb-8 border-t border-slate-200 relative">
@@ -158,8 +158,8 @@ export const Footer: React.FC<FooterProps> = () => {
 
               <div className="flex items-center gap-2.5 pt-1">
                 <Mail className="w-4 h-4 text-[#0057FF] shrink-0" />
-                <a href="mailto:info@agvertex.com" className="hover:text-[#0057FF] transition-colors font-medium">
-                  info@agvertex.com
+                <a href="mailto:agvertexdesign@gmail.com" className="hover:text-[#0057FF] transition-colors font-medium">
+                  agvertexdesign@gmail.com
                 </a>
               </div>
 

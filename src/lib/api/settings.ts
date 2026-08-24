@@ -221,10 +221,10 @@ export const DEFAULT_PAGE_CONTENT: WebsitePageContent = {
 const defaultSettings: AllSettings = {
   contact: {
     phone: '+1 (289) 683-1234',
-    email: 'info@agvertex.com',
+    email: 'agvertexdesign@gmail.com',
     address: 'Windsor, Ontario, Canada',
     whatsapp: '',
-    contact_form_email: 'info@agvertex.com',
+    contact_form_email: 'agvertexdesign@gmail.com',
   },
   social: { linkedin: '', instagram: '', facebook: '', youtube: '' },
   business: {

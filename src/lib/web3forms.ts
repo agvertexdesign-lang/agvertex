@@ -15,6 +15,7 @@ export async function submitToWeb3Forms(
       access_key: WEB3FORMS_ACCESS_KEY,
       subject: subject,
       from_name: "AG VERTEX Engineering Website",
+      to_email: "agvertexdesign@gmail.com",
       ...fields
     };
 
