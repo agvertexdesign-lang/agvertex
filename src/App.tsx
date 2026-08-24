@@ -35,8 +35,10 @@ export default function App() {
     description: '',
   });
 
-  const handleCustomNavigate = (tabOrPath: string) => {
-    const cleanPath = tabOrPath === 'home'
+  const handleNavigate = (tabOrPath: string) => {
+    const cleanPath = tabOrPath.startsWith('/')
+      ? tabOrPath
+      : tabOrPath === 'home'
       ? '/'
       : `/${tabOrPath}`;
     navigate(cleanPath);
