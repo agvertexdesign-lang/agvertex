@@ -28,8 +28,8 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
   const PROCESS_STEPS = [
     { num: '1', title: 'REQUIREMENTS', desc: 'Understand goals, constraints and technical requirements.' },
     { num: '2', title: 'CAD DEVELOPMENT', desc: 'Create models, assemblies and detailed design solutions.' },
-    { num: '3', title: 'DRAWING REVIEW', desc: 'Validate design intent, GD&T and documentation accuracy.' },
-    { num: '4', title: 'SUPPLIER COORDINATION', desc: 'Support manufacturing handoff, prototypes and engineering changes.' },
+    { num: '3', title: 'DRAWING REVIEW', desc: 'Review design intent, GD&T, and documentation consistency.' },
+    { num: '4', title: 'SUPPLIER COORDINATION', desc: 'Support manufacturing handoff, prototype fitment, and engineering changes.' },
   ];
 
   return (

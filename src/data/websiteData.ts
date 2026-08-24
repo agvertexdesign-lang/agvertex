@@ -507,9 +507,9 @@ export const FAQ_ITEMS = [
     id: 'faq-2',
     category: 'Location & Collaboration',
     question: 'Where is AG Vertex located and how do you work with clients?',
-    answer: 'AG Vertex is a mechanical design consultancy based in Windsor, Ontario, Canada. We support local and international clients with turnkey CAD modeling, tooling designs, and drawing validation.',
+    answer: 'AG Vertex is a mechanical design consultancy based in Windsor, Ontario, Canada. We support local and international clients with turnkey CAD modeling, tooling designs, and drawing review.',
     q: 'Where is AG Vertex located and how do you work with clients?',
-    a: 'AG Vertex is a mechanical design consultancy based in Windsor, Ontario, Canada. We support local and international clients with turnkey CAD modeling, tooling designs, and drawing validation.',
+    a: 'AG Vertex is a mechanical design consultancy based in Windsor, Ontario, Canada. We support local and international clients with turnkey CAD modeling, tooling designs, and drawing review.',
   },
   {
     id: 'faq-3',

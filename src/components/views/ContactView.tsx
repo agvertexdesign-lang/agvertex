@@ -73,7 +73,7 @@ export const ContactView: React.FC = () => {
       flag: '🇮🇳',
       city: 'Kochi, Kerala',
       role: 'Engineering Design & CAD Detailing Center',
-      details: 'Complex 3D CAD modeling, mold & die split engineering, ASME Y14.5 GD&T drafting, and parametric part validation.',
+      details: 'Complex 3D CAD modeling, mold & die split engineering, ASME Y14.5 GD&T drafting, and drawing review.',
       timezone: 'IST (UTC+5:30)',
     },
     {
