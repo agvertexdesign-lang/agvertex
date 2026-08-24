@@ -317,11 +317,6 @@ export const CareersView: React.FC = () => {
                   {tool.desc}
                 </p>
               </div>
-
-              <div className="pt-2 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                <span>Production Ready</span>
-              </div>
             </div>
           ))}
         </div>
@@ -329,22 +324,22 @@ export const CareersView: React.FC = () => {
 
       {/* 5. BOTTOM CALLOUT */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="glass-card bg-slate-900 text-white p-8 lg:p-12 rounded-3xl shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="glass-card bg-white border border-slate-200/90 p-8 lg:p-12 rounded-3xl shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
           
           <div className="space-y-2 text-center lg:text-left">
-            <h3 className="text-xl sm:text-2xl font-heading font-bold uppercase tracking-tight">
+            <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#0F172A] uppercase tracking-tight">
               INTERESTED IN FUTURE PROJECT-BASED WORK?
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300">
+            <p className="text-xs sm:text-sm text-slate-600 font-medium">
               Submit your profile and we'll keep you in mind for suitable project-based opportunities.
             </p>
           </div>
 
           <button
             onClick={() => setModalOpen(true)}
-            className="btn-primary px-7 py-3.5 text-xs font-semibold shrink-0 cursor-pointer shadow-lg shadow-blue-500/25"
+            className="btn-primary px-7 py-3.5 text-xs font-semibold shrink-0 cursor-pointer shadow-lg shadow-blue-500/25 flex items-center gap-2"
           >
-            Submit Your Profile →
+            Submit Specialist Profile →
           </button>
 
         </div>
