@@ -115,53 +115,16 @@ export const CareersView: React.FC = () => {
 
     setIsSubmitting(true);
 
-    let cvPublicUrl: string | null = null;
-    if (selectedFile) {
-      cvPublicUrl = await uploadResume(selectedFile);
-    }
-
-    const lines = [
-      "💼 AG VERTEX — Specialist Profile Submission",
-      "----------------------------------------",
-      `👤 Full Name: ${profileForm.name}`,
-      `✉️ Email: ${profileForm.email}`,
-      `🛠️ Discipline: ${profileForm.primaryDiscipline}`,
-      `💻 CAD Tools: ${profileForm.cadTools.join(', ') || 'Not specified'}`,
-      `🔗 LinkedIn: ${profileForm.linkedin || 'Not provided'}`,
-      cvPublicUrl 
-        ? `📄 Download CV Document: ${cvPublicUrl}`
-        : `📄 Résumé / CV File: ${profileForm.resumeName || 'Not attached'}`,
-      "",
-      "📝 Experience Summary / Notes:",
-      profileForm.notes || 'Not provided',
-    ];
-
-    // 1. Try native Web Share API with physical file object attachment (attaches PDF to WhatsApp)
-    let sharedViaNativeApp = false;
-    if (selectedFile && navigator.share && navigator.canShare && navigator.canShare({ files: [selectedFile] })) {
-      try {
-        await navigator.share({
-          title: `AG VERTEX Specialist Profile - ${profileForm.name}`,
-          text: lines.join('\n'),
-          files: [selectedFile],
-        });
-        sharedViaNativeApp = true;
-      } catch (err) {
-        console.log("Native share cancelled or failed, using wa.me fallback", err);
-      }
-    }
-
-    // 2. Fallback to WhatsApp Web link with direct downloadable file link
-    if (!sharedViaNativeApp) {
-      sendToWhatsApp(lines);
-    }
-
-    // 3. Direct email transmission to agvertexdesign@gmail.com
     try {
+      let cvPublicUrl: string | null = null;
+      if (selectedFile) {
+        cvPublicUrl = await uploadResume(selectedFile);
+      }
+
       const formData = new FormData();
       formData.append("access_key", "05c842a4-bdd5-4cd3-b9a8-b2d1a2b646bd");
       formData.append("subject", `AG VERTEX — New CV & Profile Submission (${profileForm.name})`);
-      formData.append("from_name", "AG VERTEX Careers");
+      formData.append("from_name", "AG VERTEX Careers Portal");
       formData.append("to_email", "agvertexdesign@gmail.com");
       formData.append("name", profileForm.name);
       formData.append("email", profileForm.email);
@@ -170,20 +133,30 @@ export const CareersView: React.FC = () => {
       formData.append("cad_tools", profileForm.cadTools.join(', '));
       formData.append("linkedin_url", profileForm.linkedin || 'Not provided');
       formData.append("experience_summary", profileForm.notes || 'Not provided');
+      if (cvPublicUrl) {
+        formData.append("cv_public_url", cvPublicUrl);
+      }
 
       if (selectedFile) {
         formData.append("attachment", selectedFile);
       }
 
-      await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData
       });
-    } catch (err) {
-      console.warn("Background Web3Forms submission log:", err);
+
+      const data = await res.json();
+      if (data.success) {
+        setProfileSubmitted(true);
+      } else {
+        setErrorMessage(data.message || 'Failed to send application email. Please try again.');
+      }
+    } catch (err: any) {
+      console.error("Application email submission error:", err);
+      setErrorMessage('Failed to send application email. Please try again.');
     } finally {
       setIsSubmitting(false);
-      setProfileSubmitted(true);
     }
   };
 
@@ -439,9 +412,9 @@ export const CareersView: React.FC = () => {
             {profileSubmitted ? (
               <div className="py-8 text-center space-y-3">
                 <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
-                <h3 className="text-xl font-heading font-bold text-[#0F172A]">Profile Submitted Securely!</h3>
+                <h3 className="text-xl font-heading font-bold text-[#0F172A]">Application Sent to Email!</h3>
                 <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                  Thank you for your interest. Your profile has been received and retained for future project-based collaboration opportunities.
+                  Thank you for your interest. Your profile and CV have been sent directly to <strong className="text-slate-800">agvertexdesign@gmail.com</strong> for review.
                 </p>
               </div>
             ) : (
@@ -585,14 +558,14 @@ export const CareersView: React.FC = () => {
                     </p>
                   </div>
 
-                  {/* Submit Profile via WhatsApp */}
+                  {/* Submit Profile via Email */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full btn-primary py-3.5 text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-blue-500/20 disabled:opacity-50"
                   >
-                    <Send className="w-4 h-4 text-emerald-400" />
-                    {isSubmitting ? 'Opening WhatsApp...' : 'Submit Profile via WhatsApp'}
+                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                    {isSubmitting ? 'Sending Application...' : 'Submit Profile Securely via Email'}
                   </button>
                 </form>
               </>
