@@ -50,8 +50,8 @@ export const DEFAULT_SERVICES: Service[] = [
   {
     id: 'svc-3',
     title: 'Drawings, GD&T & BOMs',
-    short_desc: 'ASME Y14.5 manufacturing prints, Geometric Dimensioning & Tolerancing, datum reference frames and structured BOMs.',
-    full_desc: 'Clear 2D manufacturing prints with precise Geometric Dimensioning and Tolerancing (GD&T) application, datum reference frames, tolerance stack-up definition, and structured Bills of Materials.',
+    short_desc: 'Manufacturing drawings, ASME Y14.5 GD&T, structured BOMs, and automotive drawing review.',
+    full_desc: 'Clear 2D manufacturing prints with precise Geometric Dimensioning and Tolerancing (GD&T) application, datum reference frames, tolerance stack-up definition, structured Bills of Materials, and automotive drawing review.',
     image_url: '/services/drawings_gdt.png',
     display_order: 3,
     status: 'published',
@@ -61,8 +61,8 @@ export const DEFAULT_SERVICES: Service[] = [
   {
     id: 'svc-4',
     title: 'DFM/DFA & Supplier Coordination',
-    short_desc: 'Manufacturability reviews, assembly simplification, automotive drawing review and supplier technical coordination.',
-    full_desc: 'Design for Manufacturability and Assembly (DFM/DFA) design reviews, automotive tier-supplier drawing reviews against OEM specifications, and prototype supplier coordination.',
+    short_desc: 'DFM/DFA reviews, supplier technical coordination, prototype fitment support, and engineering change management.',
+    full_desc: 'Design for Manufacturability and Assembly (DFM/DFA) design reviews, supplier technical coordination, prototype fitment support, and engineering change management.',
     image_url: '/services/dfm_dfa.png',
     display_order: 4,
     status: 'published',

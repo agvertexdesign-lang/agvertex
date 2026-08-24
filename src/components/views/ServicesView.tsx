@@ -41,7 +41,7 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
           OUR CAPABILITIES
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-[#0F172A] tracking-tight">
-          ENGINEERING DESIGN SERVICES
+          MECHANICAL DESIGN SERVICES
         </h1>
         <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium max-w-2xl mx-auto">
           Manufacturing-focused mechanical design support—from product development and tooling design to detailed CAD documentation and supplier coordination.
