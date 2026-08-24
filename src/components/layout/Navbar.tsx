@@ -7,12 +7,16 @@ interface NavbarProps {
   onOpenQuoteModal?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = () => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenQuoteModal }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { enabled: showcaseEnabled } = useShowcaseVisibility();
+
+  const handleCtaClick = () => {
+    navigate('/contact');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
         {/* Right Buttons (Matching PDF Header) */}
         <div className="hidden sm:flex items-center gap-2.5">
           <button
-            onClick={() => navigate('/contact')}
+            onClick={handleCtaClick}
             className="btn-primary px-5 py-2 text-xs sm:text-[13px] font-semibold flex items-center gap-2 cursor-pointer shadow-md shadow-blue-500/20"
           >
             Request a Project Review
@@ -122,7 +126,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
           <button
             onClick={() => {
               setMobileMenuOpen(false);
-              navigate('/contact');
+              handleCtaClick();
             }}
             className="w-full btn-primary py-3 text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25"
           >

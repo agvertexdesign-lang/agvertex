@@ -36,7 +36,7 @@ export const HomeView: React.FC<HomeViewProps> = () => {
       title: home.cap_2_title || 'Mold & Die Tooling Design',
       image: home.cap_2_img || '/services/injection_mold.png',
       icon: Layers,
-      items: (home.cap_2_desc || '3D CAD Modelling • Drawings, GD&T & BOMs').split('•').map(s => s.trim()),
+      items: (home.cap_2_desc || 'Mold Layouts • Slides, Lifters & Tooling Support').split('•').map(s => s.trim()),
       link: '/services',
     },
     {

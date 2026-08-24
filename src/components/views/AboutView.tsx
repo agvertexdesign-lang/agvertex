@@ -35,7 +35,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
     {
       icon: Eye,
       title: about.pillar_2_title || 'OUR VISION',
-      desc: about.pillar_2_desc || 'To become a trusted engineering design partner for manufacturers, tooling companies, and automotive suppliers across Canada and beyond.',
+      desc: about.pillar_2_desc || 'To be a trusted mechanical design partner for manufacturers, tooling companies, and automotive suppliers across Canada.',
     },
     {
       icon: ShieldCheck,
@@ -115,7 +115,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
 
             {/* Resized larger and highly readable paragraph */}
             <p className="text-base sm:text-lg lg:text-xl text-slate-700 font-medium leading-relaxed max-w-xl">
-              {about.hero_desc || 'AG Vertex is a Windsor-based mechanical design consultancy supporting product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA and supplier coordination.'}
+              {about.hero_desc || 'AG Vertex is a Windsor, Ontario-based mechanical design consultancy. Our experienced team supports product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA, automotive drawing review and supplier coordination.'}
             </p>
 
             <div className="pt-2">
