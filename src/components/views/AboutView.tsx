@@ -61,9 +61,9 @@ export const AboutView: React.FC<AboutViewProps> = () => {
       image: about.exp_2_img || '/services/injection_mold.png',
     },
     {
-      title: about.exp_3_title || 'AUTOMOTIVE DRAWING REVIEW',
+      title: about.exp_3_title || 'AUTOMOTIVE COMPONENTS',
       desc: about.exp_3_desc || 'Experience with suspension, steering, wheel-end components, engineering drawings, GD&T, and supplier coordination.',
-      image: about.exp_3_img || '/services/drawing_validation.png',
+      image: about.exp_3_img || '/images/control_arm_component.png',
     },
     {
       title: about.exp_4_title || 'CAD & DOCUMENTATION',
@@ -193,10 +193,10 @@ export const AboutView: React.FC<AboutViewProps> = () => {
             EXPERIENCE BEHIND AG VERTEX
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-[#0F172A] tracking-tight">
-            15+ YEARS OF PROFESSIONAL ENGINEERING EXPERIENCE
+            15+ YEARS OF MECHANICAL DESIGN EXPERIENCE
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal">
-            AG Vertex is built on experience across product development, injection molding, hot-runner systems, automotive components, and manufacturing-focused mechanical design.
+            The AG Vertex team brings experience across product development, injection molding, hot-runner systems, automotive components and manufacturing-focused mechanical design.
           </p>
         </div>
 
