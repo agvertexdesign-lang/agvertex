@@ -149,13 +149,7 @@ export const CareersView: React.FC = () => {
               {careers.hero_desc || 'AG Vertex welcomes experienced mechanical designers, tooling specialists, and CAD professionals interested in future project-based collaboration.'}
             </p>
 
-            {/* Callout 2: Status Notice before CTA */}
-            <div className="p-4 rounded-2xl bg-blue-50/80 border border-blue-100 text-xs text-slate-700 font-medium max-w-lg space-y-1">
-              <span className="font-bold text-[#0F172A] block text-xs">No active permanent positions.</span>
-              <span>Profiles are accepted for future project-based work.</span>
-            </div>
-
-            <div className="pt-1">
+            <div className="pt-2">
               <button
                 onClick={() => setModalOpen(true)}
                 className="btn-primary px-7 py-3.5 text-xs font-semibold flex items-center gap-2.5 cursor-pointer shadow-lg shadow-blue-500/25"
@@ -183,7 +177,33 @@ export const CareersView: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. FOUR VALUES ROW */}
+      {/* 2. ACTIVE NOTICE BOX (Callout 5: Placed directly below hero before value cards) */}
+      <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div className="glass-card bg-white p-8 sm:p-12 rounded-3xl border border-slate-200/90 shadow-xl max-w-3xl mx-auto text-center space-y-5">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-mono text-xs font-bold uppercase tracking-wider">
+            <Clock className="w-3.5 h-3.5 text-[#0057FF]" /> STATUS NOTICE
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-[#0F172A] tracking-tight">
+            NO ACTIVE PERMANENT POSITIONS
+          </h2>
+
+          <p className="text-base text-slate-600 font-medium leading-relaxed max-w-xl mx-auto">
+            AG Vertex is not actively recruiting permanent employees at this time. However, experienced mechanical design consultants, tooling specialists, and CAD professionals are welcome to submit their profiles for future project-based collaboration.
+          </p>
+
+          <div className="pt-3">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="btn-primary px-8 py-3.5 text-xs sm:text-sm font-bold inline-flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-500/25"
+            >
+              Submit Specialist Profile <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. FOUR VALUES ROW */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {VALUES.map((v, idx) => {
@@ -207,32 +227,6 @@ export const CareersView: React.FC = () => {
               </div>
             );
           })}
-        </div>
-      </section>
-
-      {/* 3. OPEN POSITIONS OR ACTIVE NOTICE BOX */}
-      <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="glass-card bg-white p-8 sm:p-12 rounded-3xl border border-slate-200/90 shadow-xl max-w-3xl mx-auto text-center space-y-5">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-mono text-xs font-bold uppercase tracking-wider">
-            <Clock className="w-3.5 h-3.5 text-[#0057FF]" /> STATUS NOTICE
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-[#0F172A] tracking-tight">
-            No Active Permanent Positions
-          </h2>
-
-          <p className="text-base text-slate-600 font-medium leading-relaxed max-w-xl mx-auto">
-            AG Vertex is not actively recruiting permanent employees at this time. However, experienced mechanical design consultants, tooling specialists, and CAD professionals are welcome to submit their profiles for future project-based collaboration.
-          </p>
-
-          <div className="pt-3">
-            <button
-              onClick={() => setModalOpen(true)}
-              className="btn-primary px-8 py-3.5 text-xs sm:text-sm font-bold inline-flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-500/25"
-            >
-              Submit Your Profile <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
         </div>
       </section>
 
