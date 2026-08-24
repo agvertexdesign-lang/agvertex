@@ -121,36 +121,23 @@ export const CareersView: React.FC = () => {
         cvPublicUrl = await uploadResume(selectedFile);
       }
 
-      const formData = new FormData();
-      formData.append("access_key", "05c842a4-bdd5-4cd3-b9a8-b2d1a2b646bd");
-      formData.append("subject", `AG VERTEX — New CV & Profile Submission (${profileForm.name})`);
-      formData.append("from_name", "AG VERTEX Careers Portal");
-      formData.append("to_email", "agvertexdesign@gmail.com");
-      formData.append("name", profileForm.name);
-      formData.append("email", profileForm.email);
-      formData.append("replyto", profileForm.email);
-      formData.append("discipline", profileForm.primaryDiscipline);
-      formData.append("cad_tools", profileForm.cadTools.join(', '));
-      formData.append("linkedin_url", profileForm.linkedin || 'Not provided');
-      formData.append("experience_summary", profileForm.notes || 'Not provided');
-      if (cvPublicUrl) {
-        formData.append("cv_public_url", cvPublicUrl);
-      }
+      const response = await submitToWeb3Forms({
+        name: profileForm.name,
+        email: profileForm.email,
+        replyto: profileForm.email,
+        discipline: profileForm.primaryDiscipline,
+        cad_tools: profileForm.cadTools.join(', '),
+        linkedin_url: profileForm.linkedin || 'Not provided',
+        resume_filename: profileForm.resumeName || 'Not attached',
+        cv_download_url: cvPublicUrl || 'Not attached',
+        experience_summary: profileForm.notes || 'Not provided',
+        to_email: 'agvertexdesign@gmail.com',
+      }, `AG VERTEX — New CV & Specialist Profile Submission (${profileForm.name})`);
 
-      if (selectedFile) {
-        formData.append("attachment", selectedFile);
-      }
-
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await res.json();
-      if (data.success) {
+      if (response.success) {
         setProfileSubmitted(true);
       } else {
-        setErrorMessage(data.message || 'Failed to send application email. Please try again.');
+        setErrorMessage(response.message || 'Failed to send application email. Please try again.');
       }
     } catch (err: any) {
       console.error("Application email submission error:", err);
