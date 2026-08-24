@@ -17,11 +17,11 @@ export const Footer: React.FC<FooterProps> = () => {
   };
 
   const servicesList = [
-    { label: 'Product Design & 3D CAD', path: '/services' },
-    { label: 'Mold & Die Tooling Support', path: '/services' },
-    { label: 'Drawings, GD&T & BOMs', path: '/services' },
-    { label: 'DFM/DFA & Supplier Coordination', path: '/services' },
-    { label: 'Automotive Drawing Review', path: '/services' },
+    { label: 'Product Design & 3D CAD', path: '/services?service=svc-1' },
+    { label: 'Mold & Die Tooling Support', path: '/services?service=svc-2' },
+    { label: 'Drawings, GD&T & BOMs', path: '/services?service=svc-3' },
+    { label: 'DFM/DFA & Supplier Coordination', path: '/services?service=svc-4' },
+    { label: 'Automotive Drawing Review', path: '/services?service=drawing-review' },
   ];
 
   const companyList = [

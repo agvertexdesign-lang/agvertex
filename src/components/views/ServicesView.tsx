@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   CheckCircle2,
@@ -22,8 +21,31 @@ const FALLBACK_IMG = '/services/product_design.png';
 
 export const ServicesView: React.FC<ServicesViewProps> = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const { services, loading } = useServicesData();
+
+  useEffect(() => {
+    if (!services || services.length === 0) return;
+    const params = new URLSearchParams(location.search);
+    const serviceParam = params.get('service');
+    if (serviceParam) {
+      const match = services.find(s => 
+        s.id === serviceParam || 
+        s.title.toLowerCase().includes(serviceParam.toLowerCase()) ||
+        (serviceParam === 'drawing-review' && s.id === 'svc-3')
+      );
+      if (match) {
+        setSelectedService(match);
+        setTimeout(() => {
+          const el = document.getElementById(match.id);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 100);
+      }
+    }
+  }, [location.search, services]);
 
   const PROCESS_STEPS = [
     { num: '1', title: 'REQUIREMENTS', desc: 'Understand goals, constraints and technical requirements.' },
@@ -63,7 +85,8 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
             {services.map((svc, idx) => (
               <div
                 key={svc.id}
-                className="glass-card bg-white p-7 sm:p-8 rounded-3xl border border-slate-200/90 shadow-md hover:shadow-xl hover:border-blue-400 transition-all duration-300 flex flex-col justify-between group"
+                id={svc.id}
+                className="glass-card bg-white p-7 sm:p-8 rounded-3xl border border-slate-200/90 shadow-md hover:shadow-xl hover:border-blue-400 transition-all duration-300 flex flex-col justify-between group scroll-mt-32"
               >
                 <div className="flex flex-col sm:flex-row gap-6 items-start">
 

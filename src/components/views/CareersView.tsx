@@ -142,19 +142,25 @@ export const CareersView: React.FC = () => {
             </span>
 
             <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-heading font-extrabold text-[#0F172A] tracking-tight leading-[1.12]">
-              {careers.hero_title || 'BRING PRACTICAL ENGINEERING IDEAS TO LIFE'}
+              {careers.hero_title || 'PROJECT-BASED ENGINEERING COLLABORATION'}
             </h1>
 
             <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-lg">
               {careers.hero_desc || 'AG Vertex welcomes experienced mechanical designers, tooling specialists, and CAD professionals interested in future project-based collaboration.'}
             </p>
 
-            <div className="pt-2">
+            {/* Callout 2: Status Notice before CTA */}
+            <div className="p-4 rounded-2xl bg-blue-50/80 border border-blue-100 text-xs text-slate-700 font-medium max-w-lg space-y-1">
+              <span className="font-bold text-[#0F172A] block text-xs">No active permanent positions.</span>
+              <span>Profiles are accepted for future project-based work.</span>
+            </div>
+
+            <div className="pt-1">
               <button
                 onClick={() => setModalOpen(true)}
                 className="btn-primary px-7 py-3.5 text-xs font-semibold flex items-center gap-2.5 cursor-pointer shadow-lg shadow-blue-500/25"
               >
-                Submit Your Profile
+                Submit Specialist Profile
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -165,7 +171,9 @@ export const CareersView: React.FC = () => {
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-900 group">
               <img
                 src={careers.hero_img || settings?.images?.careers_team_image || "/images/cad_team_collaboration.jpeg"}
-                alt="Engineering Team Collaboration - AG Vertex"
+                alt="Representative mechanical design collaboration"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[360px] sm:h-[420px] object-cover transition-transform duration-700 group-hover:scale-103"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />

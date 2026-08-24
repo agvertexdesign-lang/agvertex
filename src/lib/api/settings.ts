@@ -203,9 +203,9 @@ export const DEFAULT_PAGE_CONTENT: WebsitePageContent = {
     cad_items: DEFAULT_CAD_STACK,
   },
   careers: {
-    hero_tag: 'CAREERS AT AG VERTEX',
-    hero_title: 'JOIN OUR MECHANICAL DESIGN TEAM',
-    hero_desc: 'We are always looking for talented CAD specialists, tooling designers, and mechanical design consultants.',
+    hero_tag: 'CAREERS & COLLABORATION',
+    hero_title: 'PROJECT-BASED ENGINEERING COLLABORATION',
+    hero_desc: 'AG Vertex welcomes experienced mechanical designers, tooling specialists, and CAD professionals interested in future project-based collaboration.',
     hero_img: '/images/cad_team_collaboration.jpeg',
     val_1_title: 'TECHNICAL EXCELLENCE',
     val_1_desc: 'We strive for precision and clarity in every drawing, 3D model, and BOM.',
