@@ -16,13 +16,14 @@ import {
   Clock,
   ChevronDown
 } from 'lucide-react';
-import { useCareersData, usePageContent, useSettingsData } from '../../hooks/useCmsData';
-import { DEFAULT_CAD_STACK } from '../../lib/api/settings';
-import { sendToWhatsApp } from '../../lib/whatsapp';
+import { Link } from 'react-router-dom';
+import { submitToWeb3Forms } from '../../lib/web3forms';
 
 export const CareersView: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [profileSubmitted, setProfileSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const { careers: dbCareers } = useCareersData();
   const { settings } = useSettingsData();
   const { pageContent } = usePageContent();
@@ -33,46 +34,78 @@ export const CareersView: React.FC = () => {
     email: '',
     phone: '',
     primaryDiscipline: 'Product Design & Development',
-    cadSoftware: 'Creo Parametric',
-    experienceYears: '5-10 Years',
-    portfolioLink: '',
+    cadTools: ['PTC Creo Parametric'] as string[],
+    linkedin: '',
     notes: '',
+    resumeName: '',
+    agreed: false,
   });
 
-  const handleProfileSubmit = (e: React.FormEvent) => {
+  const CAD_TOOL_OPTIONS = [
+    'PTC Creo Parametric',
+    'Siemens NX',
+    'Dassault SolidWorks',
+    'Autodesk AutoCAD',
+  ];
+
+  const toggleCadTool = (tool: string) => {
+    setProfileForm((prev) => {
+      const exists = prev.cadTools.includes(tool);
+      const updated = exists 
+        ? prev.cadTools.filter(t => t !== tool)
+        : [...prev.cadTools, tool];
+      return { ...prev, cadTools: updated };
+    });
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      setErrorMessage('Résumé file size exceeds 5 MB limit. Please select a smaller file.');
+      e.target.value = '';
+      return;
+    }
+
+    setProfileForm(prev => ({ ...prev, resumeName: file.name }));
+    setErrorMessage('');
+  };
+
+  const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
 
-    const lines = [
-      "💼 AG VERTEX — Specialist Profile Submission",
-      "----------------------------------------",
-      `👤 Name: ${profileForm.name}`,
-      `✉️ Email: ${profileForm.email}`,
-      `📞 Phone: ${profileForm.phone || 'Not provided'}`,
-      `🛠️ Primary Discipline: ${profileForm.primaryDiscipline}`,
-      `💻 CAD Software: ${profileForm.cadSoftware}`,
-      `⏳ Experience: ${profileForm.experienceYears}`,
-      `🔗 Portfolio Link: ${profileForm.portfolioLink || 'Not provided'}`,
-      "",
-      "📝 Additional Summary / Notes:",
-      profileForm.notes || 'Not provided',
-    ];
+    if (!profileForm.agreed) {
+      setErrorMessage('Please accept the consent terms before submitting your profile.');
+      return;
+    }
 
-    sendToWhatsApp(lines);
-    setProfileSubmitted(true);
-    setTimeout(() => {
-      setProfileSubmitted(false);
-      setModalOpen(false);
-      setProfileForm({
-        name: '',
-        email: '',
-        phone: '',
-        primaryDiscipline: 'Product Design & Development',
-        cadSoftware: 'Creo Parametric',
-        experienceYears: '5-10 Years',
-        portfolioLink: '',
-        notes: '',
-      });
-    }, 2500);
+    setIsSubmitting(true);
+
+    try {
+      const response = await submitToWeb3Forms({
+        name: profileForm.name,
+        email: profileForm.email,
+        phone: profileForm.phone || 'Not provided',
+        discipline: profileForm.primaryDiscipline,
+        cad_tools: profileForm.cadTools.join(', '),
+        linkedin_url: profileForm.linkedin || 'Not provided',
+        resume_filename: profileForm.resumeName || 'Not attached',
+        experience_summary: profileForm.notes || 'Not provided',
+        consent_accepted: 'Yes',
+      }, "AG VERTEX — New Specialist Profile Submission");
+
+      if (response.success) {
+        setProfileSubmitted(true);
+      } else {
+        setErrorMessage(response.message || 'Submission error. Please try again.');
+      }
+    } catch {
+      setErrorMessage('Failed to submit profile. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const VALUES = [
@@ -322,8 +355,9 @@ export const CareersView: React.FC = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in">
           <div className="bg-white rounded-3xl max-w-lg w-full p-8 border border-slate-200 shadow-2xl relative space-y-6 max-h-[90vh] overflow-y-auto">
             <button
+              aria-label="Close profile form"
               onClick={() => setModalOpen(false)}
-              className="absolute top-6 right-6 w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center cursor-pointer"
+              className="absolute top-6 right-6 w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center cursor-pointer transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -331,23 +365,30 @@ export const CareersView: React.FC = () => {
             {profileSubmitted ? (
               <div className="py-8 text-center space-y-3">
                 <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
-                <h3 className="text-xl font-heading font-bold text-[#0F172A]">Profile Submitted!</h3>
-                <p className="text-xs text-slate-500">
-                  Thank you for your interest. We will contact you when suitable project opportunities arise.
+                <h3 className="text-xl font-heading font-bold text-[#0F172A]">Profile Submitted Securely!</h3>
+                <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                  Thank you for your interest. Your profile has been received and retained for future project-based collaboration opportunities.
                 </p>
               </div>
             ) : (
               <>
-                <div className="space-y-1">
+                <div className="space-y-1 pr-6">
                   <span className="text-[10px] font-mono font-bold text-[#0057FF] uppercase tracking-widest block">
                     PROJECT-BASED TALENT NETWORK
                   </span>
                   <h3 className="text-2xl font-heading font-bold text-[#0F172A]">
-                    Submit Your Specialist Profile
+                    SUBMIT YOUR SPECIALIST PROFILE
                   </h3>
                 </div>
 
+                {errorMessage && (
+                  <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-600 font-medium">
+                    {errorMessage}
+                  </div>
+                )}
+
                 <form onSubmit={handleProfileSubmit} className="space-y-4 text-xs">
+                  {/* Callout 11: Neutral placeholders */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
                       <label className="font-semibold text-slate-700">Full Name *</label>
@@ -356,7 +397,7 @@ export const CareersView: React.FC = () => {
                         required
                         value={profileForm.name}
                         onChange={(e) => setProfileForm({ ...profileForm, name: e.target.value })}
-                        placeholder="Alex Mercer"
+                        placeholder="Your full name"
                         className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500"
                       />
                     </div>
@@ -368,41 +409,73 @@ export const CareersView: React.FC = () => {
                         required
                         value={profileForm.email}
                         onChange={(e) => setProfileForm({ ...profileForm, email: e.target.value })}
-                        placeholder="alex@company.com"
+                        placeholder="name@email.com"
                         className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500"
                       />
                     </div>
                   </div>
 
+                  <div className="space-y-1">
+                    <label className="font-semibold text-slate-700">Discipline *</label>
+                    <select
+                      value={profileForm.primaryDiscipline}
+                      onChange={(e) => setProfileForm({ ...profileForm, primaryDiscipline: e.target.value })}
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 bg-white"
+                    >
+                      <option value="Product Design & Development">Product Design & Development</option>
+                      <option value="Injection Mold Design">Injection Mold Design</option>
+                      <option value="Die-Casting Die Design">Die-Casting Die Design</option>
+                      <option value="3D CAD Modelling">3D CAD Modelling</option>
+                      <option value="Drawings, GD&T & BOMs">Drawings, GD&T & BOMs</option>
+                      <option value="Automotive Drawing Review">Automotive Drawing Review</option>
+                    </select>
+                  </div>
+
+                  {/* Callout 12: Allow Multiple CAD Tools */}
+                  <div className="space-y-1.5">
+                    <label className="font-semibold text-slate-700 block">CAD Tools (Select all that apply) *</label>
+                    <div className="grid grid-cols-2 gap-2 pt-0.5">
+                      {CAD_TOOL_OPTIONS.map((tool) => (
+                        <label
+                          key={tool}
+                          className="flex items-center gap-2 text-xs font-normal text-slate-700 bg-slate-50 px-3 py-2 rounded-xl border border-slate-200 hover:border-blue-300 cursor-pointer transition-all"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={profileForm.cadTools.includes(tool)}
+                            onChange={() => toggleCadTool(tool)}
+                            className="w-3.5 h-3.5 rounded border-slate-300 text-[#0057FF] focus:ring-blue-500"
+                          />
+                          <span className="truncate">{tool}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Callout 13: Add Résumé Upload & LinkedIn URL */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="font-semibold text-slate-700">Discipline *</label>
-                      <select
-                        value={profileForm.primaryDiscipline}
-                        onChange={(e) => setProfileForm({ ...profileForm, primaryDiscipline: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 bg-white"
-                      >
-                        <option value="Product Design & Development">Product Design & Development</option>
-                        <option value="Injection Mold Design">Injection Mold Design</option>
-                        <option value="Die-Casting Die Design">Die-Casting Die Design</option>
-                        <option value="3D CAD Modelling">3D CAD Modelling</option>
-                        <option value="Drawings, GD&T & BOMs">Drawings, GD&T & BOMs</option>
-                        <option value="Automotive Drawing Review">Automotive Drawing Review</option>
-                      </select>
+                      <label className="font-semibold text-slate-700 block">Résumé / CV (PDF or DOCX, max 5 MB)</label>
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        onChange={handleFileChange}
+                        className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-[#0057FF] hover:file:bg-blue-100 cursor-pointer"
+                      />
+                      {profileForm.resumeName && (
+                        <p className="text-[10px] text-emerald-600 font-medium truncate">Selected: {profileForm.resumeName}</p>
+                      )}
                     </div>
 
                     <div className="space-y-1">
-                      <label className="font-semibold text-slate-700">CAD Experience</label>
-                      <select
-                        value={profileForm.cadSoftware}
-                        onChange={(e) => setProfileForm({ ...profileForm, cadSoftware: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 bg-white"
-                      >
-                        <option value="Creo Parametric">PTC Creo Parametric</option>
-                        <option value="Siemens NX">Siemens NX</option>
-                        <option value="AutoCAD">Autodesk AutoCAD</option>
-                        <option value="SolidWorks">Dassault SolidWorks</option>
-                      </select>
+                      <label className="font-semibold text-slate-700 block">LinkedIn URL (Optional)</label>
+                      <input
+                        type="url"
+                        value={profileForm.linkedin}
+                        onChange={(e) => setProfileForm({ ...profileForm, linkedin: e.target.value })}
+                        placeholder="https://linkedin.com/in/your-profile"
+                        className="w-full px-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500"
+                      />
                     </div>
                   </div>
 
@@ -417,16 +490,36 @@ export const CareersView: React.FC = () => {
                     />
                   </div>
 
+                  {/* Callout 15: Required Consent Checkbox & Data Retention Statement */}
+                  <div className="space-y-2 pt-2 border-t border-slate-100">
+                    <div className="flex items-start gap-2.5">
+                      <input
+                        type="checkbox"
+                        id="careersConsent"
+                        required
+                        checked={profileForm.agreed}
+                        onChange={(e) => setProfileForm({ ...profileForm, agreed: e.target.checked })}
+                        className="w-4 h-4 rounded border-slate-300 text-[#0057FF] focus:ring-blue-500 cursor-pointer mt-0.5 shrink-0"
+                      />
+                      <label htmlFor="careersConsent" className="text-[11px] text-slate-700 font-medium cursor-pointer leading-tight">
+                        I agree to the processing and retention of my submitted profile information for future project collaboration opportunities under our <Link to="/privacy" className="text-[#0057FF] underline font-semibold">Privacy Policy</Link>.
+                      </label>
+                    </div>
+
+                    <p className="text-[10px] text-slate-500 font-normal leading-relaxed pl-6">
+                      Data-retention statement: Submitted profile information will only be used to consider future collaboration opportunities. Retained securely for up to 24 months.
+                    </p>
+                  </div>
+
+                  {/* Callout 14: Submit Profile Securely */}
                   <button
                     type="submit"
-                    className="w-full btn-primary py-3 text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full btn-primary py-3.5 text-xs font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-blue-500/20 disabled:opacity-50"
                   >
-                    Submit Profile via WhatsApp <Send className="w-3.5 h-3.5" />
+                    <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                    {isSubmitting ? 'Submitting Profile...' : 'Submit Profile Securely'}
                   </button>
-
-                  <p className="text-[11px] text-slate-500 text-center font-normal pt-1">
-                    Your submitted profile information will only be used to consider future collaboration opportunities.
-                  </p>
                 </form>
               </>
             )}
