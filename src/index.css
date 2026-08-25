@@ -25,21 +25,46 @@
     --primary-blue: #0057FF;
     --accent-blue: #2D8CFF;
     --text-dark: #0F172A;
-    --text-gray: #64748B;
-    --border-subtle: rgba(15, 23, 42, 0.06);
+    --text-gray: #334155;
+    --border-subtle: rgba(15, 23, 42, 0.08);
     --glow-blue: rgba(45, 140, 255, 0.15);
   }
 
   body {
     background-color: var(--bg-main);
-    color: var(--text-dark);
+    color: #0F172A;
     font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6, .font-heading {
     font-family: 'Ardela Edge', 'Inter', sans-serif;
     letter-spacing: -0.02em;
+    color: #0F172A;
   }
+
+  p {
+    color: #1E293B;
+  }
+}
+
+/* HIGH CONTRAST & LEGIBILITY TYPOGRAPHY OVERRIDES */
+.text-slate-400 {
+  color: #475569 !important;
+}
+
+.text-slate-500 {
+  color: #334155 !important;
+}
+
+.text-slate-600 {
+  color: #1E293B !important;
+}
+
+.text-slate-700 {
+  color: #0F172A !important;
 }
 
 /* Custom Utilities & Animations */

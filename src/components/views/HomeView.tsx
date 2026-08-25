@@ -68,12 +68,12 @@ export const HomeView: React.FC<HomeViewProps> = () => {
 
             {/* Badges Row with larger, readable sizing */}
             <div className="flex flex-wrap items-center gap-3.5 pt-1">
-              <div className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-mono font-semibold text-slate-700 bg-white/95 border border-slate-200/90 px-4 py-2 rounded-full shadow-xs">
+              <div className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-sans font-bold text-slate-900 bg-white border border-slate-300 px-4.5 py-2.5 rounded-full shadow-xs">
                 <MapPin className="w-4 h-4 text-[#0057FF] shrink-0" />
                 {home.badge_1 || 'Canada · New Zealand · India'}
               </div>
 
-              <div className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-mono font-semibold text-slate-700 bg-white/95 border border-slate-200/90 px-4 py-2 rounded-full shadow-xs">
+              <div className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-sans font-bold text-slate-900 bg-white border border-slate-300 px-4.5 py-2.5 rounded-full shadow-xs">
                 <Clock className="w-4 h-4 text-[#0057FF] shrink-0" />
                 {home.badge_2 || '15+ Years of Mechanical Design Experience'}
               </div>

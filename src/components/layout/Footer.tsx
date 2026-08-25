@@ -62,7 +62,7 @@ export const Footer: React.FC<FooterProps> = () => {
               />
             </Link>
 
-            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-sm">
+            <p className="text-sm sm:text-base text-slate-800 font-medium leading-relaxed max-w-sm">
               {settings?.business?.short_description || 'Mechanical design and tooling engineering consultancy. Globally positioned across Canada, India, and New Zealand.'}
             </p>
 
@@ -106,10 +106,10 @@ export const Footer: React.FC<FooterProps> = () => {
 
           {/* Col 2: Services */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-heading font-bold text-[#0F172A] uppercase tracking-wider">
+            <h4 className="text-sm font-heading font-bold text-[#0F172A] uppercase tracking-wider">
               SERVICES
             </h4>
-            <ul className="space-y-2 text-xs text-slate-500">
+            <ul className="space-y-2.5 text-sm font-medium text-slate-700">
               {servicesList.map((service, idx) => (
                 <li key={idx}>
                   <Link 
@@ -125,10 +125,10 @@ export const Footer: React.FC<FooterProps> = () => {
 
           {/* Col 3: Company */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-heading font-bold text-[#0F172A] uppercase tracking-wider">
+            <h4 className="text-sm font-heading font-bold text-[#0F172A] uppercase tracking-wider">
               COMPANY
             </h4>
-            <ul className="space-y-2 text-xs text-slate-500">
+            <ul className="space-y-2.5 text-sm font-medium text-slate-700">
               {companyList.map((comp, idx) => (
                 <li key={idx}>
                   <Link 
@@ -144,21 +144,21 @@ export const Footer: React.FC<FooterProps> = () => {
 
           {/* Col 4: Global Footprint & Contact */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-heading font-bold text-[#0F172A] uppercase tracking-wider">
+            <h4 className="text-sm font-heading font-bold text-[#0F172A] uppercase tracking-wider">
               GLOBAL PRESENCE
             </h4>
             
-            <div className="space-y-3 text-xs text-slate-600">
+            <div className="space-y-3.5 text-sm text-slate-800 font-medium">
               <div className="space-y-1.5">
-                <div className="flex items-center gap-2 font-semibold text-slate-800">
-                  <MapPin className="w-3.5 h-3.5 text-[#0057FF] shrink-0" />
+                <div className="flex items-center gap-2 font-semibold text-slate-900">
+                  <MapPin className="w-4 h-4 text-[#0057FF] shrink-0" />
                   <span>Canada · New Zealand · India</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5 pt-1">
                 <Mail className="w-4 h-4 text-[#0057FF] shrink-0" />
-                <a href="mailto:agvertexdesign@gmail.com" className="hover:text-[#0057FF] transition-colors font-medium">
+                <a href="mailto:agvertexdesign@gmail.com" className="hover:text-[#0057FF] transition-colors font-semibold">
                   agvertexdesign@gmail.com
                 </a>
               </div>
@@ -166,7 +166,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="pt-2">
                 <button
                   onClick={() => navigate('/contact')}
-                  className="px-4 py-2 rounded-xl bg-blue-50 text-[#0057FF] font-semibold text-xs hover:bg-[#0057FF] hover:text-white transition-colors cursor-pointer"
+                  className="px-4 py-2.5 rounded-xl bg-blue-50 text-[#0057FF] font-semibold text-xs hover:bg-[#0057FF] hover:text-white transition-colors cursor-pointer"
                 >
                   Request a Project Review →
                 </button>
@@ -177,7 +177,7 @@ export const Footer: React.FC<FooterProps> = () => {
         </div>
 
         {/* Bottom Legal & Navigation Bar */}
-        <div className="pt-2 flex flex-col md:flex-row items-center justify-between text-[11px] text-slate-400 gap-4">
+        <div className="pt-2 flex flex-col md:flex-row items-center justify-between text-xs text-slate-600 font-medium gap-4">
           <p>© 2026 AG Vertex. All rights reserved.</p>
 
           {/* Bottom Page Navigation Links */}
