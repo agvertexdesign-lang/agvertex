@@ -3,12 +3,12 @@ import { useLocation } from 'react-router-dom';
 
 const SEO_META: Record<string, { title: string; description: string }> = {
   '/': {
-    title: 'AG Vertex | Mechanical Design Consultancy in Windsor, Ontario',
-    description: 'Practical mechanical design support for products, tooling, CAD documentation, GD&T, DFM/DFA, and supplier coordination.',
+    title: 'AG Vertex | Mechanical Design Consultancy in Canada, New Zealand & India',
+    description: 'Practical mechanical design support for products, tooling, CAD documentation, GD&T, DFM/DFA, and supplier coordination across Canada, New Zealand, and India.',
   },
   '/about': {
     title: 'About Us | AG Vertex Mechanical Design Consultancy',
-    description: 'Windsor-based mechanical design consultancy with 15+ years experience supporting product development, 3D CAD, tooling, and drawings.',
+    description: 'Mechanical design consultancy with 15+ years experience supporting product development, 3D CAD, tooling, and drawings across Canada, New Zealand, and India.',
   },
   '/services': {
     title: 'Mechanical Design Services | AG Vertex',
@@ -16,11 +16,11 @@ const SEO_META: Record<string, { title: string; description: string }> = {
   },
   '/careers': {
     title: 'Careers & Project Collaboration | AG Vertex',
-    description: 'Submit your profile for future project-based mechanical design, CAD, and tooling collaboration opportunities.',
+    description: 'Submit your profile for future project-based mechanical design, CAD, and tooling collaboration opportunities in Canada, New Zealand, and India.',
   },
   '/contact': {
     title: 'Request a Project Review | AG Vertex',
-    description: 'Contact AG Vertex in Windsor, Ontario to request a mechanical design project review and technical estimate.',
+    description: 'Contact AG Vertex to request a mechanical design project review and technical estimate for operations in Canada, New Zealand, and India.',
   },
 };
 

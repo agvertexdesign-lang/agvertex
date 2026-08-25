@@ -70,7 +70,7 @@ export const HomeView: React.FC<HomeViewProps> = () => {
             <div className="flex flex-wrap items-center gap-3.5 pt-1">
               <div className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-mono font-semibold text-slate-700 bg-white/95 border border-slate-200/90 px-4 py-2 rounded-full shadow-xs">
                 <MapPin className="w-4 h-4 text-[#0057FF] shrink-0" />
-                {home.badge_1 || 'Windsor, Ontario, Canada'}
+                {home.badge_1 || 'Canada · New Zealand · India'}
               </div>
 
               <div className="inline-flex items-center gap-2.5 text-xs sm:text-sm font-mono font-semibold text-slate-700 bg-white/95 border border-slate-200/90 px-4 py-2 rounded-full shadow-xs">

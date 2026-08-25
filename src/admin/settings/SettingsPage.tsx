@@ -243,7 +243,7 @@ export function SettingsPage() {
               type="text"
               value={contact.address}
               onChange={e => setContact(c => ({ ...c, address: e.target.value }))}
-              placeholder="Windsor, Ontario, Canada"
+              placeholder="Canada · New Zealand · India"
               className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm bg-slate-50 focus:outline-none focus:border-[#0057FF] focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all"
             />
           </div>

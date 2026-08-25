@@ -152,7 +152,7 @@ export const Footer: React.FC<FooterProps> = () => {
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2 font-semibold text-slate-800">
                   <MapPin className="w-3.5 h-3.5 text-[#0057FF] shrink-0" />
-                  <span>Windsor, Ontario, Canada</span>
+                  <span>Canada · New Zealand · India</span>
                 </div>
               </div>
 

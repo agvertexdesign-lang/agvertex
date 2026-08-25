@@ -115,7 +115,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
 
             {/* Resized larger and highly readable paragraph */}
             <p className="text-base sm:text-lg lg:text-xl text-slate-700 font-medium leading-relaxed max-w-xl">
-              {about.hero_desc || 'AG Vertex is a Windsor, Ontario-based mechanical design consultancy. Our experienced team supports product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA, automotive drawing review and supplier coordination.'}
+              {about.hero_desc || 'AG Vertex is a multi-national mechanical design consultancy operating across Canada, New Zealand, and India. Our experienced engineering team supports product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA, automotive drawing review and supplier coordination.'}
             </p>
 
             <div className="pt-2">

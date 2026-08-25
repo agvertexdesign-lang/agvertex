@@ -156,7 +156,7 @@ export const DEFAULT_PAGE_CONTENT: WebsitePageContent = {
   home: {
     hero_title: 'Engineering Design Built for Manufacturing.',
     hero_subtitle: 'Practical mechanical design support for products, tooling, CAD documentation, and supplier coordination.',
-    badge_1: 'Windsor, Ontario, Canada',
+    badge_1: 'Canada · New Zealand · India',
     badge_2: '15+ Years of Mechanical Design Experience',
     hero_cta_primary: 'Request a Project Review',
     hero_cta_secondary: 'Explore Services',
@@ -173,13 +173,13 @@ export const DEFAULT_PAGE_CONTENT: WebsitePageContent = {
   about: {
     hero_tag: 'ABOUT AG VERTEX',
     hero_title: 'Practical Mechanical Design Experience.',
-    hero_desc: 'AG Vertex is a Windsor, Ontario-based mechanical design consultancy. Our experienced team supports product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA, automotive drawing review and supplier coordination.',
+    hero_desc: 'AG Vertex is a multi-national mechanical design consultancy operating across Canada, New Zealand, and India. Our experienced engineering team supports product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA, automotive drawing review and supplier coordination.',
     hero_img: '/images/cad_workstation_single.jpeg',
 
     pillar_1_title: 'OUR MISSION',
     pillar_1_desc: 'To deliver practical and precise mechanical design solutions that support manufacturability, quality, and efficient product development.',
     pillar_2_title: 'OUR VISION',
-    pillar_2_desc: 'To be a trusted mechanical design partner for manufacturers, tooling companies, and automotive suppliers across Canada.',
+    pillar_2_desc: 'To be a trusted mechanical design partner for manufacturers, tooling companies, and automotive suppliers across Canada, New Zealand, and India.',
     pillar_3_title: 'CORE VALUES',
     pillar_3_desc: 'Technical Integrity · Quality · Collaboration · Confidentiality · Continuous Improvement',
     pillar_4_title: 'OUR PROMISE',
@@ -205,7 +205,7 @@ export const DEFAULT_PAGE_CONTENT: WebsitePageContent = {
   careers: {
     hero_tag: 'CAREERS & COLLABORATION',
     hero_title: 'PROJECT-BASED ENGINEERING COLLABORATION',
-    hero_desc: 'AG Vertex welcomes experienced mechanical designers, tooling specialists, and CAD professionals interested in future project-based collaboration.',
+    hero_desc: 'AG Vertex welcomes experienced mechanical designers, tooling specialists, and CAD professionals interested in future project-based collaboration across Canada, New Zealand, and India.',
     hero_img: '/images/cad_team_collaboration.jpeg',
     val_1_title: 'TECHNICAL EXCELLENCE',
     val_1_desc: 'We strive for precision and clarity in every drawing, 3D model, and BOM.',
@@ -222,16 +222,16 @@ const defaultSettings: AllSettings = {
   contact: {
     phone: '+1 (289) 683-1234',
     email: 'agvertexdesign@gmail.com',
-    address: 'Windsor, Ontario, Canada',
+    address: 'Canada · New Zealand · India',
     whatsapp: '',
     contact_form_email: 'agvertexdesign@gmail.com',
   },
   social: { linkedin: '', instagram: '', facebook: '', youtube: '' },
   business: {
     company_name: 'AG Vertex',
-    tagline: 'Windsor-Based Mechanical Design Consultancy',
-    short_description: 'Windsor-based mechanical design consultancy supporting product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA and supplier coordination.',
-    business_hours: 'Monday – Friday, 9 AM – 5 PM EST',
+    tagline: 'Mechanical Design Consultancy (Canada · New Zealand · India)',
+    short_description: 'Mechanical design consultancy with global engineering operations across Canada, New Zealand, and India, supporting product development, tooling, 3D CAD, drawings, GD&T, DFM/DFA and supplier coordination.',
+    business_hours: 'Monday – Friday, 9 AM – 5 PM EST / IST / NZST',
   },
   images: {
     about_hero_image: '/images/cad_workstation_single.jpeg',

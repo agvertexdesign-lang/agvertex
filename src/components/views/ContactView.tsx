@@ -81,26 +81,26 @@ export const ContactView: React.FC = () => {
     {
       country: 'CANADA',
       flag: '🇨🇦',
-      city: 'Windsor, Ontario',
+      city: 'Canada (Headquarters)',
       role: 'Headquarters & Client Engineering Coordination',
-      details: 'North American engineering management, tooling review, OEM standards alignment, and client account delivery.',
+      details: 'Engineering management, tooling review, OEM standards alignment, and client account delivery.',
       timezone: 'EST (UTC-5)',
-    },
-    {
-      country: 'INDIA',
-      flag: '🇮🇳',
-      city: 'Kochi, Kerala',
-      role: 'Engineering Design & CAD Detailing Center',
-      details: 'Complex 3D CAD modeling, mold & die split engineering, ASME Y14.5 GD&T drafting, and drawing review.',
-      timezone: 'IST (UTC+5:30)',
     },
     {
       country: 'NEW ZEALAND',
       flag: '🇳🇿',
-      city: 'Auckland & Regional Support',
+      city: 'New Zealand',
       role: 'APAC Operations & Quality Verification',
       details: 'Regional engineering coordination, timezone-optimized project handover, and continuous quality audits.',
       timezone: 'NZST (UTC+12)',
+    },
+    {
+      country: 'INDIA',
+      flag: '🇮🇳',
+      city: 'India',
+      role: 'Engineering Design & CAD Detailing Center',
+      details: 'Complex 3D CAD modeling, mold & die split engineering, ASME Y14.5 GD&T drafting, and drawing review.',
+      timezone: 'IST (UTC+5:30)',
     },
   ];
 
@@ -297,7 +297,7 @@ export const ContactView: React.FC = () => {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <span className="font-semibold text-slate-900">
-                    {settings?.contact?.address || 'Windsor, Ontario, Canada'}
+                    {settings?.contact?.address || 'Canada · New Zealand · India'}
                   </span>
                 </div>
 

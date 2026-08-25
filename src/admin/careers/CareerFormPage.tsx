@@ -7,7 +7,7 @@ import { ArrowLeft, Loader2, Save, Globe, Plus, X } from 'lucide-react';
 const EMPTY: CareerInsert = {
   title: '',
   department: '',
-  location: 'Windsor, Ontario, Canada',
+  location: 'Canada · New Zealand · India',
   employment_type: 'Project-Based',
   experience_required: '',
   description: '',
