@@ -134,25 +134,7 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
         )}
       </section>
 
-      {/* 3. PROCESS STEPS */}
-      <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="glass-card group bg-gradient-to-r from-white via-slate-50 to-blue-50/40 p-8 lg:p-10 rounded-3xl border border-blue-100 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-            {PROCESS_STEPS.map((step, idx) => (
-              <div key={idx} className="flex items-start gap-4 group/step p-3 rounded-2xl hover:bg-white/80 transition-all duration-300">
-                <div className="w-11 h-11 rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-mono font-extrabold text-base shadow-xs group-hover/step:bg-[#0057FF] group-hover/step:text-white group-hover/step:scale-110 transition-all duration-300">
-                  {step.num}
-                </div>
-                <div className="space-y-1">
-                  <h4 className="text-base font-heading font-extrabold text-[#0F172A] uppercase">{step.title}</h4>
-                  <p className="text-sm text-slate-800 leading-relaxed font-semibold">{step.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* 4. CTA BANNER */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">

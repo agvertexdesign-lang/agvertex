@@ -4,6 +4,7 @@ import { AdminApp } from './admin/AdminApp';
 import { AdminProvider } from './admin/context/AdminContext';
 import { Preloader } from './components/common/Preloader';
 import { ScrollToTop } from './components/common/ScrollToTop';
+import { ScrollDownIndicator } from './components/common/ScrollDownIndicator';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { BackgroundParticlesCanvas } from './components/three/BackgroundParticlesCanvas';
@@ -112,8 +113,9 @@ export default function App() {
       {/* 0. INITIAL PRELOADER SCREEN */}
       <Preloader />
 
-      {/* 1. SCROLL RESET ON ROUTE CHANGE */}
+      {/* 1. SCROLL RESET & FLOATING INDICATORS */}
       <ScrollToTop />
+      <ScrollDownIndicator />
 
       {/* GLOBAL DYNAMIC TOPOGRAPHIC CONTOUR BACKGROUND */}
       <BackgroundParticlesCanvas />
