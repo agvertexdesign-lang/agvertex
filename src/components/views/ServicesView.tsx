@@ -87,20 +87,21 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
               <div
                 key={svc.id}
                 id={svc.id}
-                className="glass-card bg-white p-7 sm:p-8 rounded-3xl border border-slate-200/90 shadow-md hover:shadow-xl hover:border-blue-400 transition-all duration-300 flex flex-col justify-between group scroll-mt-32"
+                className="glass-card group bg-gradient-to-br from-white via-slate-50/90 to-blue-50/30 p-7 sm:p-8 rounded-3xl border border-blue-100 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2.5 transition-all duration-400 flex flex-col justify-between scroll-mt-32 relative overflow-hidden"
               >
-                <div className="flex flex-col sm:flex-row gap-6 items-start">
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
+                <div className="flex flex-col sm:flex-row gap-6 items-start relative z-10">
 
                   {/* Image */}
                   <div className="w-full sm:w-52 h-52 rounded-2xl overflow-hidden shrink-0 relative border border-slate-200 shadow-sm bg-slate-900">
                     <img
                       src={svc.image_url || FALLBACK_IMG}
                       alt={svc.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMG; }}
                     />
-                    <div className="absolute top-3 left-3">
-                      <span className="px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-white text-[11px] font-mono font-bold border border-slate-700">
+                    <div className="absolute top-3 left-3 z-10">
+                      <span className="px-3 py-1 rounded-full bg-slate-900/90 backdrop-blur-md text-white text-xs font-mono font-bold border border-slate-700">
                         {BADGE_NUMS[svc.display_order - 1] ?? String(svc.display_order).padStart(2, '0')}
                       </span>
                     </div>
@@ -108,23 +109,23 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
 
                   {/* Content */}
                   <div className="space-y-3 flex-1 w-full">
-                    <h2 className="text-xl sm:text-2xl font-heading font-bold text-[#0F172A] uppercase tracking-wide">
+                    <h2 className="text-xl sm:text-2xl font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors duration-300">
                       {svc.title}
                     </h2>
-                    <p className="text-sm text-slate-600 leading-relaxed">
+                    <p className="text-base text-slate-800 leading-relaxed font-semibold">
                       {svc.short_desc}
                     </p>
                   </div>
                 </div>
 
                 {/* Footer */}
-                <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-end">
+                <div className="pt-6 mt-6 border-t border-slate-200/80 flex items-center justify-end relative z-10">
                   <button
                     onClick={() => setSelectedService(svc)}
-                    className="btn-secondary px-5 py-2.5 text-xs sm:text-sm font-bold flex items-center gap-2 cursor-pointer hover:border-blue-500 hover:text-[#0057FF] transition-all"
+                    className="btn-primary px-6 py-3 text-sm font-extrabold flex items-center gap-2 cursor-pointer shadow-md shadow-blue-500/20 group-hover:scale-105 transition-all duration-300"
                   >
                     View Details
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -135,16 +136,17 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
 
       {/* 3. PROCESS STEPS */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="glass-card bg-white p-8 lg:p-10 rounded-3xl border border-slate-200/90 shadow-md">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="glass-card group bg-gradient-to-r from-white via-slate-50 to-blue-50/40 p-8 lg:p-10 rounded-3xl border border-blue-100 shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
             {PROCESS_STEPS.map((step, idx) => (
-              <div key={idx} className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-mono font-bold text-sm">
+              <div key={idx} className="flex items-start gap-4 group/step p-3 rounded-2xl hover:bg-white/80 transition-all duration-300">
+                <div className="w-11 h-11 rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-mono font-extrabold text-base shadow-xs group-hover/step:bg-[#0057FF] group-hover/step:text-white group-hover/step:scale-110 transition-all duration-300">
                   {step.num}
                 </div>
                 <div className="space-y-1">
-                  <h4 className="text-xs sm:text-sm font-heading font-bold text-[#0F172A] uppercase">{step.title}</h4>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">{step.desc}</p>
+                  <h4 className="text-base font-heading font-extrabold text-[#0F172A] uppercase">{step.title}</h4>
+                  <p className="text-sm text-slate-800 leading-relaxed font-semibold">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -154,20 +156,21 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
 
       {/* 4. CTA BANNER */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">
-        <div className="glass-card bg-white p-10 lg:p-14 rounded-3xl border border-slate-200/90 shadow-xl space-y-5 max-w-3xl mx-auto">
-          <h3 className="text-2xl sm:text-3xl font-heading font-bold text-[#0F172A] uppercase tracking-tight">
+        <div className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/50 p-10 lg:p-14 rounded-3xl border border-blue-200 shadow-xl space-y-6 max-w-3xl mx-auto relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-extrabold text-[#0F172A] uppercase tracking-tight">
             HAVE A PROJECT TO DISCUSS?
           </h3>
-          <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto font-normal">
+          <p className="text-base sm:text-lg text-slate-800 max-w-xl mx-auto font-bold leading-relaxed">
             Let's review your design requirements, documentation needs, or supplier drawing challenges.
           </p>
           <div className="pt-2">
             <button
               onClick={() => navigate('/contact')}
-              className="btn-primary px-8 py-4 text-xs sm:text-sm font-bold inline-flex items-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer"
+              className="btn-primary px-9 py-4 text-sm sm:text-base font-extrabold inline-flex items-center gap-2.5 shadow-xl shadow-blue-500/25 cursor-pointer hover:scale-105 transition-all duration-300"
             >
               Request a Project Review
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-5 h-5" />
             </button>
           </div>
         </div>

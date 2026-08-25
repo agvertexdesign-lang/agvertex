@@ -163,18 +163,21 @@ export const AboutView: React.FC<AboutViewProps> = () => {
             return (
               <div
                 key={idx}
-                className="glass-card bg-white p-8 rounded-3xl border border-slate-200/90 shadow-md space-y-4 hover:shadow-xl hover:border-blue-400 transition-all duration-300 flex flex-col justify-between"
+                className="glass-card group p-8 rounded-3xl border border-blue-100 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2.5 transition-all duration-400 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-white via-slate-50/90 to-blue-50/40"
               >
-                <div className="space-y-4">
-                  <div className="w-14 h-14 rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center shadow-inner">
+                {/* Top Animated Gradient Accent Bar */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+
+                <div className="space-y-5 relative z-10">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100/80 text-[#0057FF] flex items-center justify-center shadow-xs border border-blue-200/70 group-hover:scale-110 group-hover:bg-[#0057FF] group-hover:text-white group-hover:rotate-3 transition-all duration-300">
                     <PillarIcon className="w-7 h-7" />
                   </div>
                   
-                  <h3 className="text-base sm:text-lg font-heading font-bold text-[#0F172A] uppercase tracking-wide">
+                  <h3 className="text-lg font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors duration-300">
                     {p.title}
                   </h3>
 
-                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                  <p className="text-base text-slate-900 leading-relaxed font-bold">
                     {p.desc}
                   </p>
                 </div>
@@ -195,7 +198,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-[#0F172A] tracking-tight">
             15+ YEARS OF MECHANICAL DESIGN EXPERIENCE
           </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base lg:text-lg text-slate-800 leading-relaxed font-bold">
             The AG Vertex team brings experience across product development, injection molding, hot-runner systems, automotive components and manufacturing-focused mechanical design.
           </p>
         </div>
@@ -205,23 +208,24 @@ export const AboutView: React.FC<AboutViewProps> = () => {
           {DOMAIN_CARDS.map((card, idx) => (
             <div
               key={idx}
-              className="glass-card bg-white overflow-hidden rounded-3xl border border-slate-200/90 shadow-md group flex flex-col justify-between hover:shadow-xl transition-all duration-300"
+              className="glass-card group bg-gradient-to-b from-white to-slate-50 overflow-hidden rounded-3xl border border-slate-200/90 shadow-md flex flex-col justify-between hover:shadow-2xl hover:border-blue-400 hover:-translate-y-2 transition-all duration-400 relative"
             >
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-sky-400 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
               <div>
                 <div className="h-48 overflow-hidden relative">
                   <img
                     src={card.image}
                     alt={card.title}
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
                 </div>
 
-                <div className="p-6 sm:p-7 space-y-2.5">
-                  <h3 className="text-sm sm:text-base font-heading font-bold text-[#0F172A] uppercase tracking-wide">
+                <div className="p-6 sm:p-7 space-y-3">
+                  <h3 className="text-base sm:text-lg font-heading font-bold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors">
                     {card.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                  <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-semibold">
                     {card.desc}
                   </p>
                 </div>
@@ -275,12 +279,13 @@ export const AboutView: React.FC<AboutViewProps> = () => {
           {(about.cad_items || DEFAULT_CAD_STACK).map((tool) => (
             <div
               key={tool.id || tool.name}
-              className="glass-card bg-white p-7 rounded-3xl border border-slate-200/90 shadow-md space-y-5 flex flex-col justify-between hover:border-blue-400 hover:shadow-xl transition-all duration-300 group"
+              className="glass-card group p-7 rounded-3xl border border-blue-100 shadow-md space-y-5 flex flex-col justify-between hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 relative overflow-hidden bg-gradient-to-br from-white via-slate-50/90 to-blue-50/30"
             >
-              <div className="space-y-4">
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
+              <div className="space-y-4 relative z-10">
                 <div className="flex items-center justify-between gap-3">
                   {tool.logo_url ? (
-                    <div className="h-20 max-w-[170px] px-4 py-3 rounded-2xl bg-white border border-slate-200/90 flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 group-hover:border-blue-300 transition-all overflow-hidden">
+                    <div className="h-20 max-w-[170px] px-4 py-3 rounded-2xl bg-white border border-slate-200/90 flex items-center justify-center shrink-0 shadow-sm group-hover:scale-108 group-hover:border-blue-400 group-hover:shadow-md transition-all duration-300 overflow-hidden">
                       <img
                         src={tool.logo_url}
                         alt={tool.name}
@@ -294,21 +299,21 @@ export const AboutView: React.FC<AboutViewProps> = () => {
                     </div>
                   )}
 
-                  <span className="px-3 py-1 rounded-full bg-blue-50 text-[#0057FF] text-[10px] font-mono font-bold tracking-wider uppercase border border-blue-100">
+                  <span className="px-3 py-1 rounded-full bg-blue-50 text-[#0057FF] text-xs font-mono font-bold tracking-wider uppercase border border-blue-200 group-hover:bg-[#0057FF] group-hover:text-white transition-colors duration-300">
                     {tool.badge}
                   </span>
                 </div>
 
                 <div className="space-y-1">
-                  <h3 className="text-base font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors">
+                  <h3 className="text-lg font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors duration-300">
                     {tool.name}
                   </h3>
-                  <p className="text-xs font-mono font-semibold text-slate-500">
+                  <p className="text-xs font-mono font-bold text-blue-600">
                     {tool.category}
                   </p>
                 </div>
 
-                <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                <p className="text-sm text-slate-800 leading-relaxed font-semibold">
                   {tool.desc}
                 </p>
               </div>

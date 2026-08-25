@@ -271,25 +271,26 @@ export const CareersView: React.FC = () => {
 
       {/* 2. ACTIVE NOTICE BOX (Callout 5: Placed directly below hero before value cards) */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="glass-card bg-white p-8 sm:p-12 rounded-3xl border border-slate-200/90 shadow-xl max-w-3xl mx-auto text-center space-y-5">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-mono text-xs font-bold uppercase tracking-wider">
-            <Clock className="w-3.5 h-3.5 text-[#0057FF]" /> STATUS NOTICE
+        <div className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/50 p-8 sm:p-12 rounded-3xl border border-blue-200 shadow-xl max-w-3xl mx-auto text-center space-y-6 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-[#0057FF] font-mono text-xs font-extrabold uppercase tracking-wider shadow-xs">
+            <Clock className="w-4 h-4 text-[#0057FF]" /> STATUS NOTICE
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-[#0F172A] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-[#0F172A] tracking-tight">
             NO ACTIVE PERMANENT POSITIONS
           </h2>
 
-          <p className="text-base text-slate-600 font-medium leading-relaxed max-w-xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-800 font-bold leading-relaxed max-w-xl mx-auto">
             AG Vertex is not actively recruiting permanent employees at this time. However, experienced mechanical design consultants, tooling specialists, and CAD professionals are welcome to submit their profiles for future project-based collaboration.
           </p>
 
           <div className="pt-3">
             <button
               onClick={() => setModalOpen(true)}
-              className="btn-primary px-8 py-3.5 text-xs sm:text-sm font-bold inline-flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-500/25"
+              className="btn-primary px-9 py-4 text-sm sm:text-base font-extrabold inline-flex items-center gap-2.5 cursor-pointer shadow-xl shadow-blue-500/25 hover:scale-105 transition-all duration-300"
             >
-              Submit Specialist Profile <ArrowRight className="w-4 h-4" />
+              Submit Specialist Profile <ArrowRight className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -303,17 +304,18 @@ export const CareersView: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="glass-card bg-white p-7 rounded-3xl border border-slate-200/90 shadow-md space-y-4 hover:border-blue-400 transition-all duration-300"
+                className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/30 p-7 rounded-3xl border border-blue-100 shadow-md space-y-4 hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 relative overflow-hidden"
               >
-                <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center">
-                  <ValIcon className="w-6 h-6" />
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
+                <div className="w-13 h-13 rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center border border-blue-200/70 group-hover:scale-110 group-hover:bg-[#0057FF] group-hover:text-white transition-all duration-300">
+                  <ValIcon className="w-6.5 h-6.5" />
                 </div>
                 
-                <h3 className="text-xs font-heading font-bold text-[#0F172A] uppercase tracking-wide">
+                <h3 className="text-base font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors duration-300">
                   {v.title}
                 </h3>
 
-                <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                <p className="text-sm text-slate-800 leading-relaxed font-semibold">
                   {v.desc}
                 </p>
               </div>
@@ -322,16 +324,16 @@ export const CareersView: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. SOFTWARE & CAD PROFICIENCY (Replaced Areas of Interest as requested) */}
+      {/* 4. SOFTWARE & CAD PROFICIENCY */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12 space-y-8">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="text-xs font-mono font-bold uppercase text-[#0057FF] tracking-widest block">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <span className="text-xs sm:text-sm font-mono font-bold uppercase text-[#0057FF] tracking-widest block">
             ENGINEERING CAD STACK
           </span>
-          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-[#0F172A]">
+          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-[#0F172A]">
             Software & CAD Proficiency
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 font-normal">
+          <p className="text-sm sm:text-base text-slate-800 font-bold leading-relaxed">
             We collaborate using industry-standard engineering suites and enterprise PLM workflows.
           </p>
         </div>
@@ -340,8 +342,9 @@ export const CareersView: React.FC = () => {
           {((pageContent.about?.cad_items && pageContent.about.cad_items.length > 0) ? pageContent.about.cad_items : DEFAULT_CAD_STACK).map((tool) => (
             <div
               key={tool.id || tool.name}
-              className="glass-card bg-white p-7 rounded-3xl border border-slate-200/90 shadow-md hover:shadow-xl hover:border-blue-400 transition-all duration-300 flex flex-col justify-between space-y-4 group"
+              className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/30 p-7 rounded-3xl border border-blue-100 shadow-md hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 flex flex-col justify-between space-y-5 relative overflow-hidden"
             >
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   {tool.logo_url ? (

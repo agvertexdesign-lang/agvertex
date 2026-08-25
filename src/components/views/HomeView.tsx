@@ -126,8 +126,9 @@ export const HomeView: React.FC<HomeViewProps> = () => {
               <div 
                 key={idx}
                 onClick={() => navigate(card.link)}
-                className="glass-card bg-white rounded-3xl border border-slate-200/90 shadow-md hover:shadow-2xl hover:border-blue-400 transition-all duration-300 cursor-pointer overflow-hidden group flex flex-col justify-between"
+                className="glass-card group bg-gradient-to-b from-white to-slate-50/80 rounded-3xl border border-blue-100 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2.5 transition-all duration-400 cursor-pointer overflow-hidden flex flex-col justify-between relative"
               >
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
                 <div>
                   {/* High-Resolution Professional Engineering Image */}
                   <div className="h-52 overflow-hidden relative">
@@ -136,36 +137,36 @@ export const HomeView: React.FC<HomeViewProps> = () => {
                       alt={`AG Vertex Representative Capability Visual - ${card.title}`}
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700" 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
                     
-                    <div className="absolute top-4 left-4">
-                      <div className="w-10 h-10 rounded-xl bg-white/90 backdrop-blur-md text-[#0057FF] flex items-center justify-center shadow-md">
-                        <Icon className="w-5 h-5" />
+                    <div className="absolute top-4 left-4 z-10">
+                      <div className="w-11 h-11 rounded-2xl bg-white/95 backdrop-blur-md text-[#0057FF] flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-[#0057FF] group-hover:text-white transition-all duration-300">
+                        <Icon className="w-5.5 h-5.5" />
                       </div>
                     </div>
                   </div>
 
                   {/* Card Content with larger, readable typography */}
                   <div className="p-7 space-y-4">
-                    <h3 className="text-lg sm:text-xl font-heading font-bold text-[#0F172A] group-hover:text-[#0057FF] transition-colors leading-snug">
+                    <h3 className="text-xl font-heading font-extrabold text-[#0F172A] group-hover:text-[#0057FF] transition-colors leading-snug">
                       {card.title}
                     </h3>
                     
-                    <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-600 font-medium pt-1">
+                    <div className="flex flex-wrap items-center gap-2 text-sm text-slate-800 font-bold pt-1">
                       <span>{card.items[0]}</span>
-                      <span className="text-slate-300 font-bold">•</span>
+                      <span className="text-blue-500 font-bold">•</span>
                       <span>{card.items[1]}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Card Footer Action */}
-                <div className="px-7 pb-6 pt-0 flex items-center justify-between text-xs sm:text-sm font-bold text-[#0057FF]">
+                <div className="px-7 pb-6 pt-0 flex items-center justify-between text-sm font-extrabold text-[#0057FF]">
                   <span>Explore Capabilities</span>
-                  <div className="w-8 h-8 rounded-full bg-blue-50 group-hover:bg-[#0057FF] group-hover:text-white flex items-center justify-center transition-colors">
-                    <ChevronRight className="w-4 h-4" />
+                  <div className="w-9 h-9 rounded-full bg-blue-50 group-hover:bg-[#0057FF] group-hover:text-white group-hover:translate-x-1 flex items-center justify-center transition-all duration-300">
+                    <ChevronRight className="w-5 h-5" />
                   </div>
                 </div>
               </div>
