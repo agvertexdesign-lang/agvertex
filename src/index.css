@@ -19,9 +19,9 @@
 
 @layer base {
   :root {
-    --bg-main: #F8FAFC;
+    --bg-main: #EBF2FA;
     --bg-surface: #FFFFFF;
-    --bg-secondary: #EEF2F7;
+    --bg-secondary: #E0EBF7;
     --primary-blue: #0057FF;
     --accent-blue: #2D8CFF;
     --text-dark: #0F172A;

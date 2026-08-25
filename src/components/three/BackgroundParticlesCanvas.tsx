@@ -48,9 +48,9 @@ export const BackgroundParticlesCanvas: React.FC = () => {
       ctx.clearRect(0, 0, width, height);
       time += 0.008;
 
-      // 1. Moving Subtle CAD Grid Layer
+      // 1. Moving Subtle CAD Grid Layer (Bright crisp white grid lines)
       const gridSize = 80;
-      ctx.strokeStyle = 'rgba(0, 87, 255, 0.025)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
       ctx.lineWidth = 1;
 
       for (let x = 0; x < width; x += gridSize) {
@@ -66,7 +66,7 @@ export const BackgroundParticlesCanvas: React.FC = () => {
         ctx.stroke();
       }
 
-      // 2. Render Topographic / FEA Elevation Contour Lines
+      // 2. Render Topographic / FEA Elevation Contour Lines in Glowing White
       const lineSpacing = height / contourCount;
 
       for (let i = 0; i < contourCount + 4; i++) {
@@ -74,10 +74,10 @@ export const BackgroundParticlesCanvas: React.FC = () => {
         const isMajorContour = i % 5 === 0;
 
         ctx.beginPath();
-        ctx.lineWidth = isMajorContour ? 1.5 : 0.8;
+        ctx.lineWidth = isMajorContour ? 2.2 : 1.3;
         ctx.strokeStyle = isMajorContour
-          ? 'rgba(0, 87, 255, 0.12)'
-          : 'rgba(45, 140, 255, 0.04)';
+          ? 'rgba(255, 255, 255, 0.95)'
+          : 'rgba(255, 255, 255, 0.6)';
 
         let firstPoint = true;
 
@@ -132,13 +132,13 @@ export const BackgroundParticlesCanvas: React.FC = () => {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {/* Dynamic Animated Ambient Orbs in Background */}
-      <div className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-[#0057FF]/08 rounded-full blur-[140px] animate-orb-float-1" />
-      <div className="absolute top-2/3 -right-20 w-[700px] h-[700px] bg-[#2D8CFF]/10 rounded-full blur-[160px] animate-orb-float-2" />
+      <div className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-[#0057FF]/12 rounded-full blur-[140px] animate-orb-float-1" />
+      <div className="absolute top-2/3 -right-20 w-[700px] h-[700px] bg-[#2D8CFF]/15 rounded-full blur-[160px] animate-orb-float-2" />
 
       {/* Topographic Contour Canvas */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 opacity-90"
+        className="absolute inset-0 opacity-100"
       />
     </div>
   );
