@@ -39,22 +39,16 @@ export const ScrollDownIndicator: React.FC = () => {
     >
       <button
         onClick={handleScrollDown}
-        className="group flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/95 backdrop-blur-md border border-blue-200 shadow-xl shadow-blue-500/15 text-slate-900 hover:text-[#0057FF] hover:border-blue-500 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+        className="group flex flex-col items-center gap-1.5 p-2 transition-transform duration-300 hover:scale-115 cursor-pointer focus:outline-none"
         aria-label="Scroll down page"
       >
-        {/* Animated Computer Mouse Icon */}
-        <div className="w-5 h-8 rounded-full border-2 border-[#0057FF] group-hover:border-blue-600 flex justify-center pt-1.5 shrink-0 bg-blue-50/50 group-hover:bg-blue-100/50 transition-colors">
-          <div className="w-1 h-2 bg-[#0057FF] rounded-full animate-mouse-scroll" />
+        {/* Animated Computer Mouse Icon Suspended in Air */}
+        <div className="w-6 h-10 rounded-full border-2 border-[#0057FF] flex justify-center pt-2 bg-white/50 backdrop-blur-xs shadow-md group-hover:border-blue-600 group-hover:bg-white/80 transition-all duration-300">
+          <div className="w-1.5 h-2.5 bg-[#0057FF] rounded-full animate-mouse-scroll" />
         </div>
 
-        <span className="text-xs font-mono font-extrabold tracking-wider uppercase text-slate-900 group-hover:text-[#0057FF] transition-colors">
-          SCROLL DOWN
-        </span>
-
-        {/* Downward Bouncing Arrow Icon */}
-        <div className="w-6 h-6 rounded-full bg-blue-50 group-hover:bg-[#0057FF] group-hover:text-white flex items-center justify-center transition-colors duration-300">
-          <ChevronDown className="w-4 h-4 text-[#0057FF] group-hover:text-white animate-bounce" />
-        </div>
+        {/* Downward Bouncing Arrow Suspended Below */}
+        <ChevronDown className="w-5 h-5 text-[#0057FF] group-hover:text-blue-700 animate-bounce filter drop-shadow-md transition-colors" />
       </button>
     </div>
   );
