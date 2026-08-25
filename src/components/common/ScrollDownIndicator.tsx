@@ -39,14 +39,21 @@ export const ScrollDownIndicator: React.FC = () => {
     >
       <button
         onClick={handleScrollDown}
-        className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-md border border-blue-200 shadow-lg shadow-blue-500/10 text-slate-800 hover:text-[#0057FF] hover:border-blue-400 transition-all cursor-pointer"
+        className="group flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/95 backdrop-blur-md border border-blue-200 shadow-xl shadow-blue-500/15 text-slate-900 hover:text-[#0057FF] hover:border-blue-500 hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
         aria-label="Scroll down page"
       >
-        <span className="text-xs font-mono font-bold tracking-wider uppercase text-slate-700 group-hover:text-[#0057FF]">
+        {/* Animated Computer Mouse Icon */}
+        <div className="w-5 h-8 rounded-full border-2 border-[#0057FF] group-hover:border-blue-600 flex justify-center pt-1.5 shrink-0 bg-blue-50/50 group-hover:bg-blue-100/50 transition-colors">
+          <div className="w-1 h-2 bg-[#0057FF] rounded-full animate-mouse-scroll" />
+        </div>
+
+        <span className="text-xs font-mono font-extrabold tracking-wider uppercase text-slate-900 group-hover:text-[#0057FF] transition-colors">
           SCROLL DOWN
         </span>
-        <div className="w-5 h-5 rounded-full bg-blue-50 group-hover:bg-[#0057FF] group-hover:text-white flex items-center justify-center transition-colors">
-          <ChevronDown className="w-3.5 h-3.5 animate-bounce" />
+
+        {/* Downward Bouncing Arrow Icon */}
+        <div className="w-6 h-6 rounded-full bg-blue-50 group-hover:bg-[#0057FF] group-hover:text-white flex items-center justify-center transition-colors duration-300">
+          <ChevronDown className="w-4 h-4 text-[#0057FF] group-hover:text-white animate-bounce" />
         </div>
       </button>
     </div>

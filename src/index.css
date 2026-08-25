@@ -241,3 +241,23 @@
 .animate-mirage-ripple {
   animation: mirageRipple 18s ease-in-out infinite;
 }
+
+/* Mouse Scroll Wheel Animation */
+@keyframes mouseScroll {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+.animate-mouse-scroll {
+  animation: mouseScroll 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
