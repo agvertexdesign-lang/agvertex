@@ -10,7 +10,8 @@ import {
   Crosshair, 
   Users, 
   ArrowRight,
-  CheckCircle2
+  CheckCircle2,
+  Lock
 } from 'lucide-react';
 import { usePageContent, useSettingsData } from '../../hooks/useCmsData';
 import { DEFAULT_CAD_STACK } from '../../lib/api/settings';
@@ -187,6 +188,86 @@ export const AboutView: React.FC<AboutViewProps> = () => {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* 2.5 CONFIDENTIALITY & INTELLECTUAL PROPERTY SECTION */}
+      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 py-6 sm:py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Left Image: generated security and trust design */}
+          <div className="lg:col-span-5 relative order-2 lg:order-1">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-blue-200/50 bg-[#EBF2FA]/40 p-4 group">
+              <img
+                src="/images/data_security_ip.png"
+                alt="AG Vertex Data Security and IP Protection"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-auto rounded-2xl object-cover shadow-inner group-hover:scale-102 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-blue-500/20 pointer-events-none transition-all duration-500" />
+            </div>
+          </div>
+
+          {/* Right Text: trust building copy */}
+          <div className="lg:col-span-7 space-y-6 order-1 lg:order-2">
+            <span className="text-xs sm:text-sm font-mono font-bold uppercase text-[#0057FF] tracking-widest block">
+              IP PROTECTION & CONFIDENTIALITY
+            </span>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-heading font-extrabold text-[#0F172A] tracking-tight leading-[1.15]">
+              Protecting Your Innovative Designs
+            </h2>
+
+            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-semibold">
+              At AG Vertex, we understand that your design concepts, CAD datasets, and engineering files represent your core competitive advantage. We handle your intellectual property with absolute discretion and secure workflows.
+            </p>
+
+            <div className="space-y-4 pt-2">
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 border border-blue-100 shadow-xs">
+                  <ShieldCheck className="w-5.5 h-5.5" />
+                </div>
+                <div>
+                  <h4 className="text-base font-heading font-bold text-[#0F172A]">
+                    Mutual Non-Disclosure Agreements
+                  </h4>
+                  <p className="text-sm text-slate-600 font-medium">
+                    We routinely execute standard NDAs prior to reviewing any proprietary project drawings, models, or design parameters.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 border border-blue-100 shadow-xs">
+                  <Lock className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-base font-heading font-bold text-[#0F172A]">
+                    Isolated Local Storage
+                  </h4>
+                  <p className="text-sm text-slate-600 font-medium">
+                    Your CAD files and technical documentation are stored securely and processed on isolated local workstations, ensuring no external leaks.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 border border-blue-100 shadow-xs">
+                  <CheckCircle2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="text-base font-heading font-bold text-[#0F172A]">
+                    100% Client Ownership
+                  </h4>
+                  <p className="text-sm text-slate-600 font-medium">
+                    All created assemblies, component prints, parametric models, and deliverables remain completely under your ownership and control.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
