@@ -271,26 +271,26 @@ export const CareersView: React.FC = () => {
 
       {/* 2. ACTIVE NOTICE BOX (Callout 5: Placed directly below hero before value cards) */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/50 p-8 sm:p-12 rounded-3xl border border-blue-200 shadow-xl max-w-3xl mx-auto text-center space-y-6 relative overflow-hidden">
+        <div className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/50 py-5 px-6 sm:py-7 sm:px-10 rounded-3xl border border-blue-200/90 shadow-lg max-w-3xl mx-auto text-center space-y-3.5 relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-[#0057FF] font-mono text-xs font-extrabold uppercase tracking-wider shadow-xs">
-            <Clock className="w-4 h-4 text-[#0057FF]" /> STATUS NOTICE
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#0057FF] font-mono text-xs font-extrabold uppercase tracking-wider shadow-xs">
+            <Clock className="w-3.5 h-3.5 text-[#0057FF]" /> STATUS NOTICE
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-[#0F172A] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-extrabold text-[#0F172A] tracking-tight">
             NO ACTIVE PERMANENT POSITIONS
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-800 font-bold leading-relaxed max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-800 font-bold leading-relaxed max-w-xl mx-auto">
             AG Vertex is not actively recruiting permanent employees at this time. However, experienced mechanical design consultants, tooling specialists, and CAD professionals are welcome to submit their profiles for future project-based collaboration.
           </p>
 
-          <div className="pt-3">
+          <div className="pt-1">
             <button
               onClick={() => setModalOpen(true)}
-              className="btn-primary px-9 py-4 text-sm sm:text-base font-extrabold inline-flex items-center gap-2.5 cursor-pointer shadow-xl shadow-blue-500/25 hover:scale-105 transition-all duration-300"
+              className="btn-primary px-7 py-3 text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-500/20 hover:scale-105 transition-all duration-300"
             >
-              Submit Specialist Profile <ArrowRight className="w-5 h-5" />
+              Submit Specialist Profile <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>

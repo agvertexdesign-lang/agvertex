@@ -179,27 +179,28 @@ export const HomeView: React.FC<HomeViewProps> = () => {
 
       {/* 3. CALL-TO-ACTION BOTTOM BANNER */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="glass-card bg-white p-8 lg:p-12 rounded-3xl border border-slate-200/90 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/50 py-5 px-6 lg:py-7 lg:px-9 rounded-3xl border border-blue-200/90 shadow-lg flex flex-col lg:flex-row items-center justify-between gap-6 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
           
-          <div className="flex items-center gap-6 w-full lg:w-auto">
-            <div className="w-16 h-16 rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 shadow-inner">
-              <Users className="w-8 h-8" />
+          <div className="flex items-center gap-5 w-full lg:w-auto relative z-10">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0057FF] via-[#004BE0] to-[#0034B3] text-white flex items-center justify-center shrink-0 shadow-[0_8px_20px_rgba(0,87,255,0.35)] ring-4 ring-blue-50/80 group-hover:scale-108 transition-all duration-300">
+              <Users className="w-7 h-7 filter drop-shadow-xs" />
             </div>
 
-            <div className="space-y-1.5">
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-[#0F172A] uppercase tracking-tight">
+            <div className="space-y-1">
+              <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-[#0F172A] uppercase tracking-tight">
                 LET'S REVIEW YOUR <span className="text-[#0057FF]">ENGINEERING PROJECT</span>
               </h3>
-              <p className="text-sm sm:text-base text-slate-600 font-medium">
+              <p className="text-sm sm:text-base text-slate-800 font-bold">
                 Discuss your design requirements, documentation needs, or supplier coordination challenges.
               </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 w-full lg:w-auto justify-start lg:justify-end shrink-0">
+          <div className="flex flex-wrap items-center gap-3.5 w-full lg:w-auto justify-start lg:justify-end shrink-0 relative z-10">
             <button
               onClick={() => navigate('/contact')}
-              className="btn-primary px-8 py-4 text-xs sm:text-sm font-bold flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300"
+              className="btn-primary px-7 py-3 text-xs sm:text-sm font-extrabold flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-500/20 hover:scale-105 transition-all duration-300"
             >
               Request a Project Review
               <ArrowRight className="w-4 h-4" />
@@ -207,7 +208,7 @@ export const HomeView: React.FC<HomeViewProps> = () => {
 
             <button
               onClick={() => navigate('/services')}
-              className="btn-secondary px-7 py-4 text-xs sm:text-sm font-bold flex items-center gap-2 cursor-pointer transition-all duration-300"
+              className="btn-secondary px-6 py-3 text-xs sm:text-sm font-extrabold flex items-center gap-2 cursor-pointer hover:scale-105 transition-all duration-300"
             >
               Explore Services
               <ArrowRight className="w-3.5 h-3.5" />

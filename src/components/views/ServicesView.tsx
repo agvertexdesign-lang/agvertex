@@ -138,21 +138,21 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
 
       {/* 4. CTA BANNER */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">
-        <div className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/50 p-10 lg:p-14 rounded-3xl border border-blue-200 shadow-xl space-y-6 max-w-3xl mx-auto relative overflow-hidden">
+        <div className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/50 py-5 px-6 sm:py-7 sm:px-10 rounded-3xl border border-blue-200/90 shadow-lg space-y-3.5 max-w-3xl mx-auto relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-extrabold text-[#0F172A] uppercase tracking-tight">
             HAVE A PROJECT TO DISCUSS?
           </h3>
-          <p className="text-base sm:text-lg text-slate-800 max-w-xl mx-auto font-bold leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-800 max-w-xl mx-auto font-bold leading-relaxed">
             Let's review your design requirements, documentation needs, or supplier drawing challenges.
           </p>
-          <div className="pt-2">
+          <div className="pt-1">
             <button
               onClick={() => navigate('/contact')}
-              className="btn-primary px-9 py-4 text-sm sm:text-base font-extrabold inline-flex items-center gap-2.5 shadow-xl shadow-blue-500/25 cursor-pointer hover:scale-105 transition-all duration-300"
+              className="btn-primary px-7 py-3 text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 shadow-lg shadow-blue-500/20 cursor-pointer hover:scale-105 transition-all duration-300"
             >
               Request a Project Review
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
