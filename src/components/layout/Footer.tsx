@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, MapPin, ArrowUp, Linkedin, Youtube, Instagram, Facebook, Globe2 } from 'lucide-react';
-import { useSettingsData, useShowcaseVisibility } from '../../hooks/useCmsData';
+import { useSettingsData, useServicesData } from '../../hooks/useCmsData';
 
 interface FooterProps {
   onOpenQuoteModal?: () => void;
@@ -10,19 +10,20 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = () => {
   const navigate = useNavigate();
   const { settings } = useSettingsData();
-  const { enabled: showcaseEnabled } = useShowcaseVisibility();
+  const { services: cmsServices } = useServicesData();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const servicesList = [
-    { label: 'Product Design & 3D CAD', path: '/services?service=svc-1' },
-    { label: 'Mold & Die Tooling Support', path: '/services?service=svc-2' },
-    { label: 'Drawings, GD&T & BOMs', path: '/services?service=svc-3' },
-    { label: 'DFM/DFA & Supplier Coordination', path: '/services?service=svc-4' },
-    { label: 'Automotive Drawing Review', path: '/services?service=drawing-review' },
-  ];
+  const dynamicServices = (cmsServices && cmsServices.length > 0)
+    ? cmsServices.map(s => ({ label: s.title, path: `/services#${s.id}` }))
+    : [
+        { label: 'Product Design & 3D CAD', path: '/services#svc-1' },
+        { label: 'Mold & Die Tooling Support', path: '/services#svc-2' },
+        { label: 'Drawings, GD&T & BOMs', path: '/services#svc-3' },
+        { label: 'DFM/DFA & Supplier Coordination', path: '/services#svc-4' },
+      ];
 
   const companyList = [
     { label: 'About', path: '/about' },
@@ -110,7 +111,7 @@ export const Footer: React.FC<FooterProps> = () => {
               SERVICES
             </h4>
             <ul className="space-y-2.5 text-sm font-medium text-slate-700">
-              {servicesList.map((service, idx) => (
+              {dynamicServices.map((service, idx) => (
                 <li key={idx}>
                   <Link 
                     to={service.path}

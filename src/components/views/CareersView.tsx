@@ -269,7 +269,7 @@ export const CareersView: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. ACTIVE NOTICE BOX (Callout 5: Placed directly below hero before value cards) */}
+      {/* 2. ACTIVE NOTICE BOX */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
         <div className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/50 py-5 px-6 sm:py-7 sm:px-10 rounded-3xl border border-blue-200/90 shadow-lg max-w-3xl mx-auto text-center space-y-3.5 relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
@@ -284,15 +284,6 @@ export const CareersView: React.FC = () => {
           <p className="text-sm sm:text-base text-slate-800 font-bold leading-relaxed max-w-xl mx-auto">
             AG Vertex is not actively recruiting permanent employees at this time. However, experienced mechanical design consultants, tooling specialists, and CAD professionals are welcome to submit their profiles for future project-based collaboration.
           </p>
-
-          <div className="pt-1">
-            <button
-              onClick={() => setModalOpen(true)}
-              className="btn-primary px-7 py-3 text-xs sm:text-sm font-extrabold inline-flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-500/20 hover:scale-105 transition-all duration-300"
-            >
-              Submit Specialist Profile <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
         </div>
       </section>
 
@@ -301,7 +292,6 @@ export const CareersView: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {VALUES.map((v, idx) => {
             const ValIcon = v.icon;
-            const stepNum = String(idx + 1).padStart(2, '0');
             return (
               <div
                 key={idx}
@@ -309,11 +299,6 @@ export const CareersView: React.FC = () => {
               >
                 <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
                 
-                {/* Top Right Watermark Step Number */}
-                <div className="absolute top-5 right-5 font-mono font-black text-xl text-blue-500/20 group-hover:text-[#0057FF]/40 transition-colors duration-300">
-                  {stepNum}
-                </div>
-
                 <div className="space-y-5 relative z-10">
                   <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#0057FF] via-[#004BE0] to-[#0034B3] text-white flex items-center justify-center shadow-[0_8px_20px_rgba(0,87,255,0.3)] ring-4 ring-blue-50/80 group-hover:ring-blue-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-400">
                     <ValIcon className="w-6.5 h-6.5 filter drop-shadow-xs" />
@@ -332,89 +317,6 @@ export const CareersView: React.FC = () => {
               </div>
             );
           })}
-        </div>
-      </section>
-
-      {/* 4. SOFTWARE & CAD PROFICIENCY */}
-      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 space-y-8">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="text-xs sm:text-sm font-mono font-bold uppercase text-[#0057FF] tracking-widest block">
-            ENGINEERING CAD STACK
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-[#0F172A]">
-            Software & CAD Proficiency
-          </h2>
-          <p className="text-sm sm:text-base text-slate-800 font-bold leading-relaxed">
-            We collaborate using industry-standard engineering suites and enterprise PLM workflows.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {((pageContent.about?.cad_items && pageContent.about.cad_items.length > 0) ? pageContent.about.cad_items : DEFAULT_CAD_STACK).map((tool) => (
-            <div
-              key={tool.id || tool.name}
-              className="glass-card group bg-gradient-to-br from-white via-slate-50 to-blue-50/30 p-7 rounded-3xl border border-blue-100 shadow-md hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 flex flex-col justify-between space-y-5 relative overflow-hidden"
-            >
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  {tool.logo_url ? (
-                    <div className="h-20 max-w-[170px] px-4 py-3 rounded-2xl bg-white border border-slate-200/90 flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 group-hover:border-blue-300 transition-all overflow-hidden">
-                      <img
-                        src={tool.logo_url}
-                        alt={tool.name}
-                        className="w-full h-full object-contain max-h-14"
-                        onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
-                      />
-                    </div>
-                  ) : (
-                    <div className="h-20 px-5 rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-bold text-xs border border-blue-100">
-                      {tool.badge}
-                    </div>
-                  )}
-
-                  <span className="text-[10px] font-mono font-bold text-[#0057FF] bg-blue-50 px-2.5 py-1 rounded-full border border-blue-100">
-                    {tool.badge}
-                  </span>
-                </div>
-
-                <h3 className="text-base font-heading font-bold text-[#0F172A] group-hover:text-[#0057FF] transition-colors">
-                  {tool.name}
-                </h3>
-
-                <span className="text-[11px] font-mono font-semibold text-slate-400 block">
-                  {tool.category}
-                </span>
-
-                <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                  {tool.desc}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. BOTTOM CALLOUT */}
-      <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
-        <div className="glass-card bg-white border border-slate-200/90 p-8 lg:p-12 rounded-3xl shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
-          
-          <div className="space-y-2 text-center lg:text-left">
-            <h3 className="text-xl sm:text-2xl font-heading font-bold text-[#0F172A] uppercase tracking-tight">
-              INTERESTED IN FUTURE PROJECT-BASED WORK?
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-600 font-medium">
-              Submit your profile and we'll keep you in mind for suitable project-based opportunities.
-            </p>
-          </div>
-
-          <button
-            onClick={() => setModalOpen(true)}
-            className="btn-primary px-7 py-3.5 text-xs font-semibold shrink-0 cursor-pointer shadow-lg shadow-blue-500/25 flex items-center gap-2"
-          >
-            Submit Specialist Profile →
-          </button>
-
         </div>
       </section>
 
