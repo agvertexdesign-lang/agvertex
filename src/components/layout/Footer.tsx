@@ -43,8 +43,8 @@ export const Footer: React.FC<FooterProps> = () => {
   const contactEmail = settings?.contact?.email || 'agvertexdesign@gmail.com';
 
   return (
-    <footer className="bg-white text-slate-700 pt-16 pb-8 border-t border-slate-200 relative">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 space-y-12">
+    <footer className="bg-gradient-to-r from-white/95 via-blue-50/85 via-20% via-blue-100/80 via-60% to-blue-500/25 backdrop-blur-xl border-t border-blue-200/90 shadow-[0_-10px_30px_rgba(0,87,255,0.06)] text-slate-800 pt-16 pb-8 relative overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 space-y-12 relative z-10">
         
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-12 border-b border-slate-200">
