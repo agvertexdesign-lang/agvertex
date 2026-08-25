@@ -25,7 +25,7 @@
     --primary-blue: #0057FF;
     --accent-blue: #2D8CFF;
     --text-dark: #0F172A;
-    --text-gray: #334155;
+    --text-gray: #1E293B;
     --border-subtle: rgba(15, 23, 42, 0.08);
     --glow-blue: rgba(45, 140, 255, 0.15);
   }
@@ -34,37 +34,54 @@
     background-color: var(--bg-main);
     color: #0F172A;
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6, .font-heading {
     font-family: 'Ardela Edge', 'Inter', sans-serif;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
+    font-weight: 800;
     color: #0F172A;
   }
 
-  p {
-    color: #1E293B;
+  p, span, label, input, textarea, button, a, li {
+    font-weight: 600;
+    color: #0F172A;
   }
 }
 
-/* HIGH CONTRAST & LEGIBILITY TYPOGRAPHY OVERRIDES */
-.text-slate-400 {
-  color: #475569 !important;
+/* ENHANCED BOLD & LARGE TYPOGRAPHY OVERRIDES */
+.text-xs {
+  font-size: 0.875rem !important; /* Bump 12px -> 14px */
+  line-height: 1.4rem !important;
+  font-weight: 600 !important;
 }
 
-.text-slate-500 {
-  color: #334155 !important;
+.text-sm {
+  font-size: 1rem !important; /* Bump 14px -> 16px */
+  line-height: 1.5rem !important;
+  font-weight: 600 !important;
 }
 
-.text-slate-600 {
-  color: #1E293B !important;
+.text-base {
+  font-size: 1.125rem !important; /* Bump 16px -> 18px */
+  line-height: 1.75rem !important;
+  font-weight: 600 !important;
 }
 
-.text-slate-700 {
+.text-lg {
+  font-size: 1.25rem !important; /* Bump 18px -> 20px */
+  line-height: 1.85rem !important;
+  font-weight: 700 !important;
+}
+
+.text-slate-400, .text-slate-500, .text-slate-600, .text-slate-700 {
   color: #0F172A !important;
+  font-weight: 600 !important;
 }
 
 /* Custom Utilities & Animations */
