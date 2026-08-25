@@ -155,31 +155,40 @@ export const AboutView: React.FC<AboutViewProps> = () => {
         </div>
       </section>
 
-      {/* 2. FOUR PILLARS (With enlarged font size and comfortable padding) */}
+      {/* 2. FOUR PILLARS */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {PILLARS.map((p, idx) => {
             const PillarIcon = p.icon;
+            const stepNum = String(idx + 1).padStart(2, '0');
             return (
               <div
                 key={idx}
-                className="glass-card group p-8 rounded-3xl border border-blue-100 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2.5 transition-all duration-400 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-white via-slate-50/90 to-blue-50/40"
+                className="glass-card group p-8 rounded-3xl border border-blue-200/80 shadow-lg hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2.5 transition-all duration-400 flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-white via-slate-50/95 to-blue-50/50"
               >
-                {/* Top Animated Gradient Accent Bar */}
+                {/* Top Animated Glowing Accent Line */}
                 <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
 
-                <div className="space-y-5 relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100/80 text-[#0057FF] flex items-center justify-center shadow-xs border border-blue-200/70 group-hover:scale-110 group-hover:bg-[#0057FF] group-hover:text-white group-hover:rotate-3 transition-all duration-300">
-                    <PillarIcon className="w-7 h-7" />
+                {/* Top Right Watermark Step Number */}
+                <div className="absolute top-6 right-6 font-mono font-black text-2xl text-blue-500/20 group-hover:text-[#0057FF]/40 transition-colors duration-300">
+                  {stepNum}
+                </div>
+
+                <div className="space-y-6 relative z-10">
+                  {/* 3D Glowing Blue Icon Badge */}
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0057FF] via-[#004BE0] to-[#0034B3] text-white flex items-center justify-center shadow-[0_8px_20px_rgba(0,87,255,0.3)] ring-4 ring-blue-50/80 group-hover:ring-blue-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-400">
+                    <PillarIcon className="w-7 h-7 filter drop-shadow-xs" />
                   </div>
                   
-                  <h3 className="text-lg font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors duration-300">
-                    {p.title}
-                  </h3>
+                  <div className="space-y-2.5">
+                    <h3 className="text-lg font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors duration-300">
+                      {p.title}
+                    </h3>
 
-                  <p className="text-base text-slate-900 leading-relaxed font-bold">
-                    {p.desc}
-                  </p>
+                    <p className="text-base text-slate-900 leading-relaxed font-bold">
+                      {p.desc}
+                    </p>
+                  </div>
                 </div>
               </div>
             );

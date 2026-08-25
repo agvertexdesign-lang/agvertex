@@ -142,8 +142,8 @@ export const HomeView: React.FC<HomeViewProps> = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
                     
                     <div className="absolute top-4 left-4 z-10">
-                      <div className="w-11 h-11 rounded-2xl bg-white/95 backdrop-blur-md text-[#0057FF] flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-[#0057FF] group-hover:text-white transition-all duration-300">
-                        <Icon className="w-5.5 h-5.5" />
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0057FF] via-[#004BE0] to-[#0034B3] text-white flex items-center justify-center shadow-[0_8px_20px_rgba(0,87,255,0.35)] ring-4 ring-white/90 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                        <Icon className="w-6 h-6 filter drop-shadow-xs" />
                       </div>
                     </div>
                   </div>
