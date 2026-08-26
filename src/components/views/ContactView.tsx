@@ -390,7 +390,7 @@ export const ContactView: React.FC = () => {
           </p>
         </div>
 
-        {/* Global Map Display Banner (using map.png graphic) */}
+        {/* Global Map Display Banner (using map.png graphic with floating location badges) */}
         <div className="glass-card group bg-white p-3 sm:p-5 lg:p-6 rounded-3xl border border-blue-200/80 shadow-2xl relative overflow-hidden">
           <div className="relative rounded-2xl overflow-hidden bg-slate-50 border border-blue-100">
             <img
@@ -398,8 +398,88 @@ export const ContactView: React.FC = () => {
               alt="AG Vertex Global Engineering Footprint Map - Canada, India, New Zealand"
               loading="lazy"
               decoding="async"
-              className="w-full h-auto object-cover group-hover:scale-101 transition-transform duration-700"
+              className="w-full h-auto object-cover min-h-[340px] sm:min-h-[440px]"
             />
+
+            {/* Connecting SVG Dotted Curved Arcs */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 1000 500" preserveAspectRatio="none">
+              {/* Arc 1: Canada to India */}
+              <path
+                d="M 280 180 Q 480 100 640 260"
+                fill="none"
+                stroke="#0057FF"
+                strokeWidth="2.5"
+                strokeDasharray="6 6"
+                className="opacity-70 animate-pulse"
+              />
+              {/* Arc 2: India to New Zealand */}
+              <path
+                d="M 640 260 Q 720 340 850 420"
+                fill="none"
+                stroke="#0057FF"
+                strokeWidth="2.5"
+                strokeDasharray="6 6"
+                className="opacity-70 animate-pulse"
+              />
+              {/* Arc 3: Canada to New Zealand */}
+              <path
+                d="M 280 180 Q 550 380 850 420"
+                fill="none"
+                stroke="#0057FF"
+                strokeWidth="1.5"
+                strokeDasharray="4 4"
+                className="opacity-40"
+              />
+            </svg>
+
+            {/* FLOATING LOCATION CARD 1: CANADA */}
+            <div className="absolute top-[14%] left-[2%] sm:top-[20%] sm:left-[8%] md:left-[12%] z-20 transition-all duration-300 hover:scale-105">
+              <div className="flex items-center gap-2.5 px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-2xl bg-white/95 backdrop-blur-md border border-blue-200 shadow-xl shadow-blue-500/15">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#0057FF] text-white flex items-center justify-center font-bold shadow-md shadow-blue-500/30 shrink-0">
+                  <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+                <div className="text-left">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[9px] sm:text-[10px] font-mono font-extrabold text-[#0057FF] bg-blue-50 px-1.5 py-0.5 rounded border border-blue-100 uppercase">CA</span>
+                    <span className="text-xs sm:text-sm font-heading font-extrabold text-[#0F172A] uppercase tracking-wide">CANADA</span>
+                  </div>
+                  <span className="text-[10px] sm:text-xs text-slate-600 font-semibold block">Canada (Headquarters)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* FLOATING LOCATION CARD 2: INDIA */}
+            <div className="absolute top-[38%] left-[46%] sm:top-[42%] sm:left-[54%] md:left-[58%] z-20 transition-all duration-300 hover:scale-105">
+              <div className="flex items-center gap-2.5 px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-2xl bg-white/95 backdrop-blur-md border border-blue-200 shadow-xl shadow-blue-500/15">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#0057FF] text-white flex items-center justify-center font-bold shadow-md shadow-blue-500/30 shrink-0">
+                  <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+                <div className="text-left">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[9px] sm:text-[10px] font-mono font-extrabold text-[#0057FF] bg-blue-50 px-1.5 py-0.5 rounded border border-blue-100 uppercase">IN</span>
+                    <span className="text-xs sm:text-sm font-heading font-extrabold text-[#0F172A] uppercase tracking-wide">INDIA</span>
+                  </div>
+                  <span className="text-[10px] sm:text-xs text-slate-600 font-semibold block">India</span>
+                </div>
+              </div>
+            </div>
+
+            {/* FLOATING LOCATION CARD 3: NEW ZEALAND */}
+            <div className="absolute top-[64%] left-[48%] sm:top-[70%] sm:left-[66%] md:left-[72%] z-20 transition-all duration-300 hover:scale-105">
+              <div className="flex items-center gap-2.5 px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-2xl bg-white/95 backdrop-blur-md border border-blue-200 shadow-xl shadow-blue-500/15">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#0057FF] text-white flex items-center justify-center font-bold shadow-md shadow-blue-500/30 shrink-0">
+                  <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                </div>
+                <div className="text-left">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[9px] sm:text-[10px] font-mono font-extrabold text-[#0057FF] bg-blue-50 px-1.5 py-0.5 rounded border border-blue-100 uppercase">NZ</span>
+                    <span className="text-xs sm:text-sm font-heading font-extrabold text-[#0F172A] uppercase tracking-wide">NEW ZEALAND</span>
+                  </div>
+                  <span className="text-[10px] sm:text-xs text-slate-600 font-semibold block">New Zealand</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
