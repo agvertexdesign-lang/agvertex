@@ -375,27 +375,40 @@ export const ContactView: React.FC = () => {
       {/* 3. GLOBAL FOOTPRINT SECTION (Matching user request: India, Canada, New Zealand) */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12 space-y-10">
         
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-[#0057FF] text-xs font-mono font-bold tracking-widest uppercase">
-            <Globe2 className="w-4 h-4" />
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-[#0057FF] text-xs font-mono font-extrabold tracking-widest uppercase shadow-xs">
+            <Globe2 className="w-4 h-4 text-[#0057FF]" />
             GLOBAL ENGINEERING FOOTPRINT
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-[#0F172A] tracking-tight">
-            Globally Positioned For Good Tech Practices
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-[#0F172A] tracking-tight uppercase">
+            GLOBALLY POSITIONED FOR GOOD TECH PRACTICES
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
+          <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-semibold">
             Strategic delivery hubs across North America, Asia, and Oceania provide our clients with local engineering coordination, round-the-clock CAD execution, and rigorous quality standards.
           </p>
         </div>
 
-        {/* 3 Global Hub Cards */}
+        {/* Global Map Display Banner (using map.png graphic) */}
+        <div className="glass-card group bg-white p-3 sm:p-5 lg:p-6 rounded-3xl border border-blue-200/80 shadow-2xl relative overflow-hidden">
+          <div className="relative rounded-2xl overflow-hidden bg-slate-50 border border-blue-100">
+            <img
+              src="/images/map.png"
+              alt="AG Vertex Global Engineering Footprint Map - Canada, India, New Zealand"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto object-cover group-hover:scale-101 transition-transform duration-700"
+            />
+          </div>
+        </div>
+
+        {/* 3 Global Hub Detail Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {GLOBAL_HUBS.map((hub, idx) => (
             <div
               key={idx}
-              className="glass-card bg-white p-8 rounded-3xl border border-slate-200/90 shadow-lg hover:shadow-xl hover:border-blue-400 transition-all duration-300 space-y-5 flex flex-col justify-between group"
+              className="glass-card bg-gradient-to-b from-white via-slate-50/80 to-blue-50/40 p-8 rounded-3xl border border-blue-200/80 shadow-lg hover:shadow-2xl hover:border-blue-500 hover:-translate-y-1.5 transition-all duration-300 space-y-5 flex flex-col justify-between group"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -406,20 +419,20 @@ export const ContactView: React.FC = () => {
                 </div>
 
                 <div className="space-y-1">
-                  <h3 className="text-2xl font-heading font-bold text-[#0F172A] group-hover:text-[#0057FF] transition-colors">
+                  <h3 className="text-2xl font-heading font-extrabold text-[#0F172A] group-hover:text-[#0057FF] transition-colors uppercase tracking-wide">
                     {hub.country}
                   </h3>
-                  <div className="flex items-center gap-1.5 text-sm font-semibold text-slate-600">
+                  <div className="flex items-center gap-1.5 text-sm font-bold text-slate-700">
                     <MapPin className="w-4 h-4 text-[#0057FF] shrink-0" />
                     <span>{hub.city}</span>
                   </div>
                 </div>
 
                 <div className="pt-3 border-t border-slate-200 space-y-2">
-                  <span className="text-xs font-mono font-bold text-[#0057FF] uppercase tracking-wider block">
+                  <span className="text-xs font-mono font-extrabold text-[#0057FF] uppercase tracking-wider block">
                     {hub.role}
                   </span>
-                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                  <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-semibold">
                     {hub.details}
                   </p>
                 </div>
