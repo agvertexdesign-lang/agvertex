@@ -17,7 +17,6 @@ import { useSettingsData } from '../../hooks/useCmsData';
 
 import { sendToWhatsApp } from '../../lib/whatsapp';
 import { submitToWeb3Forms } from '../../lib/web3forms';
-import { InteractiveWorldMap } from '../common/InteractiveWorldMap';
 
 export const ContactView: React.FC = () => {
   const { settings } = useSettingsData();
@@ -391,9 +390,17 @@ export const ContactView: React.FC = () => {
           </p>
         </div>
 
-        {/* Seamless Interactive Vector World Map */}
-        <div className="w-full">
-          <InteractiveWorldMap />
+        {/* Global Map Display Banner (using map.png graphic) */}
+        <div className="glass-card group bg-white p-3 sm:p-5 lg:p-6 rounded-3xl border border-blue-200/80 shadow-2xl relative overflow-hidden">
+          <div className="relative rounded-2xl overflow-hidden bg-slate-50 border border-blue-100">
+            <img
+              src="/images/map.png"
+              alt="AG Vertex Global Engineering Footprint Map - Canada, India, New Zealand"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto object-cover group-hover:scale-101 transition-transform duration-700"
+            />
+          </div>
         </div>
 
         {/* 3 Global Hub Detail Cards */}

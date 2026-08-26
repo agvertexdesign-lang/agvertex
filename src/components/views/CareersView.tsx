@@ -287,6 +287,39 @@ export const CareersView: React.FC = () => {
         </div>
       </section>
 
+      {/* 3. FOUR VALUES ROW */}
+      <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {VALUES.map((v, idx) => {
+            const ValIcon = v.icon;
+            return (
+              <div
+                key={idx}
+                className="glass-card group p-7 rounded-3xl border border-blue-200/80 shadow-lg hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 relative overflow-hidden bg-gradient-to-b from-white via-slate-50/95 to-blue-50/50"
+              >
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
+                
+                <div className="space-y-5 relative z-10">
+                  <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#0057FF] via-[#004BE0] to-[#0034B3] text-white flex items-center justify-center shadow-[0_8px_20px_rgba(0,87,255,0.3)] ring-4 ring-blue-50/80 group-hover:ring-blue-100 group-hover:scale-110 group-hover:rotate-3 transition-all duration-400">
+                    <ValIcon className="w-6.5 h-6.5 filter drop-shadow-xs" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="text-base font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors duration-300">
+                      {v.title}
+                    </h3>
+
+                    <p className="text-sm text-slate-800 leading-relaxed font-semibold">
+                      {v.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       {/* PROFILE SUBMISSION MODAL */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in">
