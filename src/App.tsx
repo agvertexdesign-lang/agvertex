@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { MessageCircle } from 'lucide-react';
 import { AdminApp } from './admin/AdminApp';
 import { AdminProvider } from './admin/context/AdminContext';
 import { Preloader } from './components/common/Preloader';
@@ -327,6 +328,17 @@ export default function App() {
 
           </div>
         </div>
+      )}
+
+      {/* GLOBAL WHATSAPP FLOATING BUTTON */}
+      {!isAdminRoute && (
+        <button
+          onClick={() => sendToWhatsApp("")}
+          className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-lg shadow-emerald-500/30 flex items-center justify-center transition-transform hover:scale-110 cursor-pointer"
+          aria-label="Contact us on WhatsApp"
+        >
+          <MessageCircle className="w-7 h-7" />
+        </button>
       )}
 
     </div>

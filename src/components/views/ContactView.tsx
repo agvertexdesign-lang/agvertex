@@ -289,39 +289,13 @@ export const ContactView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Submit Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                {/* Submit Button */}
+                <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full sm:flex-1 btn-primary py-4 text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer"
+                    className="w-full btn-primary py-4 text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer"
                   >
                     Submit Project Inquiry <Mail className="w-4 h-4" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (!formData.agreed) {
-                        setErrorMessage('Please check the consent box to allow us to respond to your inquiry.');
-                        return;
-                      }
-                      const lines = [
-                        "📌 AG VERTEX — New Project Review Request",
-                        "----------------------------------------",
-                        `👤 Name: ${formData.name}`,
-                        `✉️ Work Email: ${formData.email}`,
-                        `🏢 Company: ${formData.company || 'Not provided'}`,
-                        `📞 Phone: ${formData.phone || 'Not provided'}`,
-                        `🛠️ Service Required: ${formData.service || 'General Inquiry'}`,
-                        `📅 Preferred Timeline: ${formData.timeline || 'Not specified'}`,
-                        "",
-                        "📝 Project Overview:",
-                        formData.overview,
-                      ];
-                      sendToWhatsApp(lines);
-                    }}
-                    className="w-full sm:flex-1 py-4 text-sm font-bold flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl shadow-lg shadow-emerald-500/25 transition-colors cursor-pointer"
-                  >
-                    Optional: WhatsApp <Send className="w-4 h-4" />
                   </button>
                 </div>
 
