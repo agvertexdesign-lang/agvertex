@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Mail, 
   MapPin, 
@@ -251,7 +252,7 @@ export const ContactView: React.FC = () => {
                 </div>
 
                 {/* Checkbox (Unchecked by default) */}
-                <div className="space-y-2 pt-1">
+                <div className="space-y-3 pt-1">
                   <div className="flex items-start gap-3">
                     <input
                       type="checkbox"
@@ -262,12 +263,17 @@ export const ContactView: React.FC = () => {
                       className="w-4 h-4 rounded border-slate-400 text-[#0057FF] focus:ring-blue-500 cursor-pointer mt-0.5"
                     />
                     <label htmlFor="consent" className="text-xs sm:text-sm text-slate-700 font-medium cursor-pointer">
-                      I agree that AG Vertex may contact me regarding this inquiry.
+                      I consent to AG Vertex collecting and using the information provided to review and respond to my inquiry, as described in the <Link to="/privacy" className="text-[#0057FF] hover:underline focus:outline-none font-bold">Privacy Policy</Link>.
                     </label>
                   </div>
-                  <p className="text-xs text-slate-500 pl-7">
-                    Your information is used only to respond to this inquiry.
-                  </p>
+                  <div className="pl-7 space-y-2">
+                    <p className="text-xs text-slate-500 font-medium">
+                      Please do not submit confidential, proprietary, security-sensitive or export-controlled information through this form.
+                    </p>
+                    <p className="text-xs text-slate-500 font-medium">
+                      If you continue through WhatsApp, your information will be transmitted using WhatsApp/Meta and will also be subject to its privacy practices.
+                    </p>
+                  </div>
                 </div>
 
                 {/* Submit Button */}

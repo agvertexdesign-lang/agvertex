@@ -18,6 +18,7 @@ import { ProcessView } from './components/views/ProcessView';
 import { CareersView } from './components/views/CareersView';
 import { ContactView } from './components/views/ContactView';
 import { FAQView } from './components/views/FAQView';
+import { PrivacyView } from './components/views/PrivacyView';
 import { useSEO } from './hooks/useSEO';
 import { sendToWhatsApp } from './lib/whatsapp';
 import { submitToWeb3Forms } from './lib/web3forms';
@@ -184,6 +185,7 @@ export default function App() {
             element={<FAQView onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />}
           />
           {/* Fallback route */}
+          <Route path="/privacy" element={<PrivacyView />} />
           <Route
             path="*"
             element={
