@@ -80,26 +80,23 @@ export const ContactView: React.FC = () => {
     {
       country: 'CANADA',
       flag: '🇨🇦',
-      city: 'Canada (Headquarters)',
-      role: 'Headquarters & Client Engineering Coordination',
+      city: 'Windsor, Ontario – Business and Client Coordination (Remote)',
+      role: 'Client Engineering Coordination',
       details: 'Engineering management, tooling review, OEM standards alignment, and client account delivery.',
-      timezone: 'EST (UTC-5)',
     },
     {
       country: 'NEW ZEALAND',
       flag: '🇳🇿',
-      city: 'New Zealand',
-      role: 'APAC Operations & Quality Verification',
-      details: 'Regional engineering coordination, timezone-optimized project handover, and continuous quality audits.',
-      timezone: 'NZST (UTC+12)',
+      city: 'Remote Project Support',
+      role: 'Project Support',
+      details: 'Regional engineering coordination and timezone-optimized project handover.',
     },
     {
       country: 'INDIA',
       flag: '🇮🇳',
-      city: 'India',
-      role: 'Engineering Design & CAD Detailing Center',
+      city: 'Remote CAD and Design Support',
+      role: 'Engineering Design & CAD Detailing',
       details: 'Complex 3D CAD modeling, mold & die split engineering, ASME Y14.5 GD&T drafting, and drawing review.',
-      timezone: 'IST (UTC+5:30)',
     },
   ];
 
@@ -488,6 +485,43 @@ export const ContactView: React.FC = () => {
             </div>
 
           </div>
+        </div>
+
+        {/* 3 Remote Team Location Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {GLOBAL_HUBS.map((hub, idx) => (
+            <div
+              key={idx}
+              className="glass-card bg-gradient-to-b from-white via-slate-50/80 to-blue-50/40 p-8 rounded-3xl border border-blue-200/80 shadow-lg hover:shadow-2xl hover:border-blue-500 hover:-translate-y-1.5 transition-all duration-300 space-y-4 flex flex-col justify-between group"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-3xl filter drop-shadow-xs">{hub.flag}</span>
+                </div>
+
+                <div className="space-y-1">
+                  <h3 className="text-2xl font-heading font-extrabold text-[#0F172A] group-hover:text-[#0057FF] transition-colors uppercase tracking-wide">
+                    {hub.country}
+                  </h3>
+                  <div className="flex items-center gap-1.5 text-sm font-bold text-slate-700">
+                    <MapPin className="w-4 h-4 text-[#0057FF] shrink-0" />
+                    <span className="leading-snug">{hub.city}</span>
+                  </div>
+                </div>
+
+                {hub.role && (
+                  <div className="pt-3 border-t border-slate-200 space-y-2">
+                    <span className="text-xs font-mono font-extrabold text-[#0057FF] uppercase tracking-wider block">
+                      {hub.role}
+                    </span>
+                    <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-semibold">
+                      {hub.details}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
 
       </section>
