@@ -146,7 +146,7 @@ export const Footer: React.FC<FooterProps> = () => {
           {/* Col 4: Global Footprint & Contact */}
           <div className="lg:col-span-3 space-y-3">
             <h4 className="text-sm font-heading font-bold text-[#0F172A] uppercase tracking-wider">
-              GLOBAL PRESENCE
+              TEAM LOCATIONS
             </h4>
             
             <div className="space-y-3.5 text-sm text-slate-800 font-medium">
