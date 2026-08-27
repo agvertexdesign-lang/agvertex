@@ -41,7 +41,7 @@ export const Footer: React.FC<FooterProps> = () => {
   ];
 
   const socialLinks = settings?.social || { linkedin: '', instagram: '', facebook: '', youtube: '' };
-  const contactEmail = settings?.contact?.email || 'agvertexdesign@gmail.com';
+  const contactEmail = settings?.contact?.email || 'info@agvertex.com';
 
   return (
     <footer className="bg-gradient-to-r from-white/95 via-blue-50/85 via-20% via-blue-100/80 via-60% to-blue-500/25 backdrop-blur-xl border-t border-blue-200/90 shadow-[0_-10px_30px_rgba(0,87,255,0.06)] text-slate-800 pt-16 pb-8 relative overflow-hidden">
@@ -159,8 +159,8 @@ export const Footer: React.FC<FooterProps> = () => {
 
               <div className="flex items-center gap-2.5 pt-1">
                 <Mail className="w-4 h-4 text-[#0057FF] shrink-0" />
-                <a href="mailto:agvertexdesign@gmail.com" className="hover:text-[#0057FF] transition-colors font-semibold">
-                  agvertexdesign@gmail.com
+                <a href="mailto:info@agvertex.com" className="hover:text-[#0057FF] transition-colors font-semibold">
+                  info@agvertex.com
                 </a>
               </div>
 

@@ -57,8 +57,6 @@ export const ContactView: React.FC = () => {
       formData.overview,
     ];
 
-    sendToWhatsApp(lines);
-
     try {
       await submitToWeb3Forms({
         name: formData.name,
@@ -69,7 +67,7 @@ export const ContactView: React.FC = () => {
         service_required: formData.service || 'General Inquiry',
         timeline: formData.timeline || 'Not specified',
         project_overview: formData.overview,
-        to_email: 'agvertexdesign@gmail.com',
+        to_email: 'info@agvertex.com',
       }, `AG VERTEX — New Project Inquiry (${formData.name})`);
     } catch (err) {
       console.warn("Contact Web3Forms submit log:", err);
@@ -132,7 +130,7 @@ export const ContactView: React.FC = () => {
                 Project Inquiry Details
               </h2>
               <p className="text-sm text-slate-600 font-medium">
-                Fill in the details below and an engineer will review your inquiry and respond promptly.
+                Fill in the details below and a member of our mechanical design team will review your inquiry and respond promptly.
               </p>
             </div>
 
@@ -156,10 +154,13 @@ export const ContactView: React.FC = () => {
                 {/* Name & Work Email */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
-                    <label className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
+                    <label htmlFor="contact_name" className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
                       Name *
                     </label>
                     <input
+                      id="contact_name"
+                      name="name"
+                      autoComplete="name"
                       type="text"
                       required
                       value={formData.name}
@@ -170,10 +171,13 @@ export const ContactView: React.FC = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
+                    <label htmlFor="contact_email" className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
                       Work Email *
                     </label>
                     <input
+                      id="contact_email"
+                      name="email"
+                      autoComplete="email"
                       type="email"
                       required
                       value={formData.email}
@@ -187,10 +191,13 @@ export const ContactView: React.FC = () => {
                 {/* Company & Phone Number */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
-                    <label className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
+                    <label htmlFor="contact_company" className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
                       Company
                     </label>
                     <input
+                      id="contact_company"
+                      name="company"
+                      autoComplete="organization"
                       type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
@@ -200,10 +207,13 @@ export const ContactView: React.FC = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
+                    <label htmlFor="contact_service" className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
                       Service Required *
                     </label>
                     <select
+                      id="contact_service"
+                      name="service"
+                      autoComplete="off"
                       required
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
@@ -221,10 +231,13 @@ export const ContactView: React.FC = () => {
 
                 {/* Project Overview */}
                 <div className="space-y-2">
-                  <label className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
+                  <label htmlFor="contact_overview" className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
                     Project Overview *
                   </label>
                   <textarea
+                    id="contact_overview"
+                    name="overview"
+                    autoComplete="off"
                     rows={4}
                     required
                     value={formData.overview}
@@ -236,10 +249,13 @@ export const ContactView: React.FC = () => {
 
                 {/* Preferred Timeline */}
                 <div className="space-y-2">
-                  <label className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
+                  <label htmlFor="contact_timeline" className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
                     Preferred Timeline
                   </label>
                   <select
+                    id="contact_timeline"
+                    name="timeline"
+                    autoComplete="off"
                     value={formData.timeline}
                     onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
                     className="w-full px-4 py-3.5 rounded-xl bg-slate-50 border border-slate-300 text-sm font-medium text-slate-900 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all cursor-pointer"
@@ -270,19 +286,44 @@ export const ContactView: React.FC = () => {
                     <p className="text-xs text-slate-500 font-medium">
                       Please do not submit confidential, proprietary, security-sensitive or export-controlled information through this form.
                     </p>
-                    <p className="text-xs text-slate-500 font-medium">
-                      If you continue through WhatsApp, your information will be transmitted using WhatsApp/Meta and will also be subject to its privacy practices.
-                    </p>
                   </div>
                 </div>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full btn-primary py-4 text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer"
-                >
-                  Send Request via WhatsApp <Send className="w-4 h-4" />
-                </button>
+                {/* Submit Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                  <button
+                    type="submit"
+                    className="w-full sm:flex-1 btn-primary py-4 text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer"
+                  >
+                    Submit Project Inquiry <Mail className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!formData.agreed) {
+                        setErrorMessage('Please check the consent box to allow us to respond to your inquiry.');
+                        return;
+                      }
+                      const lines = [
+                        "📌 AG VERTEX — New Project Review Request",
+                        "----------------------------------------",
+                        `👤 Name: ${formData.name}`,
+                        `✉️ Work Email: ${formData.email}`,
+                        `🏢 Company: ${formData.company || 'Not provided'}`,
+                        `📞 Phone: ${formData.phone || 'Not provided'}`,
+                        `🛠️ Service Required: ${formData.service || 'General Inquiry'}`,
+                        `📅 Preferred Timeline: ${formData.timeline || 'Not specified'}`,
+                        "",
+                        "📝 Project Overview:",
+                        formData.overview,
+                      ];
+                      sendToWhatsApp(lines);
+                    }}
+                    className="w-full sm:flex-1 py-4 text-sm font-bold flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl shadow-lg shadow-emerald-500/25 transition-colors cursor-pointer"
+                  >
+                    Optional: WhatsApp <Send className="w-4 h-4" />
+                  </button>
+                </div>
 
               </form>
             )}
@@ -311,8 +352,8 @@ export const ContactView: React.FC = () => {
                   <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-bold">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <a href={`mailto:${settings?.contact?.email || 'agvertexdesign@gmail.com'}`} className="font-semibold text-[#0057FF] hover:underline">
-                    {settings?.contact?.email || 'agvertexdesign@gmail.com'}
+                  <a href={`mailto:${settings?.contact?.email || 'info@agvertex.com'}`} className="font-semibold text-[#0057FF] hover:underline">
+                    {settings?.contact?.email || 'info@agvertex.com'}
                   </a>
                 </div>
 
@@ -358,20 +399,6 @@ export const ContactView: React.FC = () => {
               </div>
             </div>
 
-            {/* Quick Consultation Callout */}
-            <div className="glass-card bg-gradient-to-br from-blue-50 to-indigo-50/50 p-6 sm:p-7 rounded-3xl border border-blue-200/80 shadow-md flex items-center gap-4">
-              <div className="w-13 h-13 rounded-2xl bg-[#0057FF] text-white flex items-center justify-center shrink-0 shadow-md shadow-blue-500/20">
-                <Clock className="w-7 h-7" />
-              </div>
-              <div className="space-y-1">
-                <h4 className="text-sm font-heading font-bold text-[#0F172A] uppercase">
-                  Fast 24-Hour Turnaround
-                </h4>
-                <p className="text-xs sm:text-sm text-slate-700 font-medium">
-                  Our distributed engineering footprint across three global timezones ensures continuous workflow support.
-                </p>
-              </div>
-            </div>
 
           </div>
 
