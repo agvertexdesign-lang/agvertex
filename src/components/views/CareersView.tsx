@@ -477,9 +477,6 @@ export const CareersView: React.FC = () => {
                     </div>
 
                     <div className="space-y-1.5 pl-6 pt-1">
-                      <p className="text-[10px] text-slate-500 font-normal leading-relaxed">
-                        Data-retention statement: Submitted profile information will only be used to consider future collaboration opportunities. Retained securely for up to 24 months.
-                      </p>
                       <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
                         Please do not submit confidential, proprietary, security-sensitive or export-controlled information through this form.
                       </p>
