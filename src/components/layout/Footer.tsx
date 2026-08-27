@@ -64,7 +64,7 @@ export const Footer: React.FC<FooterProps> = () => {
             </Link>
 
             <p className="text-sm sm:text-base text-slate-800 font-medium leading-relaxed max-w-sm">
-              {settings?.business?.short_description || 'Mechanical design and tooling engineering consultancy. Globally positioned across Canada, India, and New Zealand.'}
+              {settings?.business?.short_description || 'Mechanical design and tooling engineering consultancy. Projects coordinated from Windsor, Ontario, with remote support in India and New Zealand.'}
             </p>
 
             {/* Social Icons */}

@@ -385,24 +385,24 @@ export const ContactView: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-[#0057FF] text-xs font-mono font-extrabold tracking-widest uppercase shadow-xs">
             <Globe2 className="w-4 h-4 text-[#0057FF]" />
-            GLOBAL ENGINEERING FOOTPRINT
+            REMOTE TEAM LOCATIONS
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-[#0F172A] tracking-tight uppercase">
-            GLOBALLY POSITIONED FOR GOOD TECH PRACTICES
+            Distributed Design Collaboration
           </h2>
 
           <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-semibold">
-            Strategic delivery hubs across North America, Asia, and Oceania provide our clients with local engineering coordination, round-the-clock CAD execution, and rigorous quality standards.
+            AG Vertex coordinates projects remotely from Windsor, Ontario, with team support in India and New Zealand based on project requirements.
           </p>
         </div>
 
-        {/* Global Map Display Banner (using map.png graphic with floating location badges) */}
+        {/* Global Map Display Banner */}
         <div className="glass-card group bg-white p-3 sm:p-5 lg:p-6 rounded-3xl border border-blue-200/80 shadow-2xl relative overflow-hidden">
           <div className="relative rounded-2xl overflow-hidden bg-slate-50 border border-blue-100">
             <img
               src="/images/map.png"
-              alt="AG Vertex Global Engineering Footprint Map - Canada, India, New Zealand"
+              alt="AG Vertex Remote Team Locations Map - Canada, India, New Zealand"
               loading="lazy"
               decoding="async"
               className="w-full h-auto object-cover min-h-[340px] sm:min-h-[440px]"
@@ -450,7 +450,7 @@ export const ContactView: React.FC = () => {
                     <span className="text-[9px] sm:text-[10px] font-mono font-extrabold text-[#0057FF] bg-blue-50 px-1.5 py-0.5 rounded border border-blue-100 uppercase">CA</span>
                     <span className="text-xs sm:text-sm font-heading font-extrabold text-[#0F172A] uppercase tracking-wide">CANADA</span>
                   </div>
-                  <span className="text-[10px] sm:text-xs text-slate-600 font-semibold block">Canada (Headquarters)</span>
+                  <span className="text-[10px] sm:text-xs text-slate-600 font-semibold block">Canada</span>
                 </div>
               </div>
             </div>
@@ -488,49 +488,6 @@ export const ContactView: React.FC = () => {
             </div>
 
           </div>
-        </div>
-
-        {/* 3 Global Hub Detail Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {GLOBAL_HUBS.map((hub, idx) => (
-            <div
-              key={idx}
-              className="glass-card bg-gradient-to-b from-white via-slate-50/80 to-blue-50/40 p-8 rounded-3xl border border-blue-200/80 shadow-lg hover:shadow-2xl hover:border-blue-500 hover:-translate-y-1.5 transition-all duration-300 space-y-5 flex flex-col justify-between group"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-3xl filter drop-shadow-xs">{hub.flag}</span>
-                  <span className="text-xs font-mono font-bold text-[#0057FF] bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
-                    {hub.timezone}
-                  </span>
-                </div>
-
-                <div className="space-y-1">
-                  <h3 className="text-2xl font-heading font-extrabold text-[#0F172A] group-hover:text-[#0057FF] transition-colors uppercase tracking-wide">
-                    {hub.country}
-                  </h3>
-                  <div className="flex items-center gap-1.5 text-sm font-bold text-slate-700">
-                    <MapPin className="w-4 h-4 text-[#0057FF] shrink-0" />
-                    <span>{hub.city}</span>
-                  </div>
-                </div>
-
-                <div className="pt-3 border-t border-slate-200 space-y-2">
-                  <span className="text-xs font-mono font-extrabold text-[#0057FF] uppercase tracking-wider block">
-                    {hub.role}
-                  </span>
-                  <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-semibold">
-                    {hub.details}
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-3 border-t border-slate-200 flex items-center gap-2 text-xs font-bold text-emerald-700">
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Active Engineering Node</span>
-              </div>
-            </div>
-          ))}
         </div>
 
       </section>
