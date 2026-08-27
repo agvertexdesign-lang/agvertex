@@ -12,7 +12,13 @@ const DEFAULT_IMAGES: SectionImagesSettings = {
 };
 
 export function SettingsPage() {
-  const [contact, setContact] = useState<ContactSettings>({ phone: '', email: '', address: '', whatsapp: '', contact_form_email: '' });
+  const [contact, setContact] = useState<ContactSettings>({
+    phone: '',
+    email: 'agvertexdesign@gmail.com',
+    address: 'Canada · New Zealand · India',
+    whatsapp: '',
+    contact_form_email: 'agvertexdesign@gmail.com',
+  });
   const [social, setSocial] = useState<SocialSettings>({ linkedin: '', instagram: '', facebook: '', youtube: '' });
   const [business, setBusiness] = useState<BusinessSettings>({ company_name: '', tagline: '', short_description: '', business_hours: '' });
   const [images, setImages] = useState<SectionImagesSettings>(DEFAULT_IMAGES);

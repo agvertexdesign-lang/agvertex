@@ -33,7 +33,7 @@ async function syncEmail() {
     .upsert({
       setting_key: 'site_settings',
       setting_value: updatedValue
-    });
+    }, { onConflict: 'setting_key' });
 
   if (updateError) {
     console.error('Update error:', updateError);

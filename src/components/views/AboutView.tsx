@@ -220,7 +220,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
             </h2>
 
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-semibold">
-              At AG Vertex, we understand that your design concepts, CAD datasets, and engineering files represent your core competitive advantage. We handle your intellectual property with absolute discretion and secure workflows.
+              At AG Vertex, we understand that your design concepts, CAD datasets, and engineering files represent your core competitive advantage. We handle your intellectual property with strict professional discretion and established data-handling protocols.
             </p>
 
             <div className="space-y-4 pt-2">
@@ -247,7 +247,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
                     Isolated Local Storage
                   </h4>
                   <p className="text-sm text-slate-600 font-medium">
-                    Your CAD files and technical documentation are stored securely and processed on isolated local workstations, ensuring no external leaks.
+                    Your CAD files and technical documentation are stored securely and processed on isolated local workstations, using controlled access and secure file-handling practices.
                   </p>
                 </div>
               </div>

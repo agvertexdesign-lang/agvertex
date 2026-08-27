@@ -14,7 +14,7 @@ const EMPTY: CareerInsert = {
   responsibilities: [],
   requirements: [],
   skills: [],
-  application_email: 'info@agvertex.com',
+  application_email: 'agvertexdesign@gmail.com',
   closing_date: null,
   status: 'draft',
 };
