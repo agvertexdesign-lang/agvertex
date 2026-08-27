@@ -67,7 +67,7 @@ export const ContactView: React.FC = () => {
         service_required: formData.service || 'General Inquiry',
         timeline: formData.timeline || 'Not specified',
         project_overview: formData.overview,
-        to_email: 'info@agvertex.com',
+        to_email: 'agvertexdesign@gmail.com',
       }, `AG VERTEX — New Project Inquiry (${formData.name})`);
     } catch (err) {
       console.warn("Contact Web3Forms submit log:", err);
@@ -326,8 +326,8 @@ export const ContactView: React.FC = () => {
                   <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-bold">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <a href={`mailto:${settings?.contact?.email || 'info@agvertex.com'}`} className="font-semibold text-[#0057FF] hover:underline">
-                    {settings?.contact?.email || 'info@agvertex.com'}
+                  <a href={`mailto:${settings?.contact?.email || 'agvertexdesign@gmail.com'}`} className="font-semibold text-[#0057FF] hover:underline">
+                    {settings?.contact?.email || 'agvertexdesign@gmail.com'}
                   </a>
                 </div>
 

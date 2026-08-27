@@ -228,7 +228,7 @@ export function SettingsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {[
             { key: 'phone', label: 'Phone Number', placeholder: '+1 (289) 683-1234' },
-            { key: 'email', label: 'Business Email', placeholder: 'info@agvertex.com' },
+            { key: 'email', label: 'Business Email', placeholder: 'agvertexdesign@gmail.com' },
             { key: 'contact_form_email', label: 'Contact Form Email', placeholder: 'Where form submissions go' },
             { key: 'whatsapp', label: 'WhatsApp Number (Optional)', placeholder: '+1 (289) ...' },
           ].map(field => (

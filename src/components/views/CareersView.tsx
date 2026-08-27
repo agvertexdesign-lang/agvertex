@@ -151,7 +151,7 @@ export const CareersView: React.FC = () => {
         "Résumé File Name": profileForm.resumeName || 'Not attached',
         "CV Document Link (Click to Download)": cvPublicUrl || 'Upload failed / Not attached',
         "Experience Summary": profileForm.notes || 'Not provided',
-        "to_email": 'info@agvertex.com',
+        "to_email": 'agvertexdesign@gmail.com',
       }, `AG VERTEX — New CV Submission (${profileForm.name})`);
 
       if (response.success) {
@@ -337,7 +337,7 @@ export const CareersView: React.FC = () => {
                 <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
                 <h3 className="text-xl font-heading font-bold text-[#0F172A]">Application Sent to Email!</h3>
                 <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                  Thank you for your interest. Your profile and CV have been sent directly to <strong className="text-slate-800">info@agvertex.com</strong> for review.
+                  Thank you for your interest. Your profile and CV have been sent directly to <strong className="text-slate-800">agvertexdesign@gmail.com</strong> for review.
                 </p>
               </div>
             ) : (
@@ -433,7 +433,7 @@ export const CareersView: React.FC = () => {
                         className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-[#0057FF] hover:file:bg-blue-100 cursor-pointer"
                       />
                       {profileForm.resumeName && (
-                        <p className="text-[10px] text-emerald-600 font-medium truncate">✓ {profileForm.resumeName} (File sent to info@agvertex.com)</p>
+                        <p className="text-[10px] text-emerald-600 font-medium truncate">✓ {profileForm.resumeName} (File sent to agvertexdesign@gmail.com)</p>
                       )}
                     </div>
 

@@ -74,7 +74,7 @@ export default function App() {
         engineering_service: quoteForm.service,
         timeline: quoteForm.timeline,
         project_specifications: quoteForm.description || 'Not provided',
-        to_email: 'info@agvertex.com',
+        to_email: 'agvertexdesign@gmail.com',
       }, `AG VERTEX — New Quote Request (${quoteForm.name})`);
     } catch (err) {
       console.warn("Quote Web3Forms submit log:", err);
