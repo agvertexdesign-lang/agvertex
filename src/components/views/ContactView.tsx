@@ -219,6 +219,7 @@ export const ContactView: React.FC = () => {
                       <option value="">Select a service</option>
                       <option value="Product Design & 3D CAD">Product Design & 3D CAD</option>
                       <option value="Mold & Die Tooling Support">Mold & Die Tooling Support</option>
+                      <option value="Die-Casting Die Design">Die-Casting Die Design</option>
                       <option value="Drawings, GD&T & BOMs">Drawings, GD&T & BOMs</option>
                       <option value="DFM/DFA & Supplier Coordination">DFM/DFA & Supplier Coordination</option>
                       <option value="Automotive Drawing Review">Automotive Drawing Review</option>

@@ -189,7 +189,7 @@ export const HomeView: React.FC<HomeViewProps> = () => {
 
             <div className="space-y-1">
               <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-[#0F172A] uppercase tracking-tight">
-                LET'S REVIEW YOUR <span className="text-[#0057FF]">ENGINEERING PROJECT</span>
+                LET'S REVIEW YOUR <span className="text-[#0057FF]">DESIGN PROJECT</span>
               </h3>
               <p className="text-sm sm:text-base text-slate-800 font-bold">
                 Discuss your design requirements, documentation needs, or supplier coordination challenges.
