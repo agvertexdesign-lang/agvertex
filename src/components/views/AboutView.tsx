@@ -371,16 +371,16 @@ export const AboutView: React.FC<AboutViewProps> = () => {
                   {/* Logo and Badge Stack */}
                   <div className="flex flex-col gap-3">
                     {tool.logo_url ? (
-                      <div className="h-20 w-full px-4 py-3 rounded-2xl bg-white border border-slate-200/90 flex items-center justify-center shadow-sm group-hover:scale-103 group-hover:border-blue-400 group-hover:shadow-md transition-all duration-300 overflow-hidden">
+                      <div className="h-24 w-full p-2 rounded-2xl bg-white border border-slate-200/90 flex items-center justify-center shadow-sm group-hover:scale-103 group-hover:border-blue-400 group-hover:shadow-md transition-all duration-300 overflow-hidden">
                         <img
                           src={tool.logo_url}
                           alt={tool.name}
-                          className="w-auto h-full object-contain max-h-14"
+                          className="w-auto h-full object-contain max-h-20"
                           onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
                         />
                       </div>
                     ) : (
-                      <div className="h-20 w-full rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center font-bold text-sm border border-blue-100">
+                      <div className="h-24 w-full rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center font-bold text-sm border border-blue-100">
                         {tool.badge}
                       </div>
                     )}
