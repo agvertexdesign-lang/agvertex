@@ -366,7 +366,7 @@ export const CareersView: React.FC = () => {
 
       {/* PROFILE SUBMISSION MODAL */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in" role="dialog" aria-modal="true">
           <div id="careers-modal" className="bg-white rounded-3xl max-w-lg w-full p-8 border border-slate-200 shadow-2xl relative space-y-6 max-h-[90vh] overflow-y-auto">
             <button
               aria-label="Close profile form"
