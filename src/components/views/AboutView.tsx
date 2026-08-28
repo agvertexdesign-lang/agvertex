@@ -363,43 +363,50 @@ export const AboutView: React.FC<AboutViewProps> = () => {
           {(about.cad_items || DEFAULT_CAD_STACK).map((tool) => (
             <div
               key={tool.id || tool.name}
-              className="glass-card group p-7 rounded-3xl border border-blue-100 shadow-md space-y-5 flex flex-col justify-between hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 relative overflow-hidden bg-gradient-to-br from-white via-slate-50/90 to-blue-50/30"
+              className="glass-card group p-7 rounded-3xl border border-blue-100 shadow-md flex flex-col justify-between hover:border-blue-500 hover:shadow-2xl hover:-translate-y-2 transition-all duration-400 relative overflow-hidden bg-gradient-to-br from-white via-slate-50/90 to-blue-50/30"
             >
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
-              <div className="space-y-4 relative z-10">
-                <div className="flex items-center justify-between gap-3">
-                  {tool.logo_url ? (
-                    <div className="h-16 max-w-[130px] px-3.5 py-2.5 rounded-2xl bg-white border border-slate-200/90 flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 group-hover:border-blue-400 group-hover:shadow-md transition-all duration-300 overflow-hidden">
-                      <img
-                        src={tool.logo_url}
-                        alt={tool.name}
-                        className="w-full h-full object-contain max-h-11"
-                        onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
-                      />
-                    </div>
-                  ) : (
-                    <div className="h-16 px-4 rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-bold text-xs border border-blue-100">
-                      {tool.badge}
-                    </div>
-                  )}
+              <div className="space-y-5 relative z-10 flex flex-col justify-between h-full">
+                <div className="space-y-4">
+                  {/* Logo and Badge Stack */}
+                  <div className="flex flex-col gap-3">
+                    {tool.logo_url ? (
+                      <div className="h-20 w-full px-4 py-3 rounded-2xl bg-white border border-slate-200/90 flex items-center justify-center shadow-sm group-hover:scale-103 group-hover:border-blue-400 group-hover:shadow-md transition-all duration-300 overflow-hidden">
+                        <img
+                          src={tool.logo_url}
+                          alt={tool.name}
+                          className="w-auto h-full object-contain max-h-14"
+                          onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
+                        />
+                      </div>
+                    ) : (
+                      <div className="h-20 w-full rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center font-bold text-sm border border-blue-100">
+                        {tool.badge}
+                      </div>
+                    )}
 
-                  <span className="px-3 py-1.5 rounded-full bg-blue-50 text-[#0057FF] text-[10px] font-mono font-bold tracking-wider uppercase border border-blue-200 group-hover:bg-[#0057FF] group-hover:text-white transition-colors duration-300 text-center flex items-center justify-center min-h-[30px] max-w-[125px] leading-tight shrink-0">
-                    {tool.badge}
-                  </span>
-                </div>
+                    <div className="flex">
+                      <span className="px-4 py-1.5 rounded-full bg-blue-50 text-[#0057FF] text-xs font-mono font-bold tracking-wider uppercase border border-blue-200 group-hover:bg-[#0057FF] group-hover:text-white transition-colors duration-300 text-center flex items-center justify-center min-h-[32px] leading-tight">
+                        {tool.badge}
+                      </span>
+                    </div>
+                  </div>
 
-                <div className="space-y-1">
-                  <h3 className="text-lg font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors duration-300">
-                    {tool.name}
-                  </h3>
-                  <p className="text-xs font-mono font-bold text-blue-600">
-                    {tool.category}
+                  {/* Software Name & Category */}
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors duration-300">
+                      {tool.name}
+                    </h3>
+                    <p className="text-xs font-mono font-bold text-blue-600">
+                      {tool.category}
+                    </p>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-slate-800 leading-relaxed font-semibold">
+                    {tool.desc}
                   </p>
                 </div>
-
-                <p className="text-sm text-slate-800 leading-relaxed font-semibold">
-                  {tool.desc}
-                </p>
               </div>
             </div>
           ))}
