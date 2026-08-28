@@ -393,7 +393,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
                   </div>
 
                   {/* Software Name & Category */}
-                  <div className="space-y-1">
+                  <div className="space-y-1 text-center">
                     <h3 className="text-lg font-heading font-extrabold text-[#0F172A] uppercase tracking-wide group-hover:text-[#0057FF] transition-colors duration-300">
                       {tool.name}
                     </h3>
@@ -403,7 +403,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-slate-800 leading-relaxed font-semibold">
+                  <p className="text-sm text-slate-800 leading-relaxed font-semibold text-center">
                     {tool.desc}
                   </p>
                 </div>
