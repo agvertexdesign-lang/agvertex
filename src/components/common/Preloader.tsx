@@ -21,9 +21,9 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       return;
     }
 
-    // Snappy 0.3s loading screen
-    const totalTime = 300;
-    const intervalTime = 15;
+    // Premium 2.2s loading screen
+    const totalTime = 2200;
+    const intervalTime = 20;
     const totalSteps = totalTime / intervalTime;
     const stepIncrement = 100 / totalSteps;
 
@@ -38,7 +38,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
               sessionStorage.setItem('ag_preloaded', 'true');
             } catch (e) {}
             if (onComplete) onComplete();
-          }, 80);
+          }, 100);
           return 100;
         }
 
@@ -61,7 +61,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         sessionStorage.setItem('ag_preloaded', 'true');
       } catch (e) {}
       if (onComplete) onComplete();
-    }, 450);
+    }, 2500);
 
     return () => {
       clearInterval(interval);
