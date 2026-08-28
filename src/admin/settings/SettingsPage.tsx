@@ -40,6 +40,16 @@ export function SettingsPage() {
     setSaving('contact');
     try {
       await settingsApi.updateSetting('contact', contact);
+      try {
+        const cached = localStorage.getItem('ag_settings');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          parsed.contact = contact;
+          localStorage.setItem('ag_settings', JSON.stringify(parsed));
+        }
+      } catch (err) {
+        console.warn(err);
+      }
       toast.success('Contact settings saved.');
     } catch (e: any) {
       toast.error('Save failed: ' + e.message);
@@ -52,6 +62,16 @@ export function SettingsPage() {
     setSaving('social');
     try {
       await settingsApi.updateSetting('social', social);
+      try {
+        const cached = localStorage.getItem('ag_settings');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          parsed.social = social;
+          localStorage.setItem('ag_settings', JSON.stringify(parsed));
+        }
+      } catch (err) {
+        console.warn(err);
+      }
       toast.success('Social links saved.');
     } catch (e: any) {
       toast.error('Save failed: ' + e.message);
@@ -64,6 +84,16 @@ export function SettingsPage() {
     setSaving('business');
     try {
       await settingsApi.updateSetting('business', business);
+      try {
+        const cached = localStorage.getItem('ag_settings');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          parsed.business = business;
+          localStorage.setItem('ag_settings', JSON.stringify(parsed));
+        }
+      } catch (err) {
+        console.warn(err);
+      }
       toast.success('Business info saved.');
     } catch (e: any) {
       toast.error('Save failed: ' + e.message);
@@ -76,6 +106,16 @@ export function SettingsPage() {
     setSaving('images');
     try {
       await settingsApi.updateSetting('images', images);
+      try {
+        const cached = localStorage.getItem('ag_settings');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          parsed.images = images;
+          localStorage.setItem('ag_settings', JSON.stringify(parsed));
+        }
+      } catch (err) {
+        console.warn(err);
+      }
       toast.success('Page & section images saved successfully.');
     } catch (e: any) {
       toast.error('Save failed: ' + e.message);

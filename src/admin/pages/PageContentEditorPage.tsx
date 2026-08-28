@@ -22,6 +22,11 @@ export function PageContentEditorPage() {
     setSaving(true);
     try {
       await settingsApi.updatePageContent(content);
+      try {
+        localStorage.setItem('ag_page_content', JSON.stringify(content));
+      } catch (err) {
+        console.warn('Cache write failed:', err);
+      }
       toast.success('Page content & images saved successfully! Live website updated.');
     } catch (e: any) {
       toast.error('Save failed: ' + e.message);

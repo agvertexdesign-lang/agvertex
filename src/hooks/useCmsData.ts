@@ -5,7 +5,14 @@ import { careersApi, Career } from '../lib/api/careers';
 import { settingsApi, AllSettings, WebsitePageContent, DEFAULT_PAGE_CONTENT } from '../lib/api/settings';
 
 export function useShowcaseVisibility() {
-  const [enabled, setEnabled] = useState<boolean>(true);
+  const [enabled, setEnabled] = useState<boolean>(() => {
+    try {
+      const cached = localStorage.getItem('ag_showcase_visibility');
+      return cached ? JSON.parse(cached) : true;
+    } catch {
+      return true;
+    }
+  });
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -13,6 +20,11 @@ export function useShowcaseVisibility() {
     showcaseApi.getVisibility().then(val => {
       if (mounted) {
         setEnabled(val);
+        try {
+          localStorage.setItem('ag_showcase_visibility', JSON.stringify(val));
+        } catch (e) {
+          console.warn(e);
+        }
         setLoading(false);
       }
     }).catch(() => {
@@ -72,7 +84,14 @@ export const DEFAULT_SERVICES: Service[] = [
 ];
 
 export function useServicesData() {
-  const [services, setServices] = useState<Service[]>(DEFAULT_SERVICES);
+  const [services, setServices] = useState<Service[]>(() => {
+    try {
+      const cached = localStorage.getItem('ag_services');
+      return cached ? JSON.parse(cached) : DEFAULT_SERVICES;
+    } catch {
+      return DEFAULT_SERVICES;
+    }
+  });
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -81,6 +100,11 @@ export function useServicesData() {
       if (mounted) {
         if (data && data.length > 0) {
           setServices(data);
+          try {
+            localStorage.setItem('ag_services', JSON.stringify(data));
+          } catch (e) {
+            console.warn(e);
+          }
         }
         setLoading(false);
       }
@@ -94,7 +118,14 @@ export function useServicesData() {
 }
 
 export function useShowcaseData() {
-  const [projects, setProjects] = useState<ShowcaseProject[]>([]);
+  const [projects, setProjects] = useState<ShowcaseProject[]>(() => {
+    try {
+      const cached = localStorage.getItem('ag_projects');
+      return cached ? JSON.parse(cached) : [];
+    } catch {
+      return [];
+    }
+  });
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -102,6 +133,11 @@ export function useShowcaseData() {
     showcaseApi.getPublished().then(data => {
       if (mounted) {
         setProjects(data);
+        try {
+          localStorage.setItem('ag_projects', JSON.stringify(data));
+        } catch (e) {
+          console.warn(e);
+        }
         setLoading(false);
       }
     }).catch(() => {
@@ -114,7 +150,14 @@ export function useShowcaseData() {
 }
 
 export function useCareersData() {
-  const [careers, setCareers] = useState<Career[]>([]);
+  const [careers, setCareers] = useState<Career[]>(() => {
+    try {
+      const cached = localStorage.getItem('ag_careers');
+      return cached ? JSON.parse(cached) : [];
+    } catch {
+      return [];
+    }
+  });
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -122,6 +165,11 @@ export function useCareersData() {
     careersApi.getPublished().then(data => {
       if (mounted) {
         setCareers(data);
+        try {
+          localStorage.setItem('ag_careers', JSON.stringify(data));
+        } catch (e) {
+          console.warn(e);
+        }
         setLoading(false);
       }
     }).catch(() => {
@@ -134,7 +182,14 @@ export function useCareersData() {
 }
 
 export function useSettingsData() {
-  const [settings, setSettings] = useState<AllSettings | null>(null);
+  const [settings, setSettings] = useState<AllSettings | null>(() => {
+    try {
+      const cached = localStorage.getItem('ag_settings');
+      return cached ? JSON.parse(cached) : null;
+    } catch {
+      return null;
+    }
+  });
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -142,6 +197,11 @@ export function useSettingsData() {
     settingsApi.getAllSettings().then(data => {
       if (mounted) {
         setSettings(data);
+        try {
+          localStorage.setItem('ag_settings', JSON.stringify(data));
+        } catch (e) {
+          console.warn(e);
+        }
         setLoading(false);
       }
     }).catch(() => {
@@ -154,7 +214,14 @@ export function useSettingsData() {
 }
 
 export function usePageContent() {
-  const [pageContent, setPageContent] = useState<WebsitePageContent>(DEFAULT_PAGE_CONTENT);
+  const [pageContent, setPageContent] = useState<WebsitePageContent>(() => {
+    try {
+      const cached = localStorage.getItem('ag_page_content');
+      return cached ? JSON.parse(cached) : DEFAULT_PAGE_CONTENT;
+    } catch {
+      return DEFAULT_PAGE_CONTENT;
+    }
+  });
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -162,6 +229,11 @@ export function usePageContent() {
     settingsApi.getPageContent().then(data => {
       if (mounted) {
         setPageContent(data);
+        try {
+          localStorage.setItem('ag_page_content', JSON.stringify(data));
+        } catch (e) {
+          console.warn(e);
+        }
         setLoading(false);
       }
     }).catch(() => {
