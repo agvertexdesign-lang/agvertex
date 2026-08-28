@@ -28,6 +28,47 @@ export const CareersView: React.FC = () => {
   const [profileSubmitted, setProfileSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  React.useEffect(() => {
+    if (!modalOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setModalOpen(false);
+        return;
+      }
+      if (e.key === 'Tab') {
+        const modalElement = document.getElementById('careers-modal');
+        if (!modalElement) return;
+        const focusableElements = modalElement.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+        const firstElement = focusableElements[0] as HTMLElement;
+        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            lastElement.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            firstElement.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    
+    // Auto-focus the close button or first input for accessibility
+    setTimeout(() => {
+      const modalElement = document.getElementById('careers-modal');
+      const closeBtn = modalElement?.querySelector('[aria-label="Close profile form"]') as HTMLElement;
+      closeBtn?.focus();
+    }, 50);
+
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [modalOpen]);
   const { careers: dbCareers } = useCareersData();
   const { settings } = useSettingsData();
   const { pageContent } = usePageContent();
@@ -170,7 +211,7 @@ export const CareersView: React.FC = () => {
   const VALUES = [
     {
       icon: Layers,
-      title: careers.val_1_title || 'PRACTICAL ENGINEERING',
+      title: careers.val_1_title || 'PRACTICAL DESIGN SUPPORT',
       desc: careers.val_1_desc || 'We solve real design problems with practical, manufacturable solutions.',
     },
     {
@@ -186,7 +227,7 @@ export const CareersView: React.FC = () => {
     {
       icon: GraduationCap,
       title: careers.val_4_title || 'CONTINUOUS LEARNING',
-      desc: careers.val_4_desc || 'We encourage knowledge sharing and ongoing growth in engineering.',
+      desc: careers.val_4_desc || 'We encourage knowledge sharing and ongoing growth in mechanical design.',
     },
   ];
 
@@ -234,14 +275,14 @@ export const CareersView: React.FC = () => {
             </span>
 
             <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-heading font-extrabold text-[#0F172A] tracking-tight leading-[1.12]">
-              {careers.hero_title || 'PROJECT-BASED ENGINEERING COLLABORATION'}
+              {careers.hero_title || 'BRING PRACTICAL MECHANICAL DESIGN IDEAS TO LIFE'}
             </h1>
 
             <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-lg">
               {careers.hero_desc || 'AG Vertex welcomes experienced mechanical designers, tooling specialists, and CAD professionals interested in future project-based collaboration.'}
             </p>
 
-            <div className="pt-2">
+            <div className="pt-2 space-y-2">
               <button
                 onClick={() => setModalOpen(true)}
                 className="btn-primary px-7 py-3.5 text-xs font-semibold flex items-center gap-2.5 cursor-pointer shadow-lg shadow-blue-500/25"
@@ -249,6 +290,9 @@ export const CareersView: React.FC = () => {
                 Submit Specialist Profile
                 <ArrowRight className="w-4 h-4" />
               </button>
+              <p className="text-[11px] text-slate-500 font-medium">
+                Profile submission does not guarantee future work.
+              </p>
             </div>
           </div>
 
@@ -322,8 +366,8 @@ export const CareersView: React.FC = () => {
 
       {/* PROFILE SUBMISSION MODAL */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-8 border border-slate-200 shadow-2xl relative space-y-6 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in" role="dialog" aria-modal="true">
+          <div id="careers-modal" className="bg-white rounded-3xl max-w-lg w-full p-8 border border-slate-200 shadow-2xl relative space-y-6 max-h-[90vh] overflow-y-auto">
             <button
               aria-label="Close profile form"
               onClick={() => setModalOpen(false)}
