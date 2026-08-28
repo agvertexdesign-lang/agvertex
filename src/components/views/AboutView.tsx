@@ -385,7 +385,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
                       </div>
                     )}
 
-                    <div className="flex">
+                    <div className="flex justify-center">
                       <span className="px-4 py-1.5 rounded-full bg-blue-50 text-[#0057FF] text-xs font-mono font-bold tracking-wider uppercase border border-blue-200 group-hover:bg-[#0057FF] group-hover:text-white transition-colors duration-300 text-center flex items-center justify-center min-h-[32px] leading-tight">
                         {tool.badge}
                       </span>
