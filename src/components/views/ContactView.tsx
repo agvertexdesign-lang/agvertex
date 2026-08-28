@@ -79,21 +79,21 @@ export const ContactView: React.FC = () => {
   const GLOBAL_HUBS = [
     {
       country: 'CANADA',
-      flag: '🇨🇦',
+      flag: 'https://flagcdn.com/ca.svg',
       city: 'Windsor, Ontario – Business and Client Coordination (Remote)',
       role: 'Client Coordination',
       details: 'Project Coordination, tooling review, client-provided standards coordination, and client account delivery.',
     },
     {
       country: 'NEW ZEALAND',
-      flag: '🇳🇿',
+      flag: 'https://flagcdn.com/nz.svg',
       city: 'Remote Project Support',
       role: 'Project Support',
       details: 'Regional engineering coordination and timezone-optimized project handover.',
     },
     {
       country: 'INDIA',
-      flag: '🇮🇳',
+      flag: 'https://flagcdn.com/in.svg',
       city: 'Remote CAD and Design Support',
       role: 'Mechanical Design & CAD Detailing',
       details: 'Complex 3D CAD modeling, mold & die split engineering, ASME Y14.5 GD&T drafting, and drawing review.',
@@ -497,7 +497,15 @@ export const ContactView: React.FC = () => {
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl filter drop-shadow-xs">{hub.flag}</span>
+                  {hub.flag.startsWith('http') ? (
+                    <img
+                      src={hub.flag}
+                      alt={`${hub.country} Flag`}
+                      className="h-5 w-auto rounded-sm border border-slate-200/60 shadow-xs object-contain"
+                    />
+                  ) : (
+                    <span className="text-3xl filter drop-shadow-xs">{hub.flag}</span>
+                  )}
                 </div>
 
                 <div className="space-y-1">
