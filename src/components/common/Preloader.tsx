@@ -7,11 +7,22 @@ interface PreloaderProps {
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState('INITIALIZING MECHANICAL DESIGN SUITE...');
-  const [isDone, setIsDone] = useState(false);
+  const [isDone, setIsDone] = useState(() => {
+    try {
+      return sessionStorage.getItem('ag_preloaded') === 'true';
+    } catch {
+      return false;
+    }
+  });
 
   useEffect(() => {
-    // Snappy 1.2s loading screen
-    const totalTime = 1200;
+    if (isDone) {
+      if (onComplete) onComplete();
+      return;
+    }
+
+    // Snappy 0.5s loading screen
+    const totalTime = 500;
     const intervalTime = 20;
     const totalSteps = totalTime / intervalTime;
     const stepIncrement = 100 / totalSteps;
@@ -23,8 +34,11 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           clearInterval(interval);
           setTimeout(() => {
             setIsDone(true);
+            try {
+              sessionStorage.setItem('ag_preloaded', 'true');
+            } catch (e) {}
             if (onComplete) onComplete();
-          }, 200);
+          }, 100);
           return 100;
         }
 
@@ -43,14 +57,17 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     const safetyTimeout = setTimeout(() => {
       setProgress(100);
       setIsDone(true);
+      try {
+        sessionStorage.setItem('ag_preloaded', 'true');
+      } catch (e) {}
       if (onComplete) onComplete();
-    }, 1500);
+    }, 700);
 
     return () => {
       clearInterval(interval);
       clearTimeout(safetyTimeout);
     };
-  }, [onComplete]);
+  }, [onComplete, isDone]);
 
   if (isDone) return null;
 

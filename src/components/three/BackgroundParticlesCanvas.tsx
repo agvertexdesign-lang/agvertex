@@ -42,17 +42,17 @@ export const BackgroundParticlesCanvas: React.FC = () => {
     let time = 0;
 
     // Number of contour isolines across height
-    const contourCount = 28;
-
+    const contourCount = 20;
+ 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
       time += 0.008;
-
+ 
       // 1. Moving Subtle CAD Grid Layer (Bright crisp white grid lines)
       const gridSize = 80;
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
       ctx.lineWidth = 1;
-
+ 
       for (let x = 0; x < width; x += gridSize) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -65,7 +65,7 @@ export const BackgroundParticlesCanvas: React.FC = () => {
         ctx.lineTo(width, y);
         ctx.stroke();
       }
-
+ 
       // 2. Render Dynamic Mirage Wave Reflection Ribbons
       for (let m = 0; m < 3; m++) {
         const mirageY = height * (0.25 + m * 0.3) + Math.sin(time * 0.7 + m) * 20;
@@ -73,39 +73,39 @@ export const BackgroundParticlesCanvas: React.FC = () => {
         grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
         grad.addColorStop(0.5, `rgba(255, 255, 255, ${0.18 + m * 0.05})`);
         grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
-
+ 
         ctx.fillStyle = grad;
         ctx.beginPath();
         ctx.moveTo(0, mirageY);
-
-        for (let x = 0; x <= width + 50; x += 30) {
+ 
+        for (let x = 0; x <= width + 60; x += 60) {
           const wave = Math.sin(x * 0.002 + time * 1.2 + m * 1.5) * 25 + Math.cos(x * 0.004 - time) * 15;
           ctx.lineTo(x, mirageY + wave);
         }
-
+ 
         ctx.lineTo(width, height);
         ctx.lineTo(0, height);
         ctx.closePath();
         ctx.fill();
       }
-
+ 
       // 3. Render Topographic / FEA Elevation Contour Lines in Glowing White
       const lineSpacing = height / contourCount;
-
+ 
       for (let i = 0; i < contourCount + 4; i++) {
         const baseY = (i - 2) * lineSpacing;
         const isMajorContour = i % 5 === 0;
-
+ 
         ctx.beginPath();
         ctx.lineWidth = isMajorContour ? 2.2 : 1.3;
         ctx.strokeStyle = isMajorContour
           ? 'rgba(255, 255, 255, 0.95)'
           : 'rgba(255, 255, 255, 0.6)';
-
+ 
         let firstPoint = true;
-
+ 
         // Draw smooth contour curve across horizontal width
-        for (let x = 0; x <= width + 40; x += 25) {
+        for (let x = 0; x <= width + 48; x += 48) {
           // Multi-frequency wave calculation for natural topography
           const wave1 = Math.sin(x * 0.003 + time + i * 0.35) * 35;
           const wave2 = Math.cos(x * 0.0015 - time * 0.8 + i * 0.2) * 45;
