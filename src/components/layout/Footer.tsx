@@ -30,6 +30,7 @@ export const Footer: React.FC<FooterProps> = () => {
     { label: 'Services', path: '/services' },
     { label: 'Careers', path: '/careers' },
     { label: 'Contact', path: '/contact' },
+    { label: 'Privacy Policy', path: '/privacy' },
   ];
 
   const bottomNavLinks = [
@@ -38,6 +39,7 @@ export const Footer: React.FC<FooterProps> = () => {
     { label: 'Services', path: '/services' },
     { label: 'Careers', path: '/careers' },
     { label: 'Contact', path: '/contact' },
+    { label: 'Privacy Policy', path: '/privacy' },
   ];
 
   const socialLinks = settings?.social || { linkedin: '', instagram: '', facebook: '', youtube: '' };
