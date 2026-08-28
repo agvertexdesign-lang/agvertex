@@ -369,21 +369,21 @@ export const AboutView: React.FC<AboutViewProps> = () => {
               <div className="space-y-4 relative z-10">
                 <div className="flex items-center justify-between gap-3">
                   {tool.logo_url ? (
-                    <div className="h-20 max-w-[170px] px-4 py-3 rounded-2xl bg-white border border-slate-200/90 flex items-center justify-center shrink-0 shadow-sm group-hover:scale-108 group-hover:border-blue-400 group-hover:shadow-md transition-all duration-300 overflow-hidden">
+                    <div className="h-16 max-w-[130px] px-3.5 py-2.5 rounded-2xl bg-white border border-slate-200/90 flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 group-hover:border-blue-400 group-hover:shadow-md transition-all duration-300 overflow-hidden">
                       <img
                         src={tool.logo_url}
                         alt={tool.name}
-                        className="w-full h-full object-contain max-h-14"
+                        className="w-full h-full object-contain max-h-11"
                         onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }}
                       />
                     </div>
                   ) : (
-                    <div className="h-20 px-5 rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-bold text-sm border border-blue-100">
+                    <div className="h-16 px-4 rounded-2xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-bold text-xs border border-blue-100">
                       {tool.badge}
                     </div>
                   )}
 
-                  <span className="px-3 py-1 rounded-full bg-blue-50 text-[#0057FF] text-xs font-mono font-bold tracking-wider uppercase border border-blue-200 group-hover:bg-[#0057FF] group-hover:text-white transition-colors duration-300">
+                  <span className="px-3 py-1.5 rounded-full bg-blue-50 text-[#0057FF] text-[10px] font-mono font-bold tracking-wider uppercase border border-blue-200 group-hover:bg-[#0057FF] group-hover:text-white transition-colors duration-300 text-center flex items-center justify-center min-h-[30px] max-w-[125px] leading-tight shrink-0">
                     {tool.badge}
                   </span>
                 </div>
