@@ -244,10 +244,10 @@ export const AboutView: React.FC<AboutViewProps> = () => {
                 </div>
                 <div>
                   <h4 className="text-base font-heading font-bold text-[#0F172A]">
-                    Isolated Local Storage
+                    Secure Data Management
                   </h4>
                   <p className="text-sm text-slate-600 font-medium">
-                    Your CAD files and technical documentation are stored securely and processed on isolated local workstations, using controlled access and secure file-handling practices.
+                    Your CAD files and technical documentation are handled securely using controlled access and established digital safety practices.
                   </p>
                 </div>
               </div>
