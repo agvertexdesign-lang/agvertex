@@ -81,8 +81,8 @@ export const ContactView: React.FC = () => {
       country: 'CANADA',
       flag: '🇨🇦',
       city: 'Windsor, Ontario – Business and Client Coordination (Remote)',
-      role: 'Client Engineering Coordination',
-      details: 'Engineering management, tooling review, OEM standards alignment, and client account delivery.',
+      role: 'Client Coordination',
+      details: 'Project Coordination, tooling review, client-provided standards coordination, and client account delivery.',
     },
     {
       country: 'NEW ZEALAND',
@@ -95,7 +95,7 @@ export const ContactView: React.FC = () => {
       country: 'INDIA',
       flag: '🇮🇳',
       city: 'Remote CAD and Design Support',
-      role: 'Engineering Design & CAD Detailing',
+      role: 'Mechanical Design & CAD Detailing',
       details: 'Complex 3D CAD modeling, mold & die split engineering, ASME Y14.5 GD&T drafting, and drawing review.',
     },
   ];
