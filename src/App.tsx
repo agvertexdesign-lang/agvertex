@@ -128,7 +128,7 @@ export default function App() {
       />
 
       {/* MULTI-PAGE VIEW ROUTER */}
-      <main className="relative z-10">
+      <main className="relative">
         <Routes>
           <Route
             path="/"

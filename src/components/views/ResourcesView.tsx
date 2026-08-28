@@ -213,7 +213,7 @@ export const ResourcesView: React.FC<ResourcesViewProps> = () => {
 
       {/* ARTICLE MODAL */}
       {selectedArticle && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in">
           <div className="bg-white rounded-3xl max-w-xl w-full p-8 border border-slate-200 shadow-2xl relative space-y-5">
             <button
               onClick={() => setSelectedArticle(null)}

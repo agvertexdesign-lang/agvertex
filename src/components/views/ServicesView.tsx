@@ -160,7 +160,7 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
 
       {/* SERVICE DETAIL MODAL */}
       {selectedService && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-md animate-in fade-in overflow-y-auto">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-md animate-in fade-in overflow-y-auto">
           <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-9 border border-slate-200 shadow-2xl relative space-y-6 my-8 max-h-[90vh] overflow-y-auto">
 
             {/* Close */}
