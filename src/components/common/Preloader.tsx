@@ -7,13 +7,7 @@ interface PreloaderProps {
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState('INITIALIZING MECHANICAL DESIGN SUITE...');
-  const [isDone, setIsDone] = useState(() => {
-    try {
-      return sessionStorage.getItem('ag_preloaded') === 'true';
-    } catch {
-      return false;
-    }
-  });
+  const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
     if (isDone) {
@@ -34,9 +28,6 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           clearInterval(interval);
           setTimeout(() => {
             setIsDone(true);
-            try {
-              sessionStorage.setItem('ag_preloaded', 'true');
-            } catch (e) {}
             if (onComplete) onComplete();
           }, 100);
           return 100;
@@ -57,9 +48,6 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     const safetyTimeout = setTimeout(() => {
       setProgress(100);
       setIsDone(true);
-      try {
-        sessionStorage.setItem('ag_preloaded', 'true');
-      } catch (e) {}
       if (onComplete) onComplete();
     }, 2500);
 
