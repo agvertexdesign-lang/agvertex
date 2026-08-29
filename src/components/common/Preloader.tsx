@@ -50,7 +50,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           setStatusText('SYSTEM READY. WELCOME TO AG VERTEX.');
         }
 
-        return Math.floor(next);
+        return next;
       });
     }, intervalTime);
 
@@ -100,7 +100,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           </div>
           
           <div className="text-3xl sm:text-4xl font-heading font-bold text-[#0F172A] font-mono tracking-tight">
-            {progress}%
+            {Math.floor(progress)}%
           </div>
         </div>
 
@@ -108,7 +108,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         <div className="w-full h-2 rounded-full bg-slate-200/80 overflow-hidden relative border border-slate-300/50 shadow-inner">
           <div
             className="h-full bg-gradient-to-r from-[#0057FF] to-[#2D8CFF] rounded-full transition-all duration-75 ease-out shadow-[0_0_12px_rgba(0,87,255,0.6)]"
-            style={{ width: `${progress}%` }}
+            style={{ width: `${Math.floor(progress)}%` }}
           />
         </div>
 
