@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   ArrowRight, 
@@ -23,6 +23,31 @@ export const HomeView: React.FC<HomeViewProps> = () => {
   const navigate = useNavigate();
   const { pageContent } = usePageContent();
   const home = pageContent.home;
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.defaultMuted = true;
+      video.muted = true;
+      
+      const playVideo = () => {
+        video.play().catch((err) => {
+          console.warn("HomeView video autoplay blocked:", err);
+        });
+      };
+      
+      playVideo();
+
+      const handleVisibility = () => {
+        if (document.visibilityState === 'visible') {
+          playVideo();
+        }
+      };
+      document.addEventListener('visibilitychange', handleVisibility);
+      return () => document.removeEventListener('visibilitychange', handleVisibility);
+    }
+  }, []);
 
   const CAPABILITY_CARDS = [
     {
@@ -103,11 +128,16 @@ export const HomeView: React.FC<HomeViewProps> = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-950 group">
               <video
+                ref={videoRef}
                 src="/hero-video.mp4"
                 autoPlay
                 loop
                 muted
+                defaultMuted
                 playsInline
+                // @ts-ignore
+                webkit-playsinline="true"
+                preload="auto"
                 className="w-full h-[380px] sm:h-[460px] lg:h-[480px] object-cover transition-transform duration-700 group-hover:scale-102"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-transparent pointer-events-none" />

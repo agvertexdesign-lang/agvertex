@@ -1,8 +1,33 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 export const HeroCADCanvas: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.defaultMuted = true;
+      video.muted = true;
+      
+      const playVideo = () => {
+        video.play().catch((err) => {
+          console.warn("HeroCADCanvas video autoplay blocked:", err);
+        });
+      };
+      
+      playVideo();
+
+      const handleVisibility = () => {
+        if (document.visibilityState === 'visible') {
+          playVideo();
+        }
+      };
+      document.addEventListener('visibilitychange', handleVisibility);
+      return () => document.removeEventListener('visibilitychange', handleVisibility);
+    }
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
@@ -48,9 +73,11 @@ export const HeroCADCanvas: React.FC = () => {
         }}
       >
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
+          defaultMuted
           playsInline
           // @ts-ignore
           webkit-playsinline="true"

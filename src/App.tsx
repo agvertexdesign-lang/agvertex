@@ -27,6 +27,7 @@ import { submitToWeb3Forms } from './lib/web3forms';
 export default function App() {
   const navigate = useNavigate();
   useSEO();
+  const [preloaderComplete, setPreloaderComplete] = useState<boolean>(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState<boolean>(false);
   const [quoteSubmitted, setQuoteSubmitted] = useState<boolean>(false);
   const [quoteForm, setQuoteForm] = useState({
@@ -113,14 +114,14 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#EBF2FA] text-[#0F172A] relative overflow-x-hidden selection:bg-[#0057FF] selection:text-white">
       {/* 0. INITIAL PRELOADER SCREEN */}
-      <Preloader />
+      <Preloader onComplete={() => setPreloaderComplete(true)} />
 
       {/* 1. SCROLL RESET & FLOATING INDICATORS */}
       <ScrollToTop />
       <ScrollDownIndicator />
 
       {/* GLOBAL DYNAMIC TOPOGRAPHIC CONTOUR BACKGROUND */}
-      <BackgroundParticlesCanvas />
+      {preloaderComplete && <BackgroundParticlesCanvas />}
 
       {/* GLOBAL HEADER NAVBAR */}
       <Navbar
