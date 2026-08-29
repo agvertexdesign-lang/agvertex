@@ -119,26 +119,21 @@ export default function App() {
       {/* 0. INITIAL PRELOADER SCREEN — nothing else renders until this is done */}
       <Preloader onComplete={handlePreloaderComplete} />
 
-      {preloaderComplete && (
-        <>
-          {/* 1. SCROLL RESET & FLOATING INDICATORS */}
-          <ScrollToTop />
-          <ScrollDownIndicator />
+      {/* 1. SCROLL RESET & FLOATING INDICATORS */}
+      <ScrollToTop />
+      <ScrollDownIndicator />
 
-          {/* GLOBAL DYNAMIC TOPOGRAPHIC CONTOUR BACKGROUND */}
-          <BackgroundParticlesCanvas />
+      {/* GLOBAL DYNAMIC TOPOGRAPHIC CONTOUR BACKGROUND - Gated to save CPU during preloader */}
+      {preloaderComplete && <BackgroundParticlesCanvas />}
 
-          {/* GLOBAL HEADER NAVBAR */}
-          <Navbar
-            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-          /></>
-      )}
+      {/* GLOBAL HEADER NAVBAR */}
+      <Navbar
+        onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+      />
 
-      {preloaderComplete && (
-        <>
-          {/* MULTI-PAGE VIEW ROUTER */}
-          <main className="relative">
-            <Routes>
+      {/* MULTI-PAGE VIEW ROUTER */}
+      <main className="relative">
+        <Routes>
               <Route
                 path="/"
                 element={
@@ -205,15 +200,13 @@ export default function App() {
                   />
                 }
               />
-            </Routes>
-          </main>
+        </Routes>
+      </main>
 
-          {/* GLOBAL FOOTER */}
-          <Footer
-            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-          />
-        </>
-      )}
+      {/* GLOBAL FOOTER */}
+      <Footer
+        onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+      />
 
       {/* GLOBAL INSTANT PROJECT ESTIMATOR & QUOTE MODAL */}
       {isQuoteModalOpen && (
