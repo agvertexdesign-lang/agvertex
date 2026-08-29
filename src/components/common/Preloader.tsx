@@ -1,79 +1,90 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface PreloaderProps {
   onComplete?: () => void;
 }
+
+const TOTAL_DURATION_MS = 2200;
 
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState('INITIALIZING MECHANICAL DESIGN SUITE...');
   const [isDone, setIsDone] = useState(false);
 
+  // Stable ref so onComplete changes never re-trigger the animation
   const onCompleteRef = useRef(onComplete);
   useEffect(() => {
     onCompleteRef.current = onComplete;
   }, [onComplete]);
 
   useEffect(() => {
-    if (isDone) {
-      if (onCompleteRef.current) onCompleteRef.current();
-      return;
-    }
+    let rafId: number;
+    let startTime: number | null = null;
+    let completed = false;
 
-    // Premium 2.2s loading screen
-    const totalTime = 2200;
-    const intervalTime = 20;
-    const totalSteps = totalTime / intervalTime;
-    const stepIncrement = 100 / totalSteps;
-
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + stepIncrement;
-        if (next >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setIsDone(true);
-            if (onCompleteRef.current) onCompleteRef.current();
-          }, 100);
-          return 100;
-        }
-
-        if (next < 35) {
-          setStatusText('INITIALIZING MECHANICAL DESIGN SUITE...');
-        } else if (next < 75) {
-          setStatusText('LOADING CAD DATA & DRAWING ENGINE...');
-        } else {
-          setStatusText('SYSTEM READY. WELCOME TO AG VERTEX.');
-        }
-
-        return next;
-      });
-    }, intervalTime);
-
-    const safetyTimeout = setTimeout(() => {
+    const finish = () => {
+      if (completed) return;
+      completed = true;
       setProgress(100);
-      setIsDone(true);
-      if (onCompleteRef.current) onCompleteRef.current();
-    }, 2500);
+      // Brief pause at 100% so the bar is visibly full before fade-out
+      setTimeout(() => {
+        setIsDone(true);
+        if (onCompleteRef.current) onCompleteRef.current();
+      }, 150);
+    };
+
+    const tick = (timestamp: number) => {
+      if (completed) return;
+
+      if (startTime === null) {
+        startTime = timestamp;
+      }
+
+      const elapsed = timestamp - startTime;
+      const rawProgress = Math.min((elapsed / TOTAL_DURATION_MS) * 100, 100);
+
+      setProgress(rawProgress);
+
+      if (rawProgress < 35) {
+        setStatusText('INITIALIZING MECHANICAL DESIGN SUITE...');
+      } else if (rawProgress < 75) {
+        setStatusText('LOADING CAD DATA & DRAWING ENGINE...');
+      } else {
+        setStatusText('SYSTEM READY. WELCOME TO AG VERTEX.');
+      }
+
+      if (rawProgress >= 100) {
+        finish();
+      } else {
+        rafId = requestAnimationFrame(tick);
+      }
+    };
+
+    // Hard safety cutoff — if rAF itself gets suspended (e.g. tab hidden) for too long
+    const safetyTimer = setTimeout(finish, TOTAL_DURATION_MS + 800);
+
+    rafId = requestAnimationFrame(tick);
 
     return () => {
-      clearInterval(interval);
-      clearTimeout(safetyTimeout);
+      completed = true;
+      cancelAnimationFrame(rafId);
+      clearTimeout(safetyTimer);
     };
-  }, [isDone]);
+  }, []); // Runs exactly once — no external deps, no resets
 
   if (isDone) return null;
 
   return (
-    <div className={`fixed inset-0 z-[100] bg-[#F8FAFC] flex flex-col items-center justify-center p-6 transition-opacity duration-300 ease-out ${
-      progress >= 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'
-    }`}>
-      
+    <div
+      className={`fixed inset-0 z-[100] bg-[#F8FAFC] flex flex-col items-center justify-center p-6 transition-opacity duration-300 ease-out ${
+        progress >= 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}
+    >
       {/* Background Subtle Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#0057FF]/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
 
       <div className="relative z-10 flex flex-col items-center max-w-xs sm:max-w-sm w-full space-y-6 text-center">
-        
+
         {/* Brand Logo */}
         <div className="relative">
           <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl">
@@ -91,7 +102,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             <span className="w-1.5 h-1.5 rounded-full bg-[#0057FF] animate-ping" />
             {statusText}
           </div>
-          
+
           <div className="text-3xl sm:text-4xl font-heading font-bold text-[#0F172A] font-mono tracking-tight">
             {Math.floor(progress)}%
           </div>
@@ -100,8 +111,11 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         {/* High-Precision Progress Bar */}
         <div className="w-full h-2 rounded-full bg-slate-200/80 overflow-hidden relative border border-slate-300/50 shadow-inner">
           <div
-            className="h-full bg-gradient-to-r from-[#0057FF] to-[#2D8CFF] rounded-full transition-all duration-75 ease-out shadow-[0_0_12px_rgba(0,87,255,0.6)]"
-            style={{ width: `${Math.floor(progress)}%` }}
+            className="h-full bg-gradient-to-r from-[#0057FF] to-[#2D8CFF] rounded-full shadow-[0_0_12px_rgba(0,87,255,0.6)]"
+            style={{
+              width: `${progress}%`,
+              transition: 'width 0.05s linear',
+            }}
           />
         </div>
 

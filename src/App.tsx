@@ -116,98 +116,104 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#EBF2FA] text-[#0F172A] relative overflow-x-hidden selection:bg-[#0057FF] selection:text-white">
-      {/* 0. INITIAL PRELOADER SCREEN */}
+      {/* 0. INITIAL PRELOADER SCREEN — nothing else renders until this is done */}
       <Preloader onComplete={handlePreloaderComplete} />
 
-      {/* 1. SCROLL RESET & FLOATING INDICATORS */}
-      <ScrollToTop />
-      <ScrollDownIndicator />
+      {preloaderComplete && (
+        <>
+          {/* 1. SCROLL RESET & FLOATING INDICATORS */}
+          <ScrollToTop />
+          <ScrollDownIndicator />
 
-      {/* GLOBAL DYNAMIC TOPOGRAPHIC CONTOUR BACKGROUND */}
-      {preloaderComplete && <BackgroundParticlesCanvas />}
+          {/* GLOBAL DYNAMIC TOPOGRAPHIC CONTOUR BACKGROUND */}
+          <BackgroundParticlesCanvas />
 
-      {/* GLOBAL HEADER NAVBAR */}
-      <Navbar
-        onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-      />
+          {/* GLOBAL HEADER NAVBAR */}
+          <Navbar
+            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+          /></>
+      )}
 
-      {/* MULTI-PAGE VIEW ROUTER */}
-      <main className="relative">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <HomeView
-                setActiveTab={handleNavigate}
-                onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-                onOpenProjectModal={() => handleNavigate('/case-study')}
+      {preloaderComplete && (
+        <>
+          {/* MULTI-PAGE VIEW ROUTER */}
+          <main className="relative">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <HomeView
+                    setActiveTab={handleNavigate}
+                    onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+                    onOpenProjectModal={() => handleNavigate('/case-study')}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <AboutView
-                setActiveTab={handleNavigate}
-                onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+              <Route
+                path="/about"
+                element={
+                  <AboutView
+                    setActiveTab={handleNavigate}
+                    onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/services"
-            element={<ServicesView onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />}
-          />
-          <Route
-            path="/portfolio"
-            element={
-              <PortfolioView
-                setActiveTab={handleNavigate}
-                onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+              <Route
+                path="/services"
+                element={<ServicesView onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />}
               />
-            }
-          />
-          <Route
-            path="/case-study"
-            element={
-              <CaseStudyView
-                setActiveTab={handleNavigate}
-                onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+              <Route
+                path="/portfolio"
+                element={
+                  <PortfolioView
+                    setActiveTab={handleNavigate}
+                    onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+                  />
+                }
               />
-            }
-          />
-          <Route
-            path="/technologies"
-            element={<TechnologiesView onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />}
-          />
-          <Route
-            path="/process"
-            element={<ProcessView onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />}
-          />
-          <Route path="/careers" element={<CareersView />} />
-          <Route path="/contact" element={<ContactView />} />
-          <Route
-            path="/faq"
-            element={<FAQView onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />}
-          />
-          {/* Fallback route */}
-          <Route path="/privacy" element={<PrivacyView />} />
-          <Route
-            path="*"
-            element={
-              <HomeView
-                setActiveTab={handleNavigate}
-                onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-                onOpenProjectModal={() => handleNavigate('/case-study')}
+              <Route
+                path="/case-study"
+                element={
+                  <CaseStudyView
+                    setActiveTab={handleNavigate}
+                    onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+                  />
+                }
               />
-            }
-          />
-        </Routes>
-      </main>
+              <Route
+                path="/technologies"
+                element={<TechnologiesView onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />}
+              />
+              <Route
+                path="/process"
+                element={<ProcessView onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />}
+              />
+              <Route path="/careers" element={<CareersView />} />
+              <Route path="/contact" element={<ContactView />} />
+              <Route
+                path="/faq"
+                element={<FAQView onOpenQuoteModal={() => setIsQuoteModalOpen(true)} />}
+              />
+              <Route path="/privacy" element={<PrivacyView />} />
+              <Route
+                path="*"
+                element={
+                  <HomeView
+                    setActiveTab={handleNavigate}
+                    onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+                    onOpenProjectModal={() => handleNavigate('/case-study')}
+                  />
+                }
+              />
+            </Routes>
+          </main>
 
-      {/* GLOBAL FOOTER */}
-      <Footer
-        onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
-      />
+          {/* GLOBAL FOOTER */}
+          <Footer
+            onOpenQuoteModal={() => setIsQuoteModalOpen(true)}
+          />
+        </>
+      )}
 
       {/* GLOBAL INSTANT PROJECT ESTIMATOR & QUOTE MODAL */}
       {isQuoteModalOpen && (
