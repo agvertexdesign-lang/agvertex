@@ -43,10 +43,9 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       if (completed) return;
       completed = true;
       setDisplayNumber(100);
-      setTimeout(() => {
-        setIsDone(true);
-        if (onCompleteRef.current) onCompleteRef.current();
-      }, 200);
+      // No delay — dismiss instantly when bar hits 100%
+      setIsDone(true);
+      if (onCompleteRef.current) onCompleteRef.current();
     };
 
     // rAF loop drives ONLY the text counter + status label
@@ -128,7 +127,9 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             style={{
               // width is controlled exclusively via barRef.current.style.width in useEffect
               // Do NOT set width here — React re-renders would reset the CSS transition
-              transition: `width ${TOTAL_DURATION_MS}ms cubic-bezier(0.1, 0.4, 0.8, 1.0)`,
+              // linear keeps bar in perfect sync with the rAF counter
+              // so both reach 100% at exactly the same moment
+              transition: `width ${TOTAL_DURATION_MS}ms linear`,
               willChange: 'width',
             }}
           />
