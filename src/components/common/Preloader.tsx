@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { flushSync } from 'react-dom';
 
 interface PreloaderProps {
   onComplete?: () => void;
@@ -11,6 +10,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [displayNumber, setDisplayNumber] = useState(0);
   const [statusText, setStatusText] = useState('INITIALIZING MECHANICAL DESIGN SUITE...');
   const [isDone, setIsDone] = useState(false);
+  const [fadeAway, setFadeAway] = useState(false);
 
   // Refs to touch the DOM directly — bypasses React batching entirely
   const barRef = useRef<HTMLDivElement>(null);
@@ -29,13 +29,13 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     // independent of React rendering and JS main-thread load.
     const bar = barRef.current;
     if (bar) {
-      // Start at 0%, force layout flush, then animate to 100%
-      // Two separate RAF frames guarantee the browser paints 0% first
-      bar.style.width = '0%';
+      // Start at scaleX(0), force layout flush, then animate to scaleX(1)
+      // GPU compositor guarantees this animation is never blocked by CPU work
+      bar.style.transform = 'scaleX(0)';
       bar.getBoundingClientRect(); // flush layout
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          if (!completed) bar.style.width = '100%';
+          if (!completed) bar.style.transform = 'scaleX(1)';
         });
       });
     }
@@ -43,11 +43,15 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     const finish = () => {
       if (completed) return;
       completed = true;
-      // flushSync forces React to synchronously render displayNumber=100
-      // BEFORE setIsDone(true) unmounts the component — no timeout needed
-      flushSync(() => setDisplayNumber(100));
-      setIsDone(true);
+      setDisplayNumber(100);
+      setFadeAway(true);
+      
       if (onCompleteRef.current) onCompleteRef.current();
+
+      // Smooth unmount after 300ms opacity transition finishes
+      setTimeout(() => {
+        setIsDone(true);
+      }, 300);
     };
 
     // rAF loop drives ONLY the text counter + status label
@@ -91,7 +95,9 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   if (isDone) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] bg-[#F8FAFC] flex flex-col items-center justify-center p-6">
+    <div className={`fixed inset-0 z-[100] bg-[#F8FAFC] flex flex-col items-center justify-center p-6 transition-all duration-300 ease-out ${
+      fadeAway ? 'opacity-0 scale-98 pointer-events-none' : 'opacity-100 scale-100'
+    }`}>
 
       {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#0057FF]/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
@@ -125,14 +131,13 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         <div className="w-full h-2.5 rounded-full bg-slate-200/80 overflow-hidden relative border border-slate-300/50 shadow-inner">
           <div
             ref={barRef}
-            className="h-full bg-gradient-to-r from-[#0057FF] to-[#2D8CFF] shadow-[0_0_14px_rgba(0,87,255,0.7)]"
+            className="h-full w-full bg-gradient-to-r from-[#0057FF] to-[#2D8CFF] shadow-[0_0_14px_rgba(0,87,255,0.7)]"
             style={{
-              // width is controlled exclusively via barRef.current.style.width in useEffect
-              // Do NOT set width here — React re-renders would reset the CSS transition
-              // linear keeps bar in perfect sync with the rAF counter
-              // so both reach 100% at exactly the same moment
-              transition: `width ${TOTAL_DURATION_MS}ms linear`,
-              willChange: 'width',
+              transform: 'scaleX(0)',
+              transformOrigin: 'left',
+              // scaleX is composited on the GPU — absolutely immune to main thread/React rendering lag
+              transition: `transform ${TOTAL_DURATION_MS}ms linear`,
+              willChange: 'transform',
             }}
           />
         </div>
