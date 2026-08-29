@@ -52,21 +52,21 @@ export const HomeView: React.FC<HomeViewProps> = () => {
   const CAPABILITY_CARDS = [
     {
       title: home.cap_1_title || 'Product & Mechanical Design',
-      image: home.cap_1_img || '/services/product_design.png',
+      image: home.cap_1_img || '/services/product_design.webp',
       icon: Box,
       items: (home.cap_1_desc || '3D CAD Modelling • Drawings, GD&T & BOMs').split('•').map(s => s.trim()),
       link: '/services',
     },
     {
       title: home.cap_2_title || 'Mold & Die Tooling Design',
-      image: home.cap_2_img || '/services/injection_mold.png',
+      image: home.cap_2_img || '/services/injection_mold.webp',
       icon: Layers,
       items: (home.cap_2_desc || 'Mold Layouts • Slides, Lifters & Tooling Support').split('•').map(s => s.trim()),
       link: '/services',
     },
     {
       title: home.cap_3_title || 'CAD Documentation & Manufacturing Support',
-      image: home.cap_3_img || '/services/drawings_gdt.png',
+      image: home.cap_3_img || '/services/drawings_gdt.webp',
       icon: FileText,
       items: (home.cap_3_desc || 'DFM/DFA • Supplier Coordination').split('•').map(s => s.trim()),
       link: '/services',

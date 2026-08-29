@@ -18,7 +18,7 @@ interface ServicesViewProps {
 const BADGE_NUMS = ['01', '02', '03', '04', '05', '06', '07', '08'];
 
 // Fallback image when none set in CMS
-const FALLBACK_IMG = '/services/product_design.png';
+const FALLBACK_IMG = '/services/product_design.webp';
 
 export const ServicesView: React.FC<ServicesViewProps> = () => {
   const navigate = useNavigate();

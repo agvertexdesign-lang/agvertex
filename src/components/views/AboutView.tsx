@@ -54,22 +54,22 @@ export const AboutView: React.FC<AboutViewProps> = () => {
     {
       title: about.exp_1_title || 'PRODUCT DEVELOPMENT',
       desc: about.exp_1_desc || 'Mechanical components and assemblies developed with performance, manufacturability, and production requirements in mind.',
-      image: about.exp_1_img || '/services/product_design.png',
+      image: about.exp_1_img || '/services/product_design.webp',
     },
     {
       title: about.exp_2_title || 'TOOLING EXPERIENCE',
       desc: about.exp_2_desc || 'Practical experience supporting injection molds, hot-runner systems, mold components, and pressure die-casting applications.',
-      image: about.exp_2_img || '/services/injection_mold.png',
+      image: about.exp_2_img || '/services/injection_mold.webp',
     },
     {
       title: about.exp_3_title || 'AUTOMOTIVE COMPONENTS',
       desc: about.exp_3_desc || 'Experience with suspension, steering, wheel-end components, engineering drawings, GD&T, and supplier coordination.',
-      image: about.exp_3_img || '/images/control_arm_component.png',
+      image: about.exp_3_img || '/images/control_arm_component.webp',
     },
     {
       title: about.exp_4_title || 'CAD & DOCUMENTATION',
       desc: about.exp_4_desc || '3D models, drawings, BOMs, and controlled documentation using established CAD workflows.',
-      image: about.exp_4_img || '/images/cad_workstation_single.jpeg',
+      image: about.exp_4_img || '/images/cad_workstation_single.webp',
     },
   ];
 
@@ -134,7 +134,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-900 group">
               <img
-                src={settings?.images?.about_hero_image || "/images/cad_workstation_single.jpeg"}
+                src={settings?.images?.about_hero_image || "/images/cad_workstation_single.webp"}
                 alt="CAD Workstation Visual - AG Vertex Mechanical Design Consultancy"
                 loading="lazy"
                 decoding="async"
@@ -199,7 +199,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
           <div className="lg:col-span-5 relative order-2 lg:order-1">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-blue-200/50 bg-[#EBF2FA]/40 p-4 group">
               <img
-                src="/images/data_security_ip.png"
+                src="/images/data_security_ip.webp"
                 alt="AG Vertex Data Security and IP Protection"
                 loading="lazy"
                 decoding="async"
@@ -440,7 +440,7 @@ export const AboutView: React.FC<AboutViewProps> = () => {
 
           <div className="lg:col-span-4 rounded-2xl overflow-hidden h-52 border border-slate-200 shadow-md">
             <img
-              src={settings?.images?.about_facility_image || "/services/drawing_validation.png"}
+              src={settings?.images?.about_facility_image || "/services/drawing_validation.webp"}
               alt="Discuss Your Engineering Project"
               className="w-full h-full object-cover"
             />

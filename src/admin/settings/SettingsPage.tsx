@@ -5,9 +5,9 @@ import { toast } from '../components/Toast';
 import { Save, Loader2, Phone, Linkedin, Building2, Image as ImageIcon, Upload, RotateCcw } from 'lucide-react';
 
 const DEFAULT_IMAGES: SectionImagesSettings = {
-  about_hero_image: '/images/cad_workstation_single.jpeg',
-  about_facility_image: '/services/drawing_validation.png',
-  careers_team_image: '/images/cad_team_collaboration.jpeg',
+  about_hero_image: '/images/cad_workstation_single.webp',
+  about_facility_image: '/services/drawing_validation.webp',
+  careers_team_image: '/images/cad_team_collaboration.webp',
   home_hero_image: '',
 };
 
@@ -166,19 +166,19 @@ export function SettingsPage() {
               key: 'about_hero_image' as const,
               label: 'About Us — Hero CAD Workstation Image',
               desc: 'Main image shown on the About Us page header section.',
-              defaultImg: '/images/cad_workstation_single.jpeg',
+              defaultImg: '/images/cad_workstation_single.webp',
             },
             {
               key: 'about_facility_image' as const,
               label: 'About Us — Facility / Precision Equipment Image',
               desc: 'Secondary image shown near the bottom of the About Us page.',
-              defaultImg: '/services/drawing_validation.png',
+              defaultImg: '/services/drawing_validation.webp',
             },
             {
               key: 'careers_team_image' as const,
               label: 'Careers — Team Collaboration Image',
               desc: 'Main banner image shown on the Careers page.',
-              defaultImg: '/images/cad_team_collaboration.jpeg',
+              defaultImg: '/images/cad_team_collaboration.webp',
             },
           ].map(field => {
             const currentUrl = images[field.key] || field.defaultImg;

@@ -27,7 +27,7 @@ export const IndustriesView: React.FC<IndustriesViewProps> = () => {
       tagline: 'From concept development to production-ready engineering documentation.',
       description: '3D component design and detailed documentation for suspension, steering, wheel-end, molded-plastic, and electromechanical parts—developed with manufacturability and supplier coordination in mind.',
       badges: ['Product Development', 'GD&T / DFM', 'Supplier Coordination'],
-      image: '/images/cad_workstation_single.jpeg',
+      image: '/images/cad_workstation_single.webp',
       imageBadge: 'AUTOMOTIVE COMPONENT DESIGN & DOCUMENTATION',
       needs: [
         'Production-ready component design',
@@ -48,7 +48,7 @@ export const IndustriesView: React.FC<IndustriesViewProps> = () => {
       tagline: 'Practical mold designs, parting strategies, and DFM optimization.',
       description: 'Comprehensive engineering support for plastic injection-molded components, multi-cavity tooling layouts, sliders, lifters, and shop-floor manufacturing documentation.',
       badges: ['Mold Layouts', 'Parting Line DFM', 'Toolmaker Detailing'],
-      image: '/services/injection_mold.png',
+      image: '/services/injection_mold.webp',
       imageBadge: 'PRECISION INJECTION MOLD TOOLING',
       needs: [
         'Complex parting line generation and lifter mechanisms',
@@ -69,7 +69,7 @@ export const IndustriesView: React.FC<IndustriesViewProps> = () => {
       tagline: 'Heavy-duty mechanical design, weldments, and automation tooling.',
       description: 'Robust engineering design for specialized industrial machinery, structural sheet metal enclosures, welded frames, and custom automated assembly fixtures.',
       badges: ['Machine Design', 'Sheet Metal', 'Assembly Fixtures'],
-      image: '/services/industrial_metrology.png',
+      image: '/services/industrial_metrology.webp',
       imageBadge: 'INDUSTRIAL PRODUCTS CAD & METROLOGY',
       needs: [
         'Custom machinery & structural weldment design',
@@ -90,7 +90,7 @@ export const IndustriesView: React.FC<IndustriesViewProps> = () => {
       tagline: 'Electronics enclosures, thermal packaging, and connector integration.',
       description: 'High-density packaging for PCBs, battery modules, wiring harnesses, and ruggedized weatherproof enclosures with tight environmental ingress sealing.',
       badges: ['Enclosure Design', 'Ingress Sealing', 'Connector Packaging'],
-      image: '/services/cad_modelling.png',
+      image: '/services/cad_modelling.webp',
       imageBadge: 'ELECTROMECHANICAL PACKAGING DESIGN',
       needs: [
         'Tight space envelope & thermal management packaging',

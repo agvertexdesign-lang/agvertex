@@ -532,7 +532,7 @@ export const ContactView: React.FC = () => {
         <div className="glass-card group bg-white p-3 sm:p-5 lg:p-6 rounded-3xl border border-blue-200/80 shadow-2xl relative overflow-hidden">
           <div className="relative rounded-2xl overflow-hidden bg-slate-50 border border-blue-100">
             <img
-              src="/images/map.jpg"
+              src="/images/map.webp"
               alt="AG Vertex Remote Team Locations Map - Canada, India, New Zealand"
               loading="lazy"
               decoding="async"

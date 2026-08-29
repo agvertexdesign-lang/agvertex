@@ -284,9 +284,9 @@ export function PageContentEditorPage() {
             </h2>
 
             {[
-              { num: 1, titleKey: 'cap_1_title', descKey: 'cap_1_desc', imgKey: 'cap_1_img', defaultImg: '/services/product_design.png' },
-              { num: 2, titleKey: 'cap_2_title', descKey: 'cap_2_desc', imgKey: 'cap_2_img', defaultImg: '/services/injection_mold.png' },
-              { num: 3, titleKey: 'cap_3_title', descKey: 'cap_3_desc', imgKey: 'cap_3_img', defaultImg: '/services/drawings_gdt.png' },
+              { num: 1, titleKey: 'cap_1_title', descKey: 'cap_1_desc', imgKey: 'cap_1_img', defaultImg: '/services/product_design.webp' },
+              { num: 2, titleKey: 'cap_2_title', descKey: 'cap_2_desc', imgKey: 'cap_2_img', defaultImg: '/services/injection_mold.webp' },
+              { num: 3, titleKey: 'cap_3_title', descKey: 'cap_3_desc', imgKey: 'cap_3_img', defaultImg: '/services/drawings_gdt.webp' },
             ].map(card => (
               <div key={card.num} className="p-5 rounded-2xl border border-slate-200 bg-slate-50/50 space-y-4">
                 <p className="text-xs font-mono font-bold text-[#0057FF] uppercase">Capability Card #{card.num}</p>
@@ -348,7 +348,7 @@ export function PageContentEditorPage() {
                 />
               </div>
 
-              {renderImageUploader('about', 'hero_img', 'About Us — Hero CAD Workstation Image', '/images/cad_workstation_single.jpeg')}
+              {renderImageUploader('about', 'hero_img', 'About Us — Hero CAD Workstation Image', '/images/cad_workstation_single.webp')}
             </div>
           </section>
 
@@ -399,10 +399,10 @@ export function PageContentEditorPage() {
             </h2>
 
             {[
-              { num: 1, titleKey: 'exp_1_title', descKey: 'exp_1_desc', imgKey: 'exp_1_img', defaultImg: '/services/product_design.png' },
-              { num: 2, titleKey: 'exp_2_title', descKey: 'exp_2_desc', imgKey: 'exp_2_img', defaultImg: '/services/injection_mold.png' },
-              { num: 3, titleKey: 'exp_3_title', descKey: 'exp_3_desc', imgKey: 'exp_3_img', defaultImg: '/services/drawing_validation.png' },
-              { num: 4, titleKey: 'exp_4_title', descKey: 'exp_4_desc', imgKey: 'exp_4_img', defaultImg: '/images/cad_workstation_single.jpeg' },
+              { num: 1, titleKey: 'exp_1_title', descKey: 'exp_1_desc', imgKey: 'exp_1_img', defaultImg: '/services/product_design.webp' },
+              { num: 2, titleKey: 'exp_2_title', descKey: 'exp_2_desc', imgKey: 'exp_2_img', defaultImg: '/services/injection_mold.webp' },
+              { num: 3, titleKey: 'exp_3_title', descKey: 'exp_3_desc', imgKey: 'exp_3_img', defaultImg: '/services/drawing_validation.webp' },
+              { num: 4, titleKey: 'exp_4_title', descKey: 'exp_4_desc', imgKey: 'exp_4_img', defaultImg: '/images/cad_workstation_single.webp' },
             ].map(card => (
               <div key={card.num} className="p-5 rounded-2xl border border-slate-200 bg-slate-50/50 space-y-4">
                 <p className="text-xs font-mono font-bold text-[#0057FF] uppercase">Experience Card #{card.num}</p>
@@ -430,7 +430,7 @@ export function PageContentEditorPage() {
               </div>
             ))}
 
-            {renderImageUploader('about', 'facility_img', 'About Us — Bottom Facility / Review Image', '/services/drawing_validation.png')}
+            {renderImageUploader('about', 'facility_img', 'About Us — Bottom Facility / Review Image', '/services/drawing_validation.webp')}
           </section>
 
           {/* Engineering CAD Stack Software Section */}
@@ -589,7 +589,7 @@ export function PageContentEditorPage() {
                 />
               </div>
 
-              {renderImageUploader('careers', 'hero_img', 'Careers — Team Collaboration Image', '/images/cad_team_collaboration.jpeg')}
+              {renderImageUploader('careers', 'hero_img', 'Careers — Team Collaboration Image', '/images/cad_team_collaboration.webp')}
             </div>
           </section>
 

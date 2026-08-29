@@ -40,7 +40,7 @@ export const PortfolioView: React.FC<PortfolioViewProps> = () => {
     tag: p.category ? p.category.toUpperCase() : 'PROJECT',
     title: p.title,
     desc: p.description,
-    image: p.image_url || '/services/product_design.png',
+    image: p.image_url || '/services/product_design.webp',
     category: p.category || 'Product Design',
     tools: p.client ? `Client: ${p.client} · Year: ${p.project_year}` : `Year: ${p.project_year || 'Recent'}`,
   }));

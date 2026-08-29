@@ -332,7 +332,7 @@ export const CareersView: React.FC = () => {
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-900 group">
               <img
-                src={careers.hero_img || settings?.images?.careers_team_image || "/images/cad_team_collaboration.jpeg"}
+                src={careers.hero_img || settings?.images?.careers_team_image || "/images/cad_team_collaboration.webp"}
                 alt="Representative mechanical design collaboration"
                 loading="lazy"
                 decoding="async"
