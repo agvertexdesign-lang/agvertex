@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 interface PreloaderProps {
   onComplete?: () => void;
@@ -9,9 +9,14 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [statusText, setStatusText] = useState('INITIALIZING MECHANICAL DESIGN SUITE...');
   const [isDone, setIsDone] = useState(false);
 
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
   useEffect(() => {
     if (isDone) {
-      if (onComplete) onComplete();
+      if (onCompleteRef.current) onCompleteRef.current();
       return;
     }
 
@@ -28,7 +33,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           clearInterval(interval);
           setTimeout(() => {
             setIsDone(true);
-            if (onComplete) onComplete();
+            if (onCompleteRef.current) onCompleteRef.current();
           }, 100);
           return 100;
         }
@@ -48,14 +53,14 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     const safetyTimeout = setTimeout(() => {
       setProgress(100);
       setIsDone(true);
-      if (onComplete) onComplete();
+      if (onCompleteRef.current) onCompleteRef.current();
     }, 2500);
 
     return () => {
       clearInterval(interval);
       clearTimeout(safetyTimeout);
     };
-  }, [onComplete, isDone]);
+  }, [isDone]);
 
   if (isDone) return null;
 

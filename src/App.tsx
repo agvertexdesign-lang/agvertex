@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { MessageCircle } from 'lucide-react';
 import { AdminApp } from './admin/AdminApp';
@@ -28,6 +28,9 @@ export default function App() {
   const navigate = useNavigate();
   useSEO();
   const [preloaderComplete, setPreloaderComplete] = useState<boolean>(false);
+  const handlePreloaderComplete = useCallback(() => {
+    setPreloaderComplete(true);
+  }, []);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState<boolean>(false);
   const [quoteSubmitted, setQuoteSubmitted] = useState<boolean>(false);
   const [quoteForm, setQuoteForm] = useState({
@@ -114,7 +117,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#EBF2FA] text-[#0F172A] relative overflow-x-hidden selection:bg-[#0057FF] selection:text-white">
       {/* 0. INITIAL PRELOADER SCREEN */}
-      <Preloader onComplete={() => setPreloaderComplete(true)} />
+      <Preloader onComplete={handlePreloaderComplete} />
 
       {/* 1. SCROLL RESET & FLOATING INDICATORS */}
       <ScrollToTop />
