@@ -43,9 +43,12 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       if (completed) return;
       completed = true;
       setDisplayNumber(100);
-      // No delay — dismiss instantly when bar hits 100%
-      setIsDone(true);
-      if (onCompleteRef.current) onCompleteRef.current();
+      // 80ms gap — lets React render "100%" before unmounting the component
+      // Without this, React batches setDisplayNumber+setIsDone and skips the 100% frame
+      setTimeout(() => {
+        setIsDone(true);
+        if (onCompleteRef.current) onCompleteRef.current();
+      }, 80);
     };
 
     // rAF loop drives ONLY the text counter + status label
