@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 
 interface PreloaderProps {
   onComplete?: () => void;
@@ -42,13 +43,11 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     const finish = () => {
       if (completed) return;
       completed = true;
-      setDisplayNumber(100);
-      // 80ms gap — lets React render "100%" before unmounting the component
-      // Without this, React batches setDisplayNumber+setIsDone and skips the 100% frame
-      setTimeout(() => {
-        setIsDone(true);
-        if (onCompleteRef.current) onCompleteRef.current();
-      }, 80);
+      // flushSync forces React to synchronously render displayNumber=100
+      // BEFORE setIsDone(true) unmounts the component — no timeout needed
+      flushSync(() => setDisplayNumber(100));
+      setIsDone(true);
+      if (onCompleteRef.current) onCompleteRef.current();
     };
 
     // rAF loop drives ONLY the text counter + status label
@@ -126,7 +125,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         <div className="w-full h-2.5 rounded-full bg-slate-200/80 overflow-hidden relative border border-slate-300/50 shadow-inner">
           <div
             ref={barRef}
-            className="h-full bg-gradient-to-r from-[#0057FF] to-[#2D8CFF] rounded-full shadow-[0_0_14px_rgba(0,87,255,0.7)]"
+            className="h-full bg-gradient-to-r from-[#0057FF] to-[#2D8CFF] shadow-[0_0_14px_rgba(0,87,255,0.7)]"
             style={{
               // width is controlled exclusively via barRef.current.style.width in useEffect
               // Do NOT set width here — React re-renders would reset the CSS transition
