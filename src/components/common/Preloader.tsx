@@ -28,9 +28,15 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     // independent of React rendering and JS main-thread load.
     const bar = barRef.current;
     if (bar) {
-      // Force a layout read first so the transition fires from 0 → 100%
-      bar.getBoundingClientRect();
-      bar.style.width = '100%';
+      // Start at 0%, force layout flush, then animate to 100%
+      // Two separate RAF frames guarantee the browser paints 0% first
+      bar.style.width = '0%';
+      bar.getBoundingClientRect(); // flush layout
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (!completed) bar.style.width = '100%';
+        });
+      });
     }
 
     const finish = () => {
@@ -120,9 +126,10 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             ref={barRef}
             className="h-full bg-gradient-to-r from-[#0057FF] to-[#2D8CFF] rounded-full shadow-[0_0_14px_rgba(0,87,255,0.7)]"
             style={{
-              width: '0%',
-              // Cubic-bezier gives a natural ease that accelerates then slows at end
+              // width is controlled exclusively via barRef.current.style.width in useEffect
+              // Do NOT set width here — React re-renders would reset the CSS transition
               transition: `width ${TOTAL_DURATION_MS}ms cubic-bezier(0.1, 0.4, 0.8, 1.0)`,
+              willChange: 'width',
             }}
           />
         </div>
