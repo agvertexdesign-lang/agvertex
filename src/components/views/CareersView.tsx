@@ -165,6 +165,8 @@ export const CareersView: React.FC = () => {
     return null;
   };
 
+  const [submissionId, setSubmissionId] = useState<number | null>(null);
+
   const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
@@ -182,7 +184,37 @@ export const CareersView: React.FC = () => {
         cvPublicUrl = await uploadResume(selectedFile);
       }
 
+      // Generate local fallback ID just in case
+      let applicationId = 1000 + Math.floor(Math.random() * 9000);
+      try {
+        const { data, error } = await supabase
+          .from('career_applications')
+          .insert({
+            name: profileForm.name,
+            email: profileForm.email,
+            phone: profileForm.phone,
+            discipline: profileForm.primaryDiscipline,
+            cad_tools: profileForm.cadTools.join(', '),
+            linkedin: profileForm.linkedin || 'Not provided',
+            notes: profileForm.notes || 'Not provided',
+            resume_url: cvPublicUrl || null
+          })
+          .select()
+          .single();
+
+        if (!error && data && data.id) {
+          applicationId = data.id;
+        } else if (error) {
+          console.warn('Supabase DB application insert error:', error);
+        }
+      } catch (dbErr) {
+        console.warn('Supabase DB application insert exception:', dbErr);
+      }
+
+      setSubmissionId(applicationId);
+
       const response = await submitToWeb3Forms({
+        "Submission Number": `#${applicationId}`,
         "Full Name": profileForm.name,
         "Email Address": profileForm.email,
         "replyto": profileForm.email,
@@ -193,7 +225,7 @@ export const CareersView: React.FC = () => {
         "CV Document Link (Click to Download)": cvPublicUrl || 'Upload failed / Not attached',
         "Experience Summary": profileForm.notes || 'Not provided',
         "to_email": 'agvertexdesign@gmail.com',
-      }, `AG VERTEX — New CV Submission (${profileForm.name})`);
+      }, `AG VERTEX — New CV Submission #${applicationId} (${profileForm.name})`);
 
       if (response.success) {
         setProfileSubmitted(true);
@@ -380,6 +412,9 @@ export const CareersView: React.FC = () => {
               <div className="py-8 text-center space-y-3">
                 <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
                 <h3 className="text-xl font-heading font-bold text-[#0F172A]">Application Sent to Email!</h3>
+                <p className="text-sm font-bold text-[#0057FF] font-mono">
+                  Application ID: #{submissionId}
+                </p>
                 <p className="text-xs text-slate-500 max-w-sm mx-auto">
                   Thank you for your interest. Your profile and CV have been sent directly to <strong className="text-slate-800">agvertexdesign@gmail.com</strong> for review.
                 </p>

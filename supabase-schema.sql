@@ -311,4 +311,59 @@ create policy "Allow delete from cms-images" on storage.objects
 -- Auto-confirm all users
 update auth.users set email_confirmed_at = now() where email_confirmed_at is null;
 
+-- ============================================================
+-- 9. CONTACT INQUIRIES
+-- Stores submitted contact forms with auto-increment ID starting at 1001
+-- ============================================================
+create table if not exists contact_inquiries (
+  id serial primary key,
+  name text not null,
+  email text not null,
+  company text,
+  phone text,
+  service text,
+  timeline text,
+  overview text,
+  file_url text,
+  created_at timestamptz default now()
+);
+
+-- Force sequence to start at 1001
+alter sequence if exists contact_inquiries_id_seq restart with 1001;
+
+-- Enable RLS and add public insert policies
+alter table contact_inquiries enable row level security;
+drop policy if exists "Allow public insert to contact_inquiries" on contact_inquiries;
+create policy "Allow public insert to contact_inquiries" on contact_inquiries for insert with check (true);
+drop policy if exists "Allow select contact_inquiries" on contact_inquiries;
+create policy "Allow select contact_inquiries" on contact_inquiries for select using (true);
+
+-- ============================================================
+-- 10. CAREER APPLICATIONS
+-- Stores job profile submissions with auto-increment ID starting at 1001
+-- ============================================================
+create table if not exists career_applications (
+  id serial primary key,
+  name text not null,
+  email text not null,
+  phone text,
+  discipline text,
+  cad_tools text,
+  linkedin text,
+  notes text,
+  resume_url text,
+  created_at timestamptz default now()
+);
+
+-- Force sequence to start at 1001
+alter sequence if exists career_applications_id_seq restart with 1001;
+
+-- Enable RLS and add public insert policies
+alter table career_applications enable row level security;
+drop policy if exists "Allow public insert to career_applications" on career_applications;
+create policy "Allow public insert to career_applications" on career_applications for insert with check (true);
+drop policy if exists "Allow select career_applications" on career_applications;
+create policy "Allow select career_applications" on career_applications for select using (true);
+
+
 

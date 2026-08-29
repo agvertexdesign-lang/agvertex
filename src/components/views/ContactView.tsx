@@ -12,11 +12,11 @@ import {
   CheckCircle,
   Building2,
   Layers,
-  Phone
+  Phone,
+  X
 } from 'lucide-react';
 import { useSettingsData } from '../../hooks/useCmsData';
-
-import { sendToWhatsApp } from '../../lib/whatsapp';
+import { supabase } from '../../lib/supabase';
 import { submitToWeb3Forms } from '../../lib/web3forms';
 
 export const ContactView: React.FC = () => {
@@ -33,6 +33,69 @@ export const ContactView: React.FC = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionId, setSubmissionId] = useState<number | null>(null);
+
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileName, setFileName] = useState('');
+
+  const uploadFile = async (file: File): Promise<string | null> => {
+    try {
+      const ext = file.name.split('.').pop() || 'pdf';
+      const cleanName = file.name.replace(/[^a-zA-Z0-9_.-]/g, '_');
+      const storagePath = `contacts/${Date.now()}_${cleanName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('cms-images')
+        .upload(storagePath, file, { cacheControl: '3600', upsert: true });
+
+      if (!uploadError) {
+        const { data } = supabase.storage
+          .from('cms-images')
+          .getPublicUrl(storagePath);
+
+        if (data?.publicUrl) {
+          return data.publicUrl;
+        }
+      } else {
+        console.warn('Supabase storage upload error:', uploadError);
+      }
+    } catch (e) {
+      console.warn('Supabase upload exception:', e);
+    }
+
+    try {
+      const form = new FormData();
+      form.append('file', file);
+      const res = await fetch('https://tmpfiles.org/api/v1/upload', {
+        method: 'POST',
+        body: form
+      });
+      const json = await res.json();
+      if (json?.data?.url) {
+        return json.data.url.replace('tmpfiles.org/', 'tmpfiles.org/dl/');
+      }
+    } catch (e) {
+      console.warn('Fallback file upload error:', e);
+    }
+
+    return null;
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 10 * 1024 * 1024) {
+      setErrorMessage('Attached file size exceeds 10 MB limit. Please select a smaller file.');
+      e.target.value = '';
+      return;
+    }
+
+    setSelectedFile(file);
+    setFileName(file.name);
+    setErrorMessage('');
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,37 +106,68 @@ export const ContactView: React.FC = () => {
       return;
     }
 
-    const lines = [
-      "📌 AG VERTEX — New Project Review Request",
-      "----------------------------------------",
-      `👤 Name: ${formData.name}`,
-      `✉️ Work Email: ${formData.email}`,
-      `🏢 Company: ${formData.company || 'Not provided'}`,
-      `📞 Phone: ${formData.phone || 'Not provided'}`,
-      `🛠️ Service Required: ${formData.service || 'General Inquiry'}`,
-      `📅 Preferred Timeline: ${formData.timeline || 'Not specified'}`,
-      "",
-      "📝 Project Overview:",
-      formData.overview,
-    ];
+    setIsSubmitting(true);
 
     try {
-      await submitToWeb3Forms({
-        name: formData.name,
-        email: formData.email,
-        replyto: formData.email,
-        company: formData.company || 'Not provided',
-        phone: formData.phone || 'Not provided',
-        service_required: formData.service || 'General Inquiry',
-        timeline: formData.timeline || 'Not specified',
-        project_overview: formData.overview,
-        to_email: 'agvertexdesign@gmail.com',
-      }, `AG VERTEX — New Project Inquiry (${formData.name})`);
-    } catch (err) {
-      console.warn("Contact Web3Forms submit log:", err);
-    }
+      let fileUrl: string | null = null;
+      if (selectedFile) {
+        fileUrl = await uploadFile(selectedFile);
+      }
 
-    setSubmitted(true);
+      // Generate local fallback ID just in case
+      let inquiryId = 1000 + Math.floor(Math.random() * 9000);
+      try {
+        const { data, error } = await supabase
+          .from('contact_inquiries')
+          .insert({
+            name: formData.name,
+            email: formData.email,
+            company: formData.company || 'Not provided',
+            phone: formData.phone || 'Not provided',
+            service: formData.service || 'General Inquiry',
+            timeline: formData.timeline || 'Not specified',
+            overview: formData.overview,
+            file_url: fileUrl || null
+          })
+          .select()
+          .single();
+
+        if (!error && data && data.id) {
+          inquiryId = data.id;
+        } else if (error) {
+          console.warn('Supabase DB inquiry insert error:', error);
+        }
+      } catch (dbErr) {
+        console.warn('Supabase DB inquiry insert exception:', dbErr);
+      }
+
+      setSubmissionId(inquiryId);
+
+      const response = await submitToWeb3Forms({
+        "Submission Number": `#${inquiryId}`,
+        "Full Name": formData.name,
+        "Email Address": formData.email,
+        "replyto": formData.email,
+        "Company": formData.company || 'Not provided',
+        "Phone": formData.phone || 'Not provided',
+        "Service Required": formData.service || 'General Inquiry',
+        "Timeline": formData.timeline || 'Not specified',
+        "Attached File Link": fileUrl || 'Not attached',
+        "Project Overview": formData.overview,
+        "to_email": 'agvertexdesign@gmail.com',
+      }, `AG VERTEX — New Project Inquiry #${inquiryId} (${formData.name})`);
+
+      if (response.success) {
+        setSubmitted(true);
+      } else {
+        setErrorMessage(response.message || 'Failed to send inquiry email. Please try again.');
+      }
+    } catch (err: any) {
+      console.error("Inquiry email submission error:", err);
+      setErrorMessage('Failed to send inquiry email. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const GLOBAL_HUBS = [
@@ -135,6 +229,9 @@ export const ContactView: React.FC = () => {
               <div className="p-8 rounded-2xl bg-emerald-50 text-emerald-900 text-center space-y-3 animate-in fade-in">
                 <CheckCircle2 className="w-12 h-12 mx-auto text-emerald-600" />
                 <h3 className="font-heading font-bold text-xl">Project Request Sent!</h3>
+                <p className="text-sm font-bold text-[#0057FF] font-mono">
+                  Inquiry ID: #{submissionId}
+                </p>
                 <p className="text-sm text-emerald-800 max-w-md mx-auto font-medium">
                   Thank you for contacting AG Vertex. Our team will review your requirements and respond promptly.
                 </p>
@@ -245,6 +342,40 @@ export const ContactView: React.FC = () => {
                   />
                 </div>
 
+                {/* File Attachment Upload */}
+                <div className="space-y-2">
+                  <label className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
+                    Attach Specifications / Drawings (Optional)
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <label className="cursor-pointer px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 hover:bg-slate-100 transition-all font-semibold text-slate-700 flex items-center gap-1.5 shadow-xs text-xs">
+                      Choose File
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx,.zip,.rar,.stp,.step,.igs,.iges,.dwg,.dxf"
+                        className="hidden"
+                        onChange={handleFileChange}
+                      />
+                    </label>
+                    <span className="text-xs text-slate-500 truncate max-w-[250px]">
+                      {fileName || 'No file selected (PDF, ZIP, CAD up to 10MB)'}
+                    </span>
+                    {selectedFile && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedFile(null);
+                          setFileName('');
+                        }}
+                        className="p-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors"
+                        title="Remove file"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+
                 {/* Preferred Timeline */}
                 <div className="space-y-2">
                   <label htmlFor="contact_timeline" className="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wide block">
@@ -291,9 +422,11 @@ export const ContactView: React.FC = () => {
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full btn-primary py-4 text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer"
+                    disabled={isSubmitting}
+                    className="w-full btn-primary py-4 text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 cursor-pointer disabled:opacity-60"
                   >
-                    Submit Project Inquiry <Mail className="w-4 h-4" />
+                    {isSubmitting ? 'Submitting Inquiry...' : 'Submit Project Inquiry'}
+                    <Mail className="w-4 h-4" />
                   </button>
                 </div>
 
