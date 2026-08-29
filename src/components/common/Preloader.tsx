@@ -4,14 +4,15 @@ interface PreloaderProps {
   onComplete?: () => void;
 }
 
-const TOTAL_DURATION_MS = 2200;
+const TOTAL_DURATION_MS = 4000; // 4 seconds
 
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
-  const [progress, setProgress] = useState(0);
+  const [displayNumber, setDisplayNumber] = useState(0);
   const [statusText, setStatusText] = useState('INITIALIZING MECHANICAL DESIGN SUITE...');
   const [isDone, setIsDone] = useState(false);
 
-  // Stable ref so onComplete changes never re-trigger the animation
+  // Refs to touch the DOM directly — bypasses React batching entirely
+  const barRef = useRef<HTMLDivElement>(null);
   const onCompleteRef = useRef(onComplete);
   useEffect(() => {
     onCompleteRef.current = onComplete;
@@ -22,46 +23,54 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     let startTime: number | null = null;
     let completed = false;
 
+    // Kick the CSS bar animation immediately via a direct style mutation.
+    // CSS transitions run on the GPU compositor thread — completely
+    // independent of React rendering and JS main-thread load.
+    const bar = barRef.current;
+    if (bar) {
+      // Force a layout read first so the transition fires from 0 → 100%
+      bar.getBoundingClientRect();
+      bar.style.width = '100%';
+    }
+
     const finish = () => {
       if (completed) return;
       completed = true;
-      setProgress(100);
-      // Brief pause at 100% so the bar is visibly full before fade-out
+      setDisplayNumber(100);
       setTimeout(() => {
         setIsDone(true);
         if (onCompleteRef.current) onCompleteRef.current();
-      }, 150);
+      }, 200);
     };
 
+    // rAF loop drives ONLY the text counter + status label
+    // These are low-frequency updates (~10fps effective) so batching is fine
     const tick = (timestamp: number) => {
       if (completed) return;
-
-      if (startTime === null) {
-        startTime = timestamp;
-      }
+      if (startTime === null) startTime = timestamp;
 
       const elapsed = timestamp - startTime;
-      const rawProgress = Math.min((elapsed / TOTAL_DURATION_MS) * 100, 100);
+      const pct = Math.min((elapsed / TOTAL_DURATION_MS) * 100, 100);
 
-      setProgress(rawProgress);
+      setDisplayNumber(Math.floor(pct));
 
-      if (rawProgress < 35) {
+      if (pct < 35) {
         setStatusText('INITIALIZING MECHANICAL DESIGN SUITE...');
-      } else if (rawProgress < 75) {
+      } else if (pct < 75) {
         setStatusText('LOADING CAD DATA & DRAWING ENGINE...');
       } else {
         setStatusText('SYSTEM READY. WELCOME TO AG VERTEX.');
       }
 
-      if (rawProgress >= 100) {
+      if (pct >= 100) {
         finish();
       } else {
         rafId = requestAnimationFrame(tick);
       }
     };
 
-    // Hard safety cutoff — if rAF itself gets suspended (e.g. tab hidden) for too long
-    const safetyTimer = setTimeout(finish, TOTAL_DURATION_MS + 800);
+    // Safety cutoff if tab goes background mid-load
+    const safetyTimer = setTimeout(finish, TOTAL_DURATION_MS + 1000);
 
     rafId = requestAnimationFrame(tick);
 
@@ -70,17 +79,14 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       cancelAnimationFrame(rafId);
       clearTimeout(safetyTimer);
     };
-  }, []); // Runs exactly once — no external deps, no resets
+  }, []);
 
   if (isDone) return null;
 
   return (
-    <div
-      className={`fixed inset-0 z-[100] bg-[#F8FAFC] flex flex-col items-center justify-center p-6 transition-opacity duration-300 ease-out ${
-        progress >= 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}
-    >
-      {/* Background Subtle Ambient Glow */}
+    <div className="fixed inset-0 z-[100] bg-[#F8FAFC] flex flex-col items-center justify-center p-6">
+
+      {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#0057FF]/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
 
       <div className="relative z-10 flex flex-col items-center max-w-xs sm:max-w-sm w-full space-y-6 text-center">
@@ -104,17 +110,19 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           </div>
 
           <div className="text-3xl sm:text-4xl font-heading font-bold text-[#0F172A] font-mono tracking-tight">
-            {Math.floor(progress)}%
+            {displayNumber}%
           </div>
         </div>
 
-        {/* High-Precision Progress Bar */}
-        <div className="w-full h-2 rounded-full bg-slate-200/80 overflow-hidden relative border border-slate-300/50 shadow-inner">
+        {/* Progress Bar — driven by CSS transition on the DOM ref, not React state */}
+        <div className="w-full h-2.5 rounded-full bg-slate-200/80 overflow-hidden relative border border-slate-300/50 shadow-inner">
           <div
-            className="h-full bg-gradient-to-r from-[#0057FF] to-[#2D8CFF] rounded-full shadow-[0_0_12px_rgba(0,87,255,0.6)]"
+            ref={barRef}
+            className="h-full bg-gradient-to-r from-[#0057FF] to-[#2D8CFF] rounded-full shadow-[0_0_14px_rgba(0,87,255,0.7)]"
             style={{
-              width: `${progress}%`,
-              transition: 'width 0.05s linear',
+              width: '0%',
+              // Cubic-bezier gives a natural ease that accelerates then slows at end
+              transition: `width ${TOTAL_DURATION_MS}ms cubic-bezier(0.1, 0.4, 0.8, 1.0)`,
             }}
           />
         </div>
@@ -126,7 +134,6 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         </div>
 
       </div>
-
     </div>
   );
 };
