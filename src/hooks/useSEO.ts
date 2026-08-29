@@ -11,7 +11,7 @@ const SEO_META: Record<string, { title: string; description: string }> = {
     description: 'Mechanical design consultancy with 15+ years experience supporting product development, 3D CAD, tooling, and drawings across Canada, New Zealand, and India.',
   },
   '/services': {
-    title: 'Mechanical Design Services | AG Vertex',
+    title: 'Mechanical Design and CAD Support | AG Vertex',
     description: 'Product Design & 3D CAD, Mold & Die Tooling Support, Drawings GD&T & BOMs, and DFM/DFA & Supplier Coordination.',
   },
   '/careers': {
