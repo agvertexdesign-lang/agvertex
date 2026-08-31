@@ -3,7 +3,7 @@ import { useAdminAuth } from '../auth/useAdminAuth';
 import type { User, Session } from '@supabase/supabase-js';
 
 interface AdminContextValue {
-  user: User | null;
+  user: any;
   session: Session | null;
   loading: boolean;
   isAdmin: boolean;

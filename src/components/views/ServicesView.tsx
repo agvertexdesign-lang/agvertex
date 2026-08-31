@@ -134,7 +134,25 @@ export const ServicesView: React.FC<ServicesViewProps> = () => {
         )}
       </section>
 
-
+      {/* 3. SERVICE SCOPE NOTICE */}
+      <section className="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <div className="glass-card group bg-gradient-to-br from-white via-slate-50/90 to-blue-50/30 p-7 sm:p-8 rounded-3xl border border-blue-100 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2.5 transition-all duration-400 relative overflow-hidden max-w-4xl mx-auto">
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
+          <div className="flex items-start gap-4 sm:gap-5 relative z-10">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 shadow-inner group-hover:scale-110 transition-transform duration-300">
+              <AlertCircle className="w-5.5 h-5.5" />
+            </div>
+            <div className="space-y-2">
+              <h3 className="text-sm font-heading font-extrabold text-[#0F172A] uppercase tracking-wider group-hover:text-[#0057FF] transition-colors duration-300">
+                SERVICE SCOPE NOTICE
+              </h3>
+              <p className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed">
+                AG Vertex provides mechanical design, CAD modelling, drafting and documentation support based on client-approved requirements. The client retains responsibility for engineering decisions, validation, regulatory compliance and final design release.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* 4. CTA BANNER */}
       <section className="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">

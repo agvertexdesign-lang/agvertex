@@ -77,7 +77,6 @@ export const HeroCADCanvas: React.FC = () => {
           autoPlay
           loop
           muted
-          defaultMuted
           playsInline
           // @ts-ignore
           webkit-playsinline="true"

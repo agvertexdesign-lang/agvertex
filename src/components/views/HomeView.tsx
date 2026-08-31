@@ -133,7 +133,6 @@ export const HomeView: React.FC<HomeViewProps> = () => {
                 autoPlay
                 loop
                 muted
-                defaultMuted
                 playsInline
                 // @ts-ignore
                 webkit-playsinline="true"
