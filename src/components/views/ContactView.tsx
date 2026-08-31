@@ -154,7 +154,7 @@ export const ContactView: React.FC = () => {
         "Timeline": formData.timeline || 'Not specified',
         "Attached File Link": fileUrl || 'Not attached',
         "Project Overview": formData.overview,
-        "to_email": 'agvertexdesign@gmail.com',
+        "to_email": 'contact@agvertex.ca',
       }, `AG VERTEX — New Project Inquiry #${inquiryId} (${formData.name})`);
 
       if (response.success) {
@@ -457,8 +457,8 @@ export const ContactView: React.FC = () => {
                   <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#0057FF] flex items-center justify-center shrink-0 font-bold">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <a href={`mailto:${settings?.contact?.email || 'agvertexdesign@gmail.com'}`} className="font-semibold text-[#0057FF] hover:underline">
-                    {settings?.contact?.email || 'agvertexdesign@gmail.com'}
+                  <a href={`mailto:${settings?.contact?.email || 'contact@agvertex.ca'}`} className="font-semibold text-[#0057FF] hover:underline">
+                    {settings?.contact?.email || 'contact@agvertex.ca'}
                   </a>
                 </div>
 

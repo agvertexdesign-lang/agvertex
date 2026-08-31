@@ -14,10 +14,10 @@ const DEFAULT_IMAGES: SectionImagesSettings = {
 export function SettingsPage() {
   const [contact, setContact] = useState<ContactSettings>({
     phone: '',
-    email: 'agvertexdesign@gmail.com',
+    email: 'contact@agvertex.ca',
     address: 'Canada · New Zealand · India',
     whatsapp: '',
-    contact_form_email: 'agvertexdesign@gmail.com',
+    contact_form_email: 'contact@agvertex.ca',
   });
   const [social, setSocial] = useState<SocialSettings>({ linkedin: '', instagram: '', facebook: '', youtube: '' });
   const [business, setBusiness] = useState<BusinessSettings>({ company_name: '', tagline: '', short_description: '', business_hours: '' });
@@ -268,7 +268,7 @@ export function SettingsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {[
             { key: 'phone', label: 'Phone Number', placeholder: '+1 (289) 683-1234' },
-            { key: 'email', label: 'Business Email', placeholder: 'agvertexdesign@gmail.com' },
+            { key: 'email', label: 'Business Email', placeholder: 'contact@agvertex.ca' },
             { key: 'contact_form_email', label: 'Contact Form Email', placeholder: 'Where form submissions go' },
             { key: 'whatsapp', label: 'WhatsApp Number (Optional)', placeholder: '+1 (289) ...' },
           ].map(field => (

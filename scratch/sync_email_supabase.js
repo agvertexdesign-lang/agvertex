@@ -6,7 +6,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function syncEmail() {
-  console.log('Syncing contact email in Supabase to agvertexdesign@gmail.com...');
+  console.log('Syncing contact email in Supabase to contact@agvertex.ca...');
 
   const { data, error } = await supabase
     .from('website_settings')
@@ -23,8 +23,8 @@ async function syncEmail() {
     ...existingValue,
     contact: {
       ...existingValue.contact,
-      email: 'agvertexdesign@gmail.com',
-      contact_form_email: 'agvertexdesign@gmail.com'
+      email: 'contact@agvertex.ca',
+      contact_form_email: 'contact@agvertex.ca'
     }
   };
 
@@ -38,7 +38,7 @@ async function syncEmail() {
   if (updateError) {
     console.error('Update error:', updateError);
   } else {
-    console.log('Successfully updated Supabase contact email to agvertexdesign@gmail.com!');
+    console.log('Successfully updated Supabase contact email to contact@agvertex.ca!');
   }
 }
 

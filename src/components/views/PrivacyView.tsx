@@ -129,7 +129,7 @@ export const PrivacyView: React.FC = () => {
             Questions, privacy requests or complaints may be directed to:<br/>
             AG Vertex<br/>
             Windsor, Ontario, Canada<br/>
-            Email: <a href="mailto:agvertexdesign@gmail.com" className="text-[#0057FF] hover:underline">agvertexdesign@gmail.com</a>
+            Email: <a href="mailto:contact@agvertex.ca" className="text-[#0057FF] hover:underline">contact@agvertex.ca</a>
           </p>
         </div>
       </section>

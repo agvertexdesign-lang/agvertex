@@ -221,10 +221,10 @@ export const DEFAULT_PAGE_CONTENT: WebsitePageContent = {
 const defaultSettings: AllSettings = {
   contact: {
     phone: '+1 (289) 683-1234',
-    email: 'agvertexdesign@gmail.com',
+    email: 'contact@agvertex.ca',
     address: 'Canada · New Zealand · India',
     whatsapp: '',
-    contact_form_email: 'agvertexdesign@gmail.com',
+    contact_form_email: 'contact@agvertex.ca',
   },
   social: { linkedin: '', instagram: '', facebook: '', youtube: '' },
   business: {

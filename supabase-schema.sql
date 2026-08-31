@@ -64,7 +64,7 @@ create trigger update_website_settings_updated_at
 
 -- Insert default settings
 insert into website_settings (setting_key, setting_value) values
-  ('contact', '{"phone": "+1 (289) 683-1234", "email": "agvertexdesign@gmail.com", "address": "Windsor, Ontario, Canada", "whatsapp": "", "contact_form_email": "agvertexdesign@gmail.com"}'::jsonb),
+  ('contact', '{"phone": "+1 (289) 683-1234", "email": "contact@agvertex.ca", "address": "Windsor, Ontario, Canada", "whatsapp": "", "contact_form_email": "contact@agvertex.ca"}'::jsonb),
   ('social', '{"linkedin": "", "instagram": "", "facebook": "", "youtube": ""}'::jsonb),
   ('business', '{"company_name": "AG Vertex", "tagline": "Precision Mechanical Design & Engineering Partner", "short_description": "Mechanical design consultancy in Windsor, Ontario.", "business_hours": "Monday – Friday, 9 AM – 5 PM EST"}'::jsonb)
 on conflict (setting_key) do nothing;
@@ -152,7 +152,7 @@ create table if not exists careers (
   responsibilities text[] default array[]::text[],
   requirements text[] default array[]::text[],
   skills text[] default array[]::text[],
-  application_email text default 'agvertexdesign@gmail.com',
+  application_email text default 'contact@agvertex.ca',
   closing_date date,
   status text default 'draft' check (status in ('draft', 'published')),
   created_at timestamptz default now(),
